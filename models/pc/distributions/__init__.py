@@ -1,5 +1,5 @@
 # Interfaces
-from i_distributions import IDistribution
+from .i_distribution import IDistribution
 
 # Distribution classes
-from gaussian import MultivariateGaussian
+from .gaussian import MultivariateGaussian

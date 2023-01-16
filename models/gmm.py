@@ -16,7 +16,7 @@ class GaussianMixture(Module):
         # We initialize our model with random blobs scattered across
         # the unit square, with a small-ish radius:
         self.mu = torch.rand(M, D).type(dtype)
-        self.A = 15 * torch.ones(M, 1, 1) * torch.eye(D, D).view(1, D, D)
+        self.A = 15 * torch.ones(M, D, 1)
         self.A = (self.A).type(dtype).contiguous()
         self.w = torch.ones(M, 1).type(dtype)
         self.sparsity = sparsity
@@ -30,9 +30,10 @@ class GaussianMixture(Module):
 
     def update_covariances(self):
         """Computes the full covariance matrices from the model's parameters."""
+        print(self.A)
         (M, D, _) = self.A.shape
         self.params["gamma"] = (torch.matmul(self.A, self.A.transpose(1, 2))).view(
-            M, D * D
+            M, D
         ) / 2
 
     def covariances_determinants(self):

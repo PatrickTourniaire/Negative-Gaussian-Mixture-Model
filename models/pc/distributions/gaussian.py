@@ -8,9 +8,9 @@ from torch.nn.functional import softmax, log_softmax
 from pykeops.torch import Vi, Vj
 
 # Local imports
-from i_distributions import IDistribution
+from .i_distribution import IDistribution
 
-class MultivariateGaussian(IDistribution, Module):
+class MultivariateGaussian(Module):
 
     def __init__(self, grid, res, sparsity=0, D=2):
         super(MultivariateGaussian, self).__init__()
@@ -40,6 +40,9 @@ class MultivariateGaussian(IDistribution, Module):
     #===========================================================================
     #                            Public Methods
     #===========================================================================
+    def params(self):
+        return [self.mu, self.A]
+
     def likelihood(self, sample):
         # Computes the precision matrix - inverse of covar
         pres = self.compute_precision()

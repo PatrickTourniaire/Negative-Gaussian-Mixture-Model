@@ -3,7 +3,8 @@ import numpy as np
 import torch
 from matplotlib import pyplot as plt
 
-from models.gmm import GaussianMixture
+from models.pc.units import SumUnit
+from models.pc.distributions import MultivariateGaussian
 
 # Choose the storage place for our data : CPU (host) or GPU (device) memory.
 dtype = torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor
@@ -22,25 +23,33 @@ X, Y = np.meshgrid(ticks, ticks)
 
 grid = torch.from_numpy(np.vstack((X.ravel(), Y.ravel())).T).contiguous().type(dtype)
 
-model = GaussianMixture(3, grid, res, sparsity=3)
-optimizer = torch.optim.Adam([model.A, model.w, model.mu], lr=0.1)
+inputs = [
+    MultivariateGaussian(grid, res, sparsity=3, D=2),
+    MultivariateGaussian(grid, res, sparsity=3, D=2),
+    MultivariateGaussian(grid, res, sparsity=3, D=2)
+]
+mixture_model = SumUnit(inputs)
+
+optimizer = torch.optim.Adam(mixture_model.params(), lr=0.1)
 loss = np.zeros(501)
 
 for it in range(501):
     optimizer.zero_grad()  # Reset the gradients (PyTorch syntax...).
-    cost = model.neglog_likelihood(x)  # Cost to minimize.
+    cost = mixture_model.likelihoods_neglog(x)  # Cost to minimize.
+    print(cost)
     cost.backward()  # Backpropagate to compute the gradient.
     optimizer.step()
     loss[it] = cost.data.cpu().numpy()
-
+"""
     # sphinx_gallery_thumbnail_number = 6
     if it in [0, 10, 100, 150, 250, 500]:
         plt.pause(0.01)
         plt.figure(figsize=(8, 8))
-        model.plot(x)
+        mixture_model.plot(x)
         plt.title("Density, iteration " + str(it), fontsize=20)
         plt.axis("equal")
         plt.axis([0, 1, 0, 1])
         plt.tight_layout()
         plt.pause(0.01)
         plt.savefig(f'out/simple_gmm/simple_gmm_it{it}.pdf')
+"""

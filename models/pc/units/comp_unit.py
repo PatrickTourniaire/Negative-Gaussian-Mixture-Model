@@ -6,19 +6,13 @@ from distributions import IDistribution
 class ComputationalUnit():
 
     def __init__(self, dist: IDistribution):
-        pass
-
-    def weights(self):
-        pass
+        self.dist = dist
     
-    def weights_log(self):
-        pass
-    
-    def likelihoods(self):
-        pass
+    def likelihood(self, sample):
+        return self.dist.likelihood(sample)
 
-    def likelihoods_log(self):
-        pass
+    def likelihood_log(self, sample):
+        return self.dist.likelihood_log(sample)
 
-    def likelihoods_neglog(self):
-        pass
+    def likelihood_neglog(self, sample):
+        return self.dist.likelihood_neglog(sample)

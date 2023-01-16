@@ -8,6 +8,9 @@ class IDistribution(ABC):
     Args:
         ABC (Class): inherits the abstract class from abc library
     """
+    @abstractmethod
+    def params(self):
+        pass
     
     @abstractmethod
     def likelihood(self):
