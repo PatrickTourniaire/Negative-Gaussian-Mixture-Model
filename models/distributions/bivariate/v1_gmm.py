@@ -5,7 +5,7 @@ import torch.nn as nn
 import torch.optim
 import math
 
-class GaussianMixture(nn.Module):
+class BivariateGaussian(nn.Module):
     # we only pass the number of clusters,
     # we have a single correlation coefficient
     # so we are restricted to 2 coordinates only
