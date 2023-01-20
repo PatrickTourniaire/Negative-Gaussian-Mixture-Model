@@ -9,7 +9,7 @@ import math
 class MultivariateGaussian(nn.Module):
     def __init__(self, n_dim=2):
         super().__init__()
-        self.n_dim = 2
+        self.n_dim = n_dim
         
         self.mu = nn.Parameter(torch.ones(n_dim, dtype=torch.float64).normal_()) # random mean
         self.chol = nn.Parameter(torch.ones(n_dim, n_dim, dtype=torch.float64).normal_()) # random covar matrix
