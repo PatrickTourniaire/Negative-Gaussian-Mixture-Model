@@ -9,7 +9,7 @@ from scipy.stats import multivariate_normal
 from sklearn.mixture import GaussianMixture
 
 # Local imports
-from models.mixtures.v1_gmm_mixture import MultivariateGaussianMixture
+from models.mixtures.non_monotonic.v1_nm_gmm import NMMultivariateGaussianMixture
 from utils.pickle_handler import *
 
 # Constants
@@ -39,11 +39,11 @@ writer = SummaryWriter()
 features = load_object('data', DATA_NAME)
 
 # Model and optimiser
-model = MultivariateGaussianMixture(N_CLUSTERS, 2)
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+model = NMMultivariateGaussianMixture(N_CLUSTERS, 2)
+optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
 
 gm = GaussianMixture(n_components=N_CLUSTERS, random_state=0).fit(features)
-gm_score = -gm.score_samples(features).mean()
+gm_score = gm.score_samples(features).mean()
 
 # Training iterations
 for it in range(5000):
@@ -57,15 +57,60 @@ for it in range(5000):
     }, it)
 
     # Plot the means with respect to the clusters
-    for i_mu in range(N_CLUSTERS):
+    for i in range(N_CLUSTERS):
         writer.add_scalars(f'Means/train', {
-            f'X_SGD_{i_mu}': model.mu[i_mu][0],
-            f'Y_SGD_{i_mu}': model.mu[i_mu][1],
-            f'X_MLE_{i_mu}': gm.means_[i_mu][0],
-            f'Y_MLE_{i_mu}': gm.means_[i_mu][1]
+            f'X_SGD_{i}': model.mu[i][0],
+            f'Y_SGD_{i}': model.mu[i][1],
         }, it)
+
+        writer.add_scalars(f'Weights/train', {
+            f'w_{i}': model.weight[i]
+        })
+
 
     loss.backward()
     optimizer.step()
+
+res = 200
+ticks = np.linspace(-3, 3, res + 1)[:-1] + 0.5 / res
+X, Y = np.meshgrid(ticks, ticks)
+
+grid = torch.from_numpy(np.vstack((X.ravel(), Y.ravel())).T).contiguous()
+
+# Heatmap:
+heatmap = model.log_likelihoods(grid)
+heatmap = (
+    heatmap.view(res, res).data.cpu().numpy()
+)  # reshape as a "background" image
+
+scale = np.amax(heatmap[:])
+plt.imshow(
+    -heatmap,
+    interpolation="bilinear",
+    origin="lower",
+    vmin=-scale,
+    vmax=scale,
+    cmap=cm.RdBu,
+    extent=(-3, 3, -3, 3),
+)
+plt.colorbar()
+
+log_heatmap = - model.log_likelihoods(grid)
+log_heatmap = log_heatmap.view(res, res).data.cpu().numpy()
+
+scale = np.amax(np.abs(log_heatmap[:]))
+levels = np.linspace(-scale, scale, 41)
+
+plt.contour(
+    log_heatmap,
+    origin="lower",
+    linewidths=1.0,
+    colors="#C8A1A1",
+    levels=levels,
+    extent=(-3, 3, -3, 3),
+)
+plt.scatter(features[:, 0], features[:, 1], color="k")
+
+plt.savefig('out/models/nm_gmm.pdf')
 
 writer.flush()

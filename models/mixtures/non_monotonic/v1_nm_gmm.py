@@ -16,7 +16,7 @@ class NMMultivariateGaussianMixture(nn.Module):
         
         self.mu = nn.ParameterList([nn.Parameter(torch.ones(n_dim, dtype=torch.float64).normal_()) for _ in range(n_clusters)]) # list of random means
         self.chol = nn.ParameterList([nn.Parameter(torch.ones(n_dim, n_dim, dtype=torch.float64).normal_()) for _ in range(n_clusters)]) # list of random covar matrices
-        self.weight = nn.Parameter(torch.ones(n_clusters, dtype=torch.float64).normal_()) # random weights # random covar matrix
+        self.weight = nn.Parameter(torch.zeros(n_clusters, dtype=torch.float64).random_(0,10) - 5) # random weights # random covar matrix
 
         # Paramters used in the PDF, calculated using the training parameters
         self.params = {}
@@ -36,10 +36,10 @@ class NMMultivariateGaussianMixture(nn.Module):
             except Exception:
                 raise ValueError("'covars' must be symmetric, "
                                 "positive-definite")
-        
-    def forward(self, X):
+
+    def log_likelihoods(self, X):
         self.update_covariances()
-        weights = tanh(self.weight)
+        weights = self.weight
 
         _chol_sigma = [self._chol_covariance(i) for i in range(self.n_clusters)]
 
@@ -48,6 +48,8 @@ class NMMultivariateGaussianMixture(nn.Module):
 
         log_prob = [- .5 * (torch.sum(mahalanobis_dist[i] ** 2, axis=1) + self.n_dim * np.log(2 * np.pi) + sigma_log_det[i]) for i in range(self.n_clusters)]
         log_prob = torch.logsumexp(torch.stack([log_prob[i] + weights[i] for i in range(self.n_clusters)], dim=0), dim=0)
-        print(weights)
-        print(log_prob)
-        return  log_prob.pow(2).mean()
+
+        return log_prob.pow(2)
+        
+    def forward(self, X):
+        return self.log_likelihoods(X).mean()
