@@ -2,10 +2,11 @@ import numpy as np
 import matplotlib.cm as cm
 from matplotlib import pyplot as plt
 import torch
+import torch.nn as nn
 
 RES = 200
-VMIN = -3
-VMAX = 3
+VMIN = -4
+VMAX = 4
 
 class HookVisualiseGMM():
 
@@ -16,13 +17,16 @@ class HookVisualiseGMM():
         ticks = np.linspace(VMIN, VMAX, RES + 1)[:-1] + 0.5 / RES
         X, Y = np.meshgrid(ticks, ticks)
 
-        return torch.from_numpy(np.vstack((X.ravel(), Y.ravel())).T).contiguous()
+        return torch.from_numpy(np.vstack((X.ravel(), Y.ravel())).T).contiguous(), X, Y
 
     def plot (
         self,
-        log_likelihoods: torch.Tensor, 
+        model: nn.Module,
         sample: torch.Tensor, 
         save_to: str):
+
+        grid, X, Y = model.create_grid()
+        log_likelihoods = model.log_likelihoods(grid)
 
         heatmap = self._create_heatmap(log_likelihoods)
 

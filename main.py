@@ -22,7 +22,7 @@ features = load_object('data', DATA_NAME)
 # Model and optimiser
 model = NMMultivariateGaussianMixture(N_CLUSTERS, 2)
 model.set_monitoring(os.path.abspath('runs'), 'non_monotonic_gmm')
-optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+optimizer = torch.optim.SGD(model.parameters(), lr=0.0001, momentum=0.9)
 
 # Base model from sklearn with same number of components
 base_model = GaussianMixture(n_components=N_CLUSTERS, random_state=0).fit(features)
@@ -42,10 +42,10 @@ model.clear_monitoring()
 #                     VISUALISE NON-MONOTONIC MODEL
 #===========================================================================
 
-grid = model.create_grid()
+grid, _, _ = model.create_grid()
 log_likelihoods = model.log_likelihoods(grid)
 model.plot(
-    log_likelihoods,
+    model,
     features,
     os.path.abspath('out/models/nm_gmm.pdf')
 )

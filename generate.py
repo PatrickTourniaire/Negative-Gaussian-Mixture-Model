@@ -12,7 +12,7 @@ DATA_NAME       = sys.argv[1]
 N_CLUSTERS      = int(sys.argv[2])
 PATH_DATA_PLOTS = f'out/data_plots/{DATA_NAME}.pdf'
 
-def rings_sample(N, D, sigma=0.1, radia=np.array([3])):
+def rings_sample(N, D, sigma=0.1, radia=np.array([3, 1])):
     assert D >= 2
     
     angles = np.random.rand(N) * 2 * np.pi
