@@ -44,8 +44,15 @@ model.clear_monitoring()
 
 grid, _, _ = model.create_grid()
 log_likelihoods = model.log_likelihoods(grid)
-model.plot(
+
+model.plot_heatmap(
     model,
     features,
     os.path.abspath('out/models/nm_gmm.pdf')
+)
+
+model.plot_contours(
+    model,
+    features,
+    os.path.abspath('out/models/nm_gmm_contours.pdf')
 )
