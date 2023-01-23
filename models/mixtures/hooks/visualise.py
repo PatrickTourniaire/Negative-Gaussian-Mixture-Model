@@ -15,7 +15,7 @@ class HookVisualiseGMM():
     def _create_heatmap(self, log_likelihoods: torch.Tensor):
         return (log_likelihoods.view(RES, RES).data.cpu().numpy()) 
     
-    def _confidence_ellipse(self, ax, sigma, mu, n_std=2.4, facecolor='none', **kwargs):
+    def _confidence_ellipse(self, ax, sigma, mu, n_std=2.3, facecolor='none', **kwargs):
         pearson = sigma[0][1]/np.sqrt(sigma[0][0] * sigma[1][1])
         # Using a special case to obtain the eigenvalues of this
         # two-dimensionl dataset.
