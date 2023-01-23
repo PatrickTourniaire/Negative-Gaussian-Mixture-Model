@@ -17,11 +17,11 @@ class NMMultivariateGaussianMixture(nn.Module, HookTensorBoard, HookVisualiseGMM
         self.n_clusters = n_clusters
         
         # Parameter list of random means with shape (n_clusters, n_dim)
-        self.mu = nn.ParameterList([nn.Parameter(torch.ones(n_dim, dtype=torch.float64).normal_()) for _ in range(n_clusters)])
+        self.mu = nn.Parameter(torch.zeros(n_clusters, n_dim, dtype=torch.float64).normal_())
         # Parameter list of random covariance matricies to be used with cholesky decomp, with shape (n_clusters, n_dim, n_dim)
-        self.chol = nn.ParameterList([nn.Parameter(torch.ones(n_dim, n_dim, dtype=torch.float64).normal_()) for _ in range(n_clusters)])
+        self.chol = nn.Parameter(torch.ones(n_clusters, n_dim, n_dim, dtype=torch.float64).normal_())
         # Parameter for the weights of each mixture component, which can be negative, shape (n_clusters,)
-        self.weights = nn.Parameter(torch.zeros(n_clusters, dtype=torch.float64).random_(0,10) - 5) 
+        self.weights = nn.Parameter(torch.zeros(n_clusters, dtype=torch.float64).normal_(-2,2)) 
 
         # Parameters which are calculated mid training, such as the cholesky decompositions
         self.params = {}
@@ -121,4 +121,4 @@ class NMMultivariateGaussianMixture(nn.Module, HookTensorBoard, HookVisualiseGMM
         self.add_weights(self.weights, it)
         self.add_loss(out, it)
 
-        return self.log_likelihoods(X).mean()
+        return out
