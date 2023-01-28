@@ -50,7 +50,7 @@ with  console.status("Loading dataset...") as status:
     # Model and optimiser
     model = NMMultivariateGaussianMixture(model_config['components'], 2)
     model.set_monitoring(os.path.abspath('runs'), 'non_monotonic_gmm')
-    optimizer = torch.optim.SGD(model.parameters(), lr=0.0001, momentum=0.9)
+    optimizer = torch.optim.SGD(model.parameters(), lr=model_config['learning_rate'])
     
     console.log(f'Model "{MODEL_NAME}" loaded with the following config:')
     console.log(json.dumps(model_config, indent=4))
@@ -69,6 +69,9 @@ with  console.status("Loading dataset...") as status:
         loss = model(torch.from_numpy(features), it)
         loss.backward()
         optimizer.step()
+
+    console.log(f'Center log likelihood: {str(model.log_likelihoods(torch.Tensor([[0,0]])))}')
+    console.log(f'Donut log likelihood: {str(model.log_likelihoods(torch.Tensor([[3,0]])))}')
 
     console.log(f'Model "{MODEL_NAME}" was trained successfully')
     model.clear_monitoring()

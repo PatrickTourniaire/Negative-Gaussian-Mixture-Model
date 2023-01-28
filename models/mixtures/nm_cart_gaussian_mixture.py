@@ -13,7 +13,6 @@ from .hooks import HookTensorBoard, HookVisualiseGMM
 
 class NMMultivariateGaussianMixture(nn.Module, HookTensorBoard, HookVisualiseGMM):
 
-
     def __init__(self, n_clusters=1, n_dim=2):
         super().__init__()
         self.n_dim = n_dim
@@ -22,19 +21,16 @@ class NMMultivariateGaussianMixture(nn.Module, HookTensorBoard, HookVisualiseGMM
         # Parameter list of random means with shape (n_clusters, n_dim)
         self.mu = nn.ParameterList(nn.Parameter(torch.zeros(n_dim, dtype=torch.float64).normal_()) for _ in range(n_clusters))
         # Parameter list of random covariance matricies to be used with cholesky decomp, with shape (n_clusters, n_dim, n_dim)
-        self.chol = nn.ParameterList(nn.Parameter(torch.ones(n_dim, n_dim, dtype=torch.float64).normal_()) for _ in range(n_clusters))
+        self.L = nn.ParameterList(nn.Parameter(torch.ones(n_dim, n_dim, dtype=torch.float64).normal_()) for _ in range(n_clusters))
         # Parameter for the weights of each mixture component, which can be negative, shape (n_clusters,)
-        self.weights = nn.Parameter(torch.zeros(n_clusters, dtype=torch.float64).normal_(-2,2)) 
-
-        # Parameters which are calculated mid training, such as the cholesky decompositions
-        self.params = {}
+        self.weights = nn.Parameter(torch.zeros(n_clusters, dtype=torch.float64).normal_()) 
 
 
     def update_covariances(self):
         """Uses the cholesky composition to create a positive semi-definite covariance matrix
         for each cluster in range `self.n_clusters`.
         """
-        self.params['sigma'] = [(self.chol[i] @ self.chol[i].T) + torch.eye(self.n_dim) for i in range(self.n_clusters)]
+        self.A = [(self.L[i] @ self.L[i].T) + torch.eye(self.n_dim) for i in range(self.n_clusters)]
 
 
     def _mahalanobis(
@@ -70,10 +66,10 @@ class NMMultivariateGaussianMixture(nn.Module, HookTensorBoard, HookVisualiseGMM
             torch.Tensor: Positive semi-definite covariance matrix for component `i`.
         """
         try:
-            return linalg.cholesky(self.params['sigma'][i], upper=False)
+            return linalg.cholesky(self.A[i], upper=False)
         except Exception:
             try:
-                return linalg.cholesky(self.params['sigma'][i] + 1e-3 * np.eye(self.n_dim), upper=False)
+                return linalg.cholesky(self.A[i] + 1e-3 * np.eye(self.n_dim), upper=False)
             except Exception:
                 raise ValueError("'covars' must be symmetric, "
                                 "positive-definite")
@@ -95,19 +91,21 @@ class NMMultivariateGaussianMixture(nn.Module, HookTensorBoard, HookVisualiseGMM
         z_term = 1 / torch.sqrt(torch.det(2 * np.pi * (Sigma_i + Sigma_j)))
         mahalanobis_dist = - .5 * (Mu_i - Mu_j).T @ torch.inverse(Sigma_i + Sigma_j) @ (Mu_i - Mu_j)
 
-        return z_term * torch.exp(mahalanobis_dist)
+        return torch.log(z_term * torch.exp(mahalanobis_dist))
 
 
-    def _unormalised_pdf(self, simga: torch.Tensor, mu: torch.Tensor, X: torch.Tensor) -> torch.Tensor:
-        # Log sum of determinant of each component covariance matrix
-        z_term = 1 / torch.sqrt(np.power(2 * np.pi, self.n_dim) * torch.det(simga)) # ! Might not be right to use diagonal sum
+    def _unormalised_pdf(self, sigma: torch.Tensor, mu: torch.Tensor, X: torch.Tensor) -> torch.Tensor:
         # Mahalanobis distance for each mixture component
-        mahalanobis_dist = self._mahalanobis(X, simga, mu)
+        mahalanobis_dist = self._mahalanobis(X, sigma, mu)
 
         # Log likelihood for each mixture component
-        pdf =  z_term * torch.exp(mahalanobis_dist)
+        log_likelihood = - .5 * (torch.sum(mahalanobis_dist ** 2, axis=1) + self.n_dim * np.log(2 * np.pi) + torch.log(torch.det(sigma)))
         
-        return pdf
+        return log_likelihood
+    
+    def _log_weight(self, weight):
+        if (weight < 0).any(): - torch.log(torch.abs(weight))
+        return torch.log(weight)
 
     def log_likelihoods(self, X: torch.Tensor) -> torch.Tensor:
         self.update_covariances()
@@ -121,11 +119,11 @@ class NMMultivariateGaussianMixture(nn.Module, HookTensorBoard, HookVisualiseGMM
         for i, j in cartesian_ids:
             i, j = int(i), int(j)
             sigma, mu = self._gaussian_product(i, j)
-            pdf = self._product_z(i, j) * self._unormalised_pdf(sigma, mu, X)
-            if (pdf > 1).any() or (pdf < 0).any(): print(pdf)
-            log_likelihood += pdf * weights[i] * weights[j]
+            log_prob = self._product_z(i, j) + self._unormalised_pdf(sigma, mu, X)
 
-        return torch.log(log_likelihood).mean()
+            log_likelihood += torch.exp(log_prob + self._log_weight(weights[i]) + self._log_weight(weights[j]))
+
+        return torch.log(log_likelihood)
         
         
     def forward(self, X: torch.Tensor, it: int) -> torch.Tensor:
@@ -139,11 +137,11 @@ class NMMultivariateGaussianMixture(nn.Module, HookTensorBoard, HookVisualiseGMM
         Returns:
             torch.Tensor: Mean negative log likelihood over the samples.
         """
-        out = self.log_likelihoods(X).mean()
+        out = torch.logsumexp(self.log_likelihoods(X), 0)
         if not self.monitor: return out
         
         self.add_means(self.mu, it)
         self.add_weights(self.weights, it)
         self.add_loss(out, it)
 
-        return - out
+        return out
