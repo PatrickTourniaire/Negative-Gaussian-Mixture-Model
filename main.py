@@ -8,7 +8,7 @@ from sklearn.mixture import GaussianMixture
 import argparse, sys
 
 # Local imports
-from models.mixtures.nm_gaussian_mixture import NMMultivariateGaussianMixture
+from models.mixtures.nm_gm import NMMultivariateGaussianMixture
 from utils.pickle_handler import *
 
 parser = argparse.ArgumentParser()

@@ -8,7 +8,7 @@ from sklearn.mixture import GaussianMixture
 import argparse, sys
 
 # Local imports
-from models.mixtures.nm_cart_gaussian_mixture import NMMultivariateGaussianMixture
+from models.mixtures.exp_nm_cart_gm import NMGaussianMxiture
 from utils.pickle_handler import *
 
 parser = argparse.ArgumentParser()
@@ -48,7 +48,7 @@ with  console.status("Loading dataset...") as status:
     status.update(status=f'Loading "{MODEL_NAME}" model...')
 
     # Model and optimiser
-    model = NMMultivariateGaussianMixture(model_config['components'], 2)
+    model = NMGaussianMxiture(model_config['components'], 2)
     model.set_monitoring(os.path.abspath('runs'), 'non_monotonic_gmm')
     optimizer = torch.optim.SGD(model.parameters(), lr=model_config['learning_rate'])
     
