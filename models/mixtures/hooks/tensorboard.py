@@ -17,7 +17,7 @@ class HookTensorBoard():
     def add_means(self, means: torch.Tensor, iteration: int):
         for i in range(len(means)):
             self.writer.add_scalars('Means_X/train', {
-                f'Y_EXPERIMENT_{i}': means[i][1]
+                f'X_EXPERIMENT_{i}': means[i][0]
             }, iteration)
 
             self.writer.add_scalars('Means_Y/train', {

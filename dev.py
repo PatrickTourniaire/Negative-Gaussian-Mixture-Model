@@ -8,7 +8,7 @@ from sklearn.mixture import GaussianMixture
 import argparse, sys
 
 # Local imports
-from models.mixtures.exp_nm_cart_gm import NMGaussianMxiture
+from models.mixtures.nm_cart_gm import NMGaussianMxiture
 from utils.pickle_handler import *
 
 parser = argparse.ArgumentParser()
@@ -70,8 +70,8 @@ with  console.status("Loading dataset...") as status:
         loss.backward()
         optimizer.step()
 
-    console.log(f'Center log likelihood: {str(model.log_likelihoods(torch.Tensor([[0,0]])))}')
-    console.log(f'Donut log likelihood: {str(model.log_likelihoods(torch.Tensor([[3,0]])))}')
+    console.log(f'Center log likelihood: {str(model.pdf(torch.Tensor([[0,0]])))}')
+    console.log(f'Donut log likelihood: {str(model.pdf(torch.Tensor([[3,0]])))}')
 
     console.log(f'Model "{MODEL_NAME}" was trained successfully')
     model.clear_monitoring()

@@ -8,7 +8,7 @@ from sklearn.mixture import GaussianMixture
 import argparse, sys
 
 # Local imports
-from models.mixtures.nm_gm import NMMultivariateGaussianMixture
+from models.mixtures.gm import MultivariateGaussianMixture
 from utils.pickle_handler import *
 
 parser = argparse.ArgumentParser()
@@ -48,16 +48,16 @@ with  console.status("Loading dataset...") as status:
     status.update(status=f'Loading "{MODEL_NAME}" model...')
 
     # Model and optimiser
-    model = NMMultivariateGaussianMixture(model_config['components'], 2)
+    model = MultivariateGaussianMixture(model_config['components'], 2)
     model.set_monitoring(os.path.abspath('runs'), 'non_monotonic_gmm')
-    optimizer = torch.optim.SGD(model.parameters(), lr=0.0001, momentum=0.9)
+    optimizer = torch.optim.SGD(model.parameters(), lr=model_config['learning_rate'])
     
     console.log(f'Model "{MODEL_NAME}" loaded with the following config:')
     console.log(json.dumps(model_config, indent=4))
 
     # Base model from sklearn with same number of components
     base_model = GaussianMixture(n_components=model_config['components'], random_state=0).fit(features)
-    base_loss = base_model.score_samples(features).mean()
+    base_loss = - base_model.score_samples(features).mean()
     model.set_base_loss(base_loss)
 
     console.log(f'Model "{MODEL_BASE_NAME}" loaded')

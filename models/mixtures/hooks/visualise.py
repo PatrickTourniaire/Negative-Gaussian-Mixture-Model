@@ -16,13 +16,34 @@ class HookVisualiseGMM():
         return (log_likelihoods.view(RES, RES).data.cpu().numpy()) 
     
     def _confidence_ellipse(self, ax, sigma, mu, n_std=2.3, facecolor='none', **kwargs):
-        U, s, Vt = np.linalg.svd(sigma)
-        angle = np.degrees(np.arctan2(U[1, 0], U[0, 0]))
-        width, height = 2 * np.sqrt(s)
+        pearson = sigma[0][1]/np.sqrt(sigma[0][0] * sigma[1][1])
+        # Using a special case to obtain the eigenvalues of this
+        # two-dimensionl dataset.
+        ell_radius_x = np.sqrt(1 + pearson)
+        ell_radius_y = np.sqrt(1 - pearson)
+        ellipse = Ellipse((0, 0),
+            width=ell_radius_x * 2,
+            height=ell_radius_y * 2,
+            facecolor=facecolor,
+            **kwargs)
 
-        for nsig in range(1, 4):
-            ax.add_patch(Ellipse((mu[0], mu[1]), nsig * width, nsig * height,
-                                angle, **kwargs))
+        # Calculating the stdandard deviation of x from
+        # the squareroot of the variance and multiplying
+        # with the given number of standard deviations.
+        scale_x = np.sqrt(sigma[0][0]) * n_std
+        mean_x = mu[0]
+
+        # calculating the stdandard deviation of y ...
+        scale_y = np.sqrt(sigma[1][1]) * n_std
+        mean_y = mu[1]
+
+        transf = transforms.Affine2D() \
+            .rotate_deg(45) \
+            .scale(scale_x, scale_y) \
+            .translate(mean_x, mean_y)
+
+        ellipse.set_transform(transf + ax.transData)
+        return ax.add_patch(ellipse)
 
     def create_grid(self):
         ticks = np.linspace(VMIN, VMAX, RES + 1)[:-1] + 0.5 / RES
@@ -37,7 +58,7 @@ class HookVisualiseGMM():
         save_to: str):
 
         grid, X, Y = model.create_grid()
-        log_likelihoods = model.log_likelihoods(grid)
+        log_likelihoods = model.pdf(grid)
 
         heatmap = self._create_heatmap(log_likelihoods)
 
@@ -81,12 +102,12 @@ class HookVisualiseGMM():
         ax.axvline(c='grey', lw=1)
         ax.axhline(c='grey', lw=1)
 
-        for i in range(model.n_clusters):
-            sigma = model.A[i].data.cpu().numpy()
-            mu = model.mu[i].data.cpu().numpy()
-            colour = 'blue' if model.weights[i] > 0 else 'red'
+        for (A, mu, w) in model.params.values():
+            sigma = A.data.cpu().numpy()
+            mu = mu.data.cpu().numpy()
+            colour = 'blue' if w > 0 else 'red'
 
-            self._confidence_ellipse(ax, sigma, mu, edgecolor = colour, facecolor = colour, alpha = .1)
+            self._confidence_ellipse(ax, sigma, mu, edgecolor = colour, facecolor = colour, alpha = .2)
 
             ax.scatter(mu[0], mu[1], c='red', s=3)
         
