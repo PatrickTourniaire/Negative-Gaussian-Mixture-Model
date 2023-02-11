@@ -11,6 +11,8 @@ from scipy.special import logsumexp
 
 # Local imports
 from models.mixtures.gaussian_mixture import GaussianMixture
+from models.mixtures.squared_gaussian_mixture import SquaredGaussianMixture
+from models.mixtures.squared_nm_gaussian_mixture import NMSquaredGaussianMixture
 
 
 
@@ -38,7 +40,9 @@ model_config = {
 }
 
 available_models = {
-    'gaussian_mixture': GaussianMixture
+    'gaussian_mixture': GaussianMixture,
+    'squared_gaussian_mixture': SquaredGaussianMixture,
+    'squared_nm_gaussian_mixture': NMSquaredGaussianMixture
 }
 
 BASE_MODEL_NAME = 'sklearn_gmm'
@@ -59,11 +63,10 @@ with  console.status("Loading dataset...") as status:
 
     # Model and optimiser
     model = available_models[model_config['model_name']](model_config['components'], 2)
-    model.set_monitoring(os.path.abspath('runs'), 'gaussian_mixture')
-    model.set_vis_config(res=200, vmin=-10, vmax=20)
+    model.set_monitoring(os.path.abspath('runs'), model_config["model_name"])
+    model.set_vis_config(res=200, vmin=-4, vmax=4)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=model_config['learning_rate'])
-    
 
     console.log(f'Model "{model_config["model_name"]}" loaded with the following config:')
     console.log(json.dumps(model_config, indent=4))

@@ -127,28 +127,13 @@ class GaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
     def plot_heatmap(self, samples: torch.Tensor, save_to: str):
         grid, _, _ = self.create_grid()
-        log_likelihoods = self.pdf(grid)
+        log_likelihoods = self.log_likelihoods(grid)
 
         heatmap = self._create_heatmap(log_likelihoods)
 
-        plt.imshow(
-            - heatmap,
-            interpolation="bilinear",
-            origin="lower",
-            vmin=0,
-            vmax=log_likelihoods.max(),
-            cmap=cm.RdBu,
-            extent=(5, 12, -10, 0),
-        )
-        plt.colorbar()
-
-        levels = np.linspace(-10, 0, 41)
+        levels = np.linspace(-4, 4, 100)
         plt.contour(
             heatmap,
-            origin="lower",
-            linewidths=1.0,
-            colors="#C8A1A1",
-            levels=levels,
             extent=(self.vmin, self.vmax, self.vmin, self.vmin),
         )
 
