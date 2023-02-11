@@ -26,24 +26,24 @@ MODEL_NAME = args.model
 MODEL_BASE_NAME = 'BASE_MODEL_GMM'
 
 model_config = {
-    'model_name'    : args.model,
-    'dataset'       : args.data,
-    'components'    : int(args.comp),
-    'iterations'    : int(args.it),
-    'learning_rate' : float(args.lr),
+    'model_name': args.model,
+    'dataset': args.data,
+    'components': int(args.comp),
+    'iterations': int(args.it),
+    'learning_rate': float(args.lr),
 }
 
 console = Console()
 
-with  console.status("Loading dataset...") as status:
+with console.status("Loading dataset...") as status:
     # Load data - which is generated with `generate.py`
     features = load_object('data', model_config['dataset'])
 
     console.log(f"Dataset \"{model_config['dataset']}\" loaded")
 
-    #===========================================================================
+    # ===========================================================================
     #                   TRAIN AND MONITOR WITH TENSORBOARD
-    #===========================================================================
+    # ===========================================================================
 
     status.update(status=f'Loading "{MODEL_NAME}" model...')
 
@@ -51,7 +51,7 @@ with  console.status("Loading dataset...") as status:
     model = MultivariateGaussianMixture(model_config['components'], 2)
     model.set_monitoring(os.path.abspath('runs'), 'non_monotonic_gmm')
     optimizer = torch.optim.SGD(model.parameters(), lr=model_config['learning_rate'])
-    
+
     console.log(f'Model "{MODEL_NAME}" loaded with the following config:')
     console.log(json.dumps(model_config, indent=4))
 
@@ -73,9 +73,9 @@ with  console.status("Loading dataset...") as status:
     console.log(f'Model "{MODEL_NAME}" was trained successfully')
     model.clear_monitoring()
 
-    #===========================================================================
+    # ===========================================================================
     #                     VISUALISE NON-MONOTONIC MODEL
-    #===========================================================================
+    # ===========================================================================
 
     status.update(status=f'Visualising "{MODEL_NAME}" model...')
 

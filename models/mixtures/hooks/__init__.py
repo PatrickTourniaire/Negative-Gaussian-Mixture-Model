@@ -1,2 +1,2 @@
 from .tensorboard import HookTensorBoard
-from .visualise import HookVisualiseGMM
+from .visualise import BaseHookVisualise

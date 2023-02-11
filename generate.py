@@ -35,15 +35,15 @@ def rings_sample(N, D, sigma=0.1, radia=np.array([3, 1])):
     return result
 
 # Generate clusters
-"""
+
 features, clusters = make_blobs(n_samples = 100,
                   n_features = 2, 
                   centers = N_CLUSTERS,
-                  cluster_std = 0.4,
+                  cluster_std = 0.1,
                   shuffle = True)
-"""
 
-features = rings_sample(1000, 2)
+
+#features = rings_sample(1000, 2)
 
 # Plot data and save to out
 plt.scatter(features[:,0], features[:,1])

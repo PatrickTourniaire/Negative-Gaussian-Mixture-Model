@@ -1,3 +1,4 @@
+# External imports
 from torch.utils.tensorboard import SummaryWriter
 import torch
 
@@ -13,6 +14,22 @@ class HookTensorBoard():
 
     def set_base_loss(self, base_loss: torch.Tensor):
         self.base_loss = base_loss
+    
+    def add_base_means(self, means: torch.Tensor, iteration: int):
+        for i in range(len(means)):
+            self.writer.add_scalars('Means_X/train', {
+                f'X_BASE_{i}': means[i][0]
+            }, iteration)
+
+            self.writer.add_scalars('Means_Y/train', {
+                f'Y_BASE_{i}': means[i][1]
+            }, iteration)
+    
+    def add_base_weights(self, weights: torch.Tensor, iteration: int):
+        for i in range(len(weights)):
+            self.writer.add_scalars(f'Weights/train', {
+                f'W_BASE_{i}': weights[i]
+            }, iteration)
 
     def add_means(self, means: torch.Tensor, iteration: int):
         for i in range(len(means)):
@@ -27,7 +44,7 @@ class HookTensorBoard():
     def add_weights(self, weights: torch.Tensor, iteration: int):
         for i in range(len(weights)):
             self.writer.add_scalars(f'Weights/train', {
-                f'w_{i}': weights[i]
+                f'W_EXPERIMENT_{i}': weights[i]
             }, iteration)
 
     def add_loss(self, loss: torch.Tensor, iteration: int):
