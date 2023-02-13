@@ -97,7 +97,6 @@ class SquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         weights = softmax(torch.stack(weights, dim=0), dim=0)
 
         component_likelihoods = []
-        normalisers = []
         tb_means = []
         tb_sigmas = []
 
@@ -106,16 +105,14 @@ class SquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
             tb_means.append(means)
             tb_sigmas.append(sigma)
 
-            likelihood = density_function(sigma, means)
-            normalisers.append(self._squared_norm_term(i, j) * weights[k])
-            
+            likelihood = self._squared_norm_term(i, j) * density_function(sigma, means)
             component_likelihoods.append(weights[k] * likelihood)
         
         self.tb_params['means'] = torch.stack(tb_means, dim=0)
         self.tb_params['sigmas'] = torch.stack(tb_sigmas, dim=0)
         self.tb_params['weights'] = weights
 
-        return (torch.stack(normalisers, dim=0).sum(dim=0)) * torch.stack(component_likelihoods, dim=0).sum(dim=0)
+        return torch.stack(component_likelihoods, dim=0).sum(dim=0)
     
 
     def log_likelihoods(self, X: torch.Tensor) -> torch.Tensor:
@@ -147,7 +144,7 @@ class SquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         ax.axvline(c='grey', lw=1)
         ax.axhline(c='grey', lw=1)
 
-        for i in range(self.n_clusters):
+        for i in range(len(self.tb_params['means'])):
             sigma = self.tb_params['sigmas'][i].data.cpu().numpy()
             mu = self.tb_params['means'][i].data.cpu().numpy()
             

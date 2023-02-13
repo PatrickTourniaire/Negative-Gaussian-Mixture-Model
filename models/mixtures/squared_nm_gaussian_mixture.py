@@ -26,11 +26,11 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         self.n_clusters = n_clusters
 
         # Parameters of component means (n_clusters, n_dim)
-        self.means = nn.Parameter(torch.rand(n_clusters, n_dims, dtype=torch.float64).normal_())
+        self.means = nn.Parameter(torch.zeros(n_clusters, n_dims, dtype=torch.float64))
         # Parameters of matrices used for Cholesky composition (n_clusters, n_dim, n_dim)
-        self.chols = nn.Parameter(torch.rand(n_clusters, n_dims, n_dims, dtype=torch.float64).normal_())
+        self.chols = nn.Parameter(torch.zeros(n_clusters, n_dims, n_dims, dtype=torch.float64).normal_())
         # Parameter for the weights of each mixture component (n_clusters,)
-        self.weights = nn.Parameter(torch.zeros(n_clusters, dtype=torch.float64).normal_(-1,1))
+        self.weights = nn.Parameter(torch.rand(n_clusters, dtype=torch.float64).normal_())
 
         # Parameters used for tensorboard
         self.tb_params = {}
@@ -106,16 +106,18 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
             tb_means.append(means)
             tb_sigmas.append(sigma)
 
-            likelihood = density_function(sigma, means)
-            normalisers.append(self._squared_norm_term(i, j) * weights[k])
-            
+            likelihood = self._squared_norm_term(i, j) * density_function(sigma, means)
             component_likelihoods.append(weights[k] * likelihood)
+            normalisers.append(self._squared_norm_term(i, j) * weights[k])
         
         self.tb_params['means'] = torch.stack(tb_means, dim=0)
         self.tb_params['sigmas'] = torch.stack(tb_sigmas, dim=0)
         self.tb_params['weights'] = weights
 
-        return (torch.stack(normalisers, dim=0).sum(dim=0)) * torch.stack(component_likelihoods, dim=0).sum(dim=0)
+        print(torch.stack(normalisers, dim=0))
+        z = torch.stack(normalisers, dim=0).sum(dim=0)
+
+        return torch.stack(component_likelihoods, dim=0).sum(dim=0)
     
 
     def log_likelihoods(self, X: torch.Tensor) -> torch.Tensor:
@@ -124,8 +126,9 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
     def forward(self, X: torch.Tensor, it: int, validate: bool = False) -> torch.Tensor:
         if validate and (it % 100 == 0): self._grid_validation()
-
         out = - (self.log_likelihoods(X).logsumexp(dim=0) / X.shape[0])
+        out = (out.exp() + (1 - self.tb_params['weights'].sum()).abs().log().exp()).log()
+
         if not self.monitor: return out
         
         self.add_means(self.tb_params['means'] , it)
@@ -147,7 +150,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         ax.axvline(c='grey', lw=1)
         ax.axhline(c='grey', lw=1)
 
-        for i in range(self.n_clusters):
+        for i in range(len(self.tb_params['means'])):
             sigma = self.tb_params['sigmas'][i].data.cpu().numpy()
             mu = self.tb_params['means'][i].data.cpu().numpy()
             
@@ -167,7 +170,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
     def plot_heatmap(self, samples: torch.Tensor, save_to: str):
         grid, _, _ = self.create_grid()
-        log_likelihoods = self.pdf(grid)
+        log_likelihoods = self.log_likelihoods(grid)
 
         heatmap = self._create_heatmap(log_likelihoods)
 
@@ -175,21 +178,21 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
             - heatmap,
             interpolation="bilinear",
             origin="lower",
-            vmin=0,
+            vmin=log_likelihoods.min(),
             vmax=log_likelihoods.max(),
             cmap=cm.RdBu,
-            extent=(5, 12, -10, 0),
+            extent=(-4, 4, -4, 4),
         )
         plt.colorbar()
 
-        levels = np.linspace(-10, 0, 41)
+        levels = np.linspace(-4, 4, 41)
         plt.contour(
             heatmap,
             origin="lower",
             linewidths=1.0,
             colors="#C8A1A1",
             levels=levels,
-            extent=(self.vmin, self.vmax, self.vmin, self.vmin),
+            extent=(-4, 4, -4, 4),
         )
 
         plt.scatter(samples[:, 0], samples[:, 1], color="k")
