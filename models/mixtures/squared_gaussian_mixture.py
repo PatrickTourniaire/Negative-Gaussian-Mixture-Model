@@ -97,22 +97,37 @@ class SquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         weights = softmax(torch.stack(weights, dim=0), dim=0)
 
         component_likelihoods = []
+        normalisers = []
+        
         tb_means = []
         tb_sigmas = []
+        tb_weights = []
+
+        computed_pairs = set()
 
         for (k, (i, j)) in enumerate(cartesian_ids):
+            if (i, j) in computed_pairs: continue
             sigma, means = self._sqrd_params(i, j)
+            weight = weights[k]
+
             tb_means.append(means)
             tb_sigmas.append(sigma)
+            tb_weights.append(weight)
 
-            likelihood = self._squared_norm_term(i, j) * density_function(sigma, means)
-            component_likelihoods.append(weights[k] * likelihood)
+            likelihood = density_function(sigma, means)
+            
+            component_likelihoods.append(weight * likelihood)
+            normalisers.append(weight * self._squared_norm_term(i, j))
+
+            computed_pairs = computed_pairs.union({(i, j), (j, i)})
         
         self.tb_params['means'] = torch.stack(tb_means, dim=0)
         self.tb_params['sigmas'] = torch.stack(tb_sigmas, dim=0)
-        self.tb_params['weights'] = weights
+        self.tb_params['weights'] = torch.stack(tb_weights, dim=0)
 
-        return torch.stack(component_likelihoods, dim=0).sum(dim=0)
+        z = torch.stack(normalisers, dim=0).sum(dim=0)
+
+        return 1/z * torch.stack(component_likelihoods, dim=0).sum(dim=0)
     
 
     def log_likelihoods(self, X: torch.Tensor) -> torch.Tensor:
@@ -164,7 +179,7 @@ class SquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
     def plot_heatmap(self, samples: torch.Tensor, save_to: str):
         grid, _, _ = self.create_grid()
-        log_likelihoods = self.pdf(grid)
+        log_likelihoods = self.log_likelihoods(grid)
 
         heatmap = self._create_heatmap(log_likelihoods)
 
@@ -172,21 +187,21 @@ class SquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
             - heatmap,
             interpolation="bilinear",
             origin="lower",
-            vmin=0,
+            vmin=log_likelihoods.min(),
             vmax=log_likelihoods.max(),
             cmap=cm.RdBu,
-            extent=(5, 12, -10, 0),
+            extent=(-4, 4, -4, 4),
         )
         plt.colorbar()
 
-        levels = np.linspace(-10, 0, 41)
+        levels = np.linspace(-4, 4, 41)
         plt.contour(
             heatmap,
             origin="lower",
             linewidths=1.0,
             colors="#C8A1A1",
             levels=levels,
-            extent=(self.vmin, self.vmax, self.vmin, self.vmin),
+            extent=(-4, 4, -4, 4),
         )
 
         plt.scatter(samples[:, 0], samples[:, 1], color="k")

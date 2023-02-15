@@ -6,6 +6,7 @@ import torch.optim
 from torch.nn.functional import softmax
 from matplotlib import pyplot as plt
 import matplotlib.cm as cm
+from torch import linalg
 
 # Local imports
 from .hooks import HookTensorBoard, BaseHookVisualise
@@ -30,7 +31,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         # Parameters of matrices used for Cholesky composition (n_clusters, n_dim, n_dim)
         self.chols = nn.Parameter(torch.zeros(n_clusters, n_dims, n_dims, dtype=torch.float64).normal_())
         # Parameter for the weights of each mixture component (n_clusters,)
-        self.weights = nn.Parameter(torch.rand(n_clusters, dtype=torch.float64).normal_())
+        self.weights = nn.Parameter(torch.rand(n_clusters, dtype=torch.float64).normal_(-1,1))
 
         # Parameters used for tensorboard
         self.tb_params = {}
@@ -41,7 +42,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
     #===================================================================================================
 
     def _chol_composition(self) -> torch.Tensor:
-        self.sigmas = [cholesky_comp(self.chols[i], self.n_dims) for i in range(self.n_clusters)]
+        self.sigmas = [linalg.cholesky(cholesky_comp(self.chols[i], self.n_dims), upper=False) for i in range(self.n_clusters)]
     
 
     def _sqrd_mahalanobis(self, X: torch.Tensor, S_inv: torch.tensor, mu: torch.Tensor):
@@ -63,7 +64,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         sigma_i, sigma_j = self.sigmas[i], self.sigmas[j]
         mu_i, mu_j = self.means[i], self.means[j]
 
-        z_term = 1 / torch.sqrt(torch.det(2 * np.pi * (sigma_i + sigma_j)))
+        z_term = torch.pow(torch.sqrt(torch.det(2 * np.pi * (sigma_i + sigma_j))), -1)
         mahalanobis_dist = - .5 * (mu_i - mu_j).T @ torch.inverse(sigma_i + sigma_j) @ (mu_i - mu_j)
 
         return z_term * torch.exp(mahalanobis_dist)
@@ -92,32 +93,40 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         cluster_ids = torch.Tensor(range(self.n_clusters))
         cartesian_ids = torch.cartesian_prod(cluster_ids, cluster_ids)
         cartesian_ids = cartesian_ids.data.cpu().numpy().astype(int)
-        
-        weights = [self.weights[i] * self.weights[j] for (i, j) in cartesian_ids]
-        weights = torch.stack(weights, dim=0)
 
         component_likelihoods = []
         normalisers = []
+        
         tb_means = []
         tb_sigmas = []
+        tb_weights = []
 
-        for (k, (i, j)) in enumerate(cartesian_ids):
+        computed_pairs = set()
+
+        for (i, j) in cartesian_ids:
+            if (i, j) in computed_pairs: continue
+
             sigma, means = self._sqrd_params(i, j)
+            weight = self.weights[i] * self.weights[j]
+
+            likelihood = density_function(sigma, means)
+            
+            component_likelihoods.append(weight * likelihood)
+            normalisers.append(self._squared_norm_term(i, j) * weight)
+
+            tb_weights.append(weight)
             tb_means.append(means)
             tb_sigmas.append(sigma)
 
-            likelihood = self._squared_norm_term(i, j) * density_function(sigma, means)
-            component_likelihoods.append(weights[k] * likelihood)
-            normalisers.append(self._squared_norm_term(i, j) * weights[k])
+            computed_pairs = computed_pairs.union({(i, j), (j, i)})
         
         self.tb_params['means'] = torch.stack(tb_means, dim=0)
         self.tb_params['sigmas'] = torch.stack(tb_sigmas, dim=0)
-        self.tb_params['weights'] = weights
+        self.tb_params['weights'] = torch.stack(tb_weights, dim=0)
 
-        print(torch.stack(normalisers, dim=0))
         z = torch.stack(normalisers, dim=0).sum(dim=0)
 
-        return torch.stack(component_likelihoods, dim=0).sum(dim=0)
+        return z * torch.stack(component_likelihoods, dim=0).sum(dim=0)
     
 
     def log_likelihoods(self, X: torch.Tensor) -> torch.Tensor:
@@ -127,7 +136,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
     def forward(self, X: torch.Tensor, it: int, validate: bool = False) -> torch.Tensor:
         if validate and (it % 100 == 0): self._grid_validation()
         out = - (self.log_likelihoods(X).logsumexp(dim=0) / X.shape[0])
-        out = (out.exp() + (1 - self.tb_params['weights'].sum()).abs().log().exp()).log()
+        out = out + (1 - self.tb_params['weights'].sum()).abs()
 
         if not self.monitor: return out
         

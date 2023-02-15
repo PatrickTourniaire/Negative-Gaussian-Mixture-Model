@@ -66,7 +66,7 @@ with  console.status("Loading dataset...") as status:
     model.set_monitoring(os.path.abspath('runs'), model_config["model_name"])
     model.set_vis_config(res=200, vmin=-4, vmax=4)
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=model_config['learning_rate'])
+    optimizer = torch.optim.SGD(model.parameters(), lr=model_config['learning_rate'])
 
     console.log(f'Model "{model_config["model_name"]}" loaded with the following config:')
     console.log(json.dumps(model_config, indent=4))
@@ -88,8 +88,8 @@ with  console.status("Loading dataset...") as status:
         loss.backward()
         optimizer.step()
 
-    console.log(f'Center log likelihood: {str(model.pdf(torch.Tensor([[0, 0]])))}')
-    console.log(f'Donut log likelihood: {str(model.pdf(torch.Tensor([[3, 0]])))}')
+    console.log(f'Center likelihood: {str(model.pdf(torch.Tensor([[0, 0]])))}')
+    console.log(f'Donut likelihood: {str(model.pdf(torch.Tensor([[3, 0]])))}')
 
     console.log(f'Model "{model_config["model_name"]}" was trained successfully')
     model.clear_monitoring()
