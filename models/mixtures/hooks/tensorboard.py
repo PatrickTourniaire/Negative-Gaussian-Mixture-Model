@@ -18,11 +18,11 @@ class HookTensorBoard():
     
     def add_base_means(self, means: torch.Tensor, iteration: int):
         for i in range(len(means)):
-            self.writer.add_scalars(f'Means_X/{self.model_name}/train', {
+            self.writer.add_scalars(f'Means/X/{self.model_name}/train', {
                 f'X_BASE_{i}': means[i][0]
             }, iteration)
 
-            self.writer.add_scalars(f'Means_Y/{self.model_name}/train', {
+            self.writer.add_scalars(f'Means/Y/{self.model_name}/train', {
                 f'Y_BASE_{i}': means[i][1]
             }, iteration)
     
@@ -34,11 +34,11 @@ class HookTensorBoard():
 
     def add_means(self, means: torch.Tensor, iteration: int):
         for i in range(len(means)):
-            self.writer.add_scalars(f'Means_X/{self.model_name}/train', {
+            self.writer.add_scalars(f'Means/X/{self.model_name}/train', {
                 f'X_EXPERIMENT_{i}': means[i][0]
             }, iteration)
 
-            self.writer.add_scalars(f'Means_Y/{self.model_name}/train', {
+            self.writer.add_scalars(f'Means/Y/{self.model_name}/train', {
                 f'Y_EXPERIMENT_{i}': means[i][1]
             }, iteration)
     
@@ -52,6 +52,11 @@ class HookTensorBoard():
         self.writer.add_scalars(f'Loss/{self.model_name}/train', {
             'GMM_EXPERIMENT': loss,
             'GMM_BASE': self.base_loss,
+        }, iteration)
+
+    def add_integral(self, integral: float, iteration: int):
+        self.writer.add_scalars(f'Integral/{self.model_name}/train', {
+            'MIXTURE_INTEGRAL': integral,
         }, iteration)
 
     def clear_monitoring(self):

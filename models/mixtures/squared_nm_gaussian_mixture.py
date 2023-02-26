@@ -7,9 +7,16 @@ from torch.nn.functional import softmax
 from matplotlib import pyplot as plt
 import matplotlib.cm as cm
 from torch import linalg
+from scipy import integrate
 
 # Local imports
 from .hooks import HookTensorBoard, BaseHookVisualise
+
+"""
+# TODO: Create a new wrapper which uses numerical integration for verifying that the mixture is indeed a valid PDF.
+# TODO: Possibly test with Bernoullis to check if it is a valid PDF (by summing the categorical probabilities). 
+
+"""
 
 
 # Equations
@@ -64,18 +71,29 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         sigma_i, sigma_j = self.sigmas[i], self.sigmas[j]
         mu_i, mu_j = self.means[i], self.means[j]
 
-        z_term = torch.pow(torch.sqrt(torch.det(2 * np.pi * (sigma_i + sigma_j))), -1)
-        mahalanobis_dist = - .5 * (mu_i - mu_j).T @ torch.inverse(sigma_i + sigma_j) @ (mu_i - mu_j)
+        z_term = 1 / torch.sqrt(np.power(2 * np.pi, self.n_dims) * torch.det(sigma_i + sigma_j))
 
-        return z_term * torch.exp(mahalanobis_dist)
+        mahalanobis_dist = torch.matmul(torch.matmul((mu_i - mu_j).t(), torch.inverse(sigma_i + sigma_j)), (mu_i - mu_j))
+
+
+        return z_term * torch.exp(- .5 * mahalanobis_dist)
     
 
-    def _grid_validation(self):
-        grid, _, _ = self.create_grid()
-        pdf_out = self.pdf(grid)
+    def _samplerange(self, samples: torch.Tensor):
+        x, y = samples[:,0], samples[:,1]
 
-        if ((pdf_out < 0).any()):
-            raise ValueError("The model is not a valid PDF!")
+        return (x.min(), x.max(), y.min(), y.max())
+
+
+    def _validation(self, samples: torch.Tensor, it: int):
+        x_pad, y_pad = 15, 15
+        x_min, x_max, y_min, y_max = self._samplerange(samples)
+
+        f = lambda x, y: self.pdf(torch.Tensor([[x, y]])).data.cpu().numpy().astype(float)[0]
+        integral, _ = integrate.dblquad(f, x_min-x_pad, x_max+x_pad, y_min-y_pad, y_max+y_pad)
+
+        self.add_integral(torch.Tensor([integral]), it)
+
 
 
     #===================================================================================================
@@ -104,12 +122,12 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         computed_pairs = set()
 
         for (i, j) in cartesian_ids:
-            if (i, j) in computed_pairs: continue
+            #if (i, j) in computed_pairs: continue
 
             sigma, means = self._sqrd_params(i, j)
             weight = self.weights[i] * self.weights[j]
 
-            likelihood = density_function(sigma, means)
+            likelihood = density_function(self.sigmas[i], self.means[i]) * density_function(self.sigmas[j], self.means[j])
             
             component_likelihoods.append(weight * likelihood)
             normalisers.append(self._squared_norm_term(i, j) * weight)
@@ -126,7 +144,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
         z = torch.stack(normalisers, dim=0).sum(dim=0)
 
-        return z * torch.stack(component_likelihoods, dim=0).sum(dim=0)
+        return 1/z * torch.stack(component_likelihoods, dim=0).sum(dim=0)
     
 
     def log_likelihoods(self, X: torch.Tensor) -> torch.Tensor:
@@ -134,9 +152,9 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
     
 
     def forward(self, X: torch.Tensor, it: int, validate: bool = False) -> torch.Tensor:
-        if validate and (it % 100 == 0): self._grid_validation()
+        if validate and (it % 100 == 0): self._validation(X, it)
         out = - (self.log_likelihoods(X).logsumexp(dim=0) / X.shape[0])
-        out = out + (1 - self.tb_params['weights'].sum()).abs()
+        #out = out + (1/10) * (1 - self.tb_params['weights'].sum()).abs()
 
         if not self.monitor: return out
         

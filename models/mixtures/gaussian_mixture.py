@@ -6,6 +6,7 @@ import torch.optim
 from torch.nn.functional import softmax
 from matplotlib import pyplot as plt
 import matplotlib.cm as cm
+from scipy import integrate
 
 # Local imports
 from .hooks import HookTensorBoard, BaseHookVisualise
@@ -49,12 +50,20 @@ class GaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         return torch.stack(sqrd_mahalanobis, dim=0)
     
 
-    def _grid_validation(self):
-        grid, _, _ = self.create_grid()
-        pdf_out = self.pdf(grid)
+    def _samplerange(self, samples: torch.Tensor):
+        x, y = samples[:,0], samples[:,1]
 
-        if ((pdf_out < 0).any()):
-            raise ValueError("The model is not a valid PDF!")
+        return (x.min(), x.max(), y.min(), y.max())
+
+
+    def _validation(self, samples: torch.Tensor, it: int):
+        x_pad, y_pad = 15, 15
+        x_min, x_max, y_min, y_max = self._samplerange(samples)
+
+        f = lambda x, y: self.pdf(torch.Tensor([[x, y]])).data.cpu().numpy().astype(float)[0]
+        integral, _ = integrate.dblquad(f, x_min-x_pad, x_max+x_pad, y_min-y_pad, y_max+y_pad)
+
+        self.add_integral(torch.Tensor([integral]), it)
 
 
     #===================================================================================================
@@ -83,7 +92,7 @@ class GaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
     
 
     def forward(self, X: torch.Tensor, it: int, validate: bool = False) -> torch.Tensor:
-        if validate and (it % 100 == 0): self._grid_validation()
+        if validate and (it % 100 == 0): self._validation(X, it)
 
         out = - (self.log_likelihoods(X).logsumexp(dim=0) / X.shape[0])
         if not self.monitor: return out

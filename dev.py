@@ -18,6 +18,11 @@ from models.mixtures.squared_nm_gaussian_mixture import NMSquaredGaussianMixture
 
 from utils.pickle_handler import *
 
+"""
+# TODO: Add a new module which does different initialisation techniques such as K-means
+# TODO: Add possibility to change the optimialisation techniques - for when experimentation is approaching. 
+"""
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("--model", help="Name of the model to experiment")
@@ -66,7 +71,7 @@ with  console.status("Loading dataset...") as status:
     model.set_monitoring(os.path.abspath('runs'), model_config["model_name"])
     model.set_vis_config(res=200, vmin=-4, vmax=4)
 
-    optimizer = torch.optim.SGD(model.parameters(), lr=model_config['learning_rate'])
+    optimizer = torch.optim.SGD(model.parameters(), lr=model_config['learning_rate'], momentum=0.9)
 
     console.log(f'Model "{model_config["model_name"]}" loaded with the following config:')
     console.log(json.dumps(model_config, indent=4))
@@ -85,8 +90,19 @@ with  console.status("Loading dataset...") as status:
         model.add_base_weights(base_model.weights_, it)
         optimizer.zero_grad()
         loss = model(torch.from_numpy(features), it, model_config['validate_pdf'])
+        
+        """
+        if it % 10 == 0:
+            model.plot_contours(
+                features,
+                os.path.abspath(f'out/sequence/{model_config["model_name"]}_contours_{it}.pdf')
+            )
+        """
+        
         loss.backward()
         optimizer.step()
+
+
 
     console.log(f'Center likelihood: {str(model.pdf(torch.Tensor([[0, 0]])))}')
     console.log(f'Donut likelihood: {str(model.pdf(torch.Tensor([[3, 0]])))}')
