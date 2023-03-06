@@ -14,23 +14,22 @@ from src.models.mixtures.squared_gaussian_mixture import SquaredGaussianMixture
 from src.models.mixtures.squared_nm_gaussian_mixture import NMSquaredGaussianMixture
 
 from src.utils.pickle_handler import *
-from src.utils.early_stopping import EarlyStopping
 
-"""
-# TODO: Add a new module which does different initialisation techniques such as K-means
-# TODO: Add possibility to change the optimialisation techniques - for when experimentation is approaching. 
-"""
 
-parser = argparse.ArgumentParser()
-
-parser.add_argument("--model", help="Name of the model to experiment")
-parser.add_argument("--data", help="Name of the pickle data file to train on")
-parser.add_argument("--comp", help="Number of mixture components")
-parser.add_argument("--it", help="Number of iterations for training")
-parser.add_argument("--lr", help="Learning rate for the SGD optimiser")
-parser.add_argument("--validate_pdf", help="To use grid sampling to validate the pdf")
+# Argument parsing
+arg_flags = [
+        '--model_name',
+        '--dataset',
+        '--n_components',
+        '--epochs',
+        '--learning_rate',
+        '--experiment_name'
+        ]
+parser = parser.parse_args()
+for flag in arg_flags: parser.add_argument(flag)
 
 args = parser.parse_args()
+
 
 # Experiment configuration
 model_config = {
@@ -48,16 +47,13 @@ available_models = {
     'squared_nm_gaussian_mixture': NMSquaredGaussianMixture
 }
 
-BASE_MODEL_NAME = 'sklearn_gmm'
 
-
+# Start experiment
 console = Console()
 
 with  console.status("Loading dataset...") as status:
     # Load data - which is generated with `generate.py`
-    train_set = load_object('data/train', model_config['dataset'])
-    val_set = load_object('data/val', model_config['dataset'])
-    test_set = load_object('data/test', model_config['dataset'])
+    features = load_object('data', model_config['dataset'])
 
     console.log(f"Dataset \"{model_config['dataset']}\" loaded")
 
@@ -70,17 +66,17 @@ with  console.status("Loading dataset...") as status:
     # Model and optimiser
     model = available_models[model_config['model_name']](model_config['components'], 2)
     model.set_monitoring(os.path.abspath('runs'), model_config["model_name"])
-    model.set_vis_config(res=200, vmin=-4, vmax=4)
-
+    model.set_vis_config(res=200, vmin=-4, vmax=4) # TODO: Change the vmin/vmax to be adaptive
+ 
     optimizer = torch.optim.SGD(model.parameters(), lr=model_config['learning_rate'], momentum=0.9)
-    early_stopping = EarlyStopping(tolerance=5, min_delta=0.03)
+    #scheduler = torch.optim.lr_scheduler.CyclicLR(optimizer, base_lr=model_config['learning_rate'], max_lr=0.1,step_size_up=5,mode="triangular")
 
     console.log(f'Model "{model_config["model_name"]}" loaded with the following config:')
     console.log(json.dumps(model_config, indent=4))
 
     # Base model from sklearn with same number of components
-    base_model = SKGaussianMixture(n_components=model_config['components'], random_state=0, means_init=[[0,0], [0,0]]).fit(train_set)
-    base_loss = - (logsumexp(base_model.score_samples(train_set)) / train_set.shape[0])
+    base_model = SKGaussianMixture(n_components=model_config['components'], random_state=0, means_init=[[0,0], [0,0]]).fit(features)
+    base_loss = - (logsumexp(base_model.score_samples(features)) / features.shape[0])
     model.set_base_loss(base_loss)
 
     console.log(f'Model "{BASE_MODEL_NAME}" loaded')
@@ -93,17 +89,13 @@ with  console.status("Loading dataset...") as status:
         
         optimizer.zero_grad()
 
-        it_train_loss = model(torch.from_numpy(train_set), it, model_config['validate_pdf'])
+        loss = model(torch.from_numpy(features), it, model_config['validate_pdf'])
+        loss.backward()
 
-        with torch.no_grad(): 
-            it_val_loss = model.val_loss(torch.from_numpy(val_set), it)
-        
-        early_stopping(it_train_loss, it_val_loss)
-        if early_stopping.early_stop: break
-
-        it_train_loss.backward()
         optimizer.step()
-        #scheduler.step()
+
+    console.log(f'Center likelihood: {str(model.pdf(torch.Tensor([[0, 0]])))}')
+    console.log(f'Donut likelihood: {str(model.pdf(torch.Tensor([[3, 0]])))}')
 
     console.log(f'Model "{model_config["model_name"]}" was trained successfully')
     model.clear_monitoring()
@@ -120,13 +112,12 @@ with  console.status("Loading dataset...") as status:
     model_name_path = model_config["model_name"]
 
     model.plot_heatmap(
-        train_set,
-        val_set,
+        features,
         os.path.abspath(f'out/models/{model_config["model_name"]}_heatmap.pdf')
     )
 
     model.plot_contours(
-        train_set,
+        features,
         os.path.abspath(f'out/models/{model_config["model_name"]}_contours.pdf')
     )
 
