@@ -1,0 +1,20 @@
+CUDA_VISIBLE_DEVICES: 6
+CUDA_VISIBLE_DEVICES: 6
+CUDA_VISIBLE_DEVICES: 3
+cpu
+[18:29:54] Dataset "donut" loaded                                      dev.py:71
+           Model "squared_nm_gaussian_mixture" loaded with the         dev.py:88
+           following config:                                                    
+           {                                                           dev.py:89
+               "model_name": "squared_nm_gaussian_mixture",                     
+               "dataset": "donut",                                              
+               "components": 2,                                                 
+               "iterations": 1,                                                 
+               "learning_rate": 0.1,                                            
+               "validate_pdf": false,                                           
+               "optimizer": "sgd"                                               
+           }                                                                    
+[18:29:55] Model "sklearn_gmm" loaded                                  dev.py:96
+[18:29:56] Model "squared_nm_gaussian_mixture" was trained            dev.py:117
+           successfully                                                         
+[18:30:02]  Experiment ran successfully!                              dev.py:138

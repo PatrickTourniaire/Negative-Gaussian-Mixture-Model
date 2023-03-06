@@ -13,13 +13,13 @@
 # Request 4 GB system RAM 
 # the total system RAM available to the job is the value specified here multiplied by 
 # the number of requested GPUs (above)
-#$ -l h_vmem=8G
+#$ -l h_vmem=4G
 
 # Initialise the environment modules and load CUDA version 8.0.61
 . /etc/profile.d/modules.sh
 module load anaconda/2022.05
 
-conda activate nmmm
+source activate nmmm
 
 # Run the program
 ./local_scripts/squared_gaussian_nm_mixture_test.sh

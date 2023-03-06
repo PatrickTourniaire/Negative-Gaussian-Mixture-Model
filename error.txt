@@ -1,0 +1,41 @@
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/dev.py", line 2, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/dev.py", line 12, in <module>
+    from src.models.mixtures.gaussian_mixture import GaussianMixture
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/gaussian_mixture.py", line 12, in <module>
+    from .hooks import HookTensorBoard, BaseHookVisualise
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/hooks/__init__.py", line 1, in <module>
+    from .tensorboard import HookTensorBoard
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/hooks/tensorboard.py", line 2, in <module>
+    from torch.utils.tensorboard import SummaryWriter
+  File "/home/s1900878/.conda/envs/nmmm/lib/python3.10/site-packages/torch/utils/tensorboard/__init__.py", line 1, in <module>
+    import tensorboard
+ModuleNotFoundError: No module named 'tensorboard'
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
