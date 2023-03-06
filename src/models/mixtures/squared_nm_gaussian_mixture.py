@@ -3,9 +3,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim
-from torch.nn.functional import softmax
 from matplotlib import pyplot as plt
-import matplotlib.cm as cm
 from torch import linalg
 from scipy import integrate
 
@@ -20,9 +18,10 @@ mahalanobis   = lambda x, mu, S_inv: (x - mu).t() @ S_inv @ (x - mu)
 
 class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
-    def __init__(self, n_clusters: int, n_dims: int):
+    def __init__(self, n_clusters: int, n_dims: int, device: str):
         super(NMSquaredGaussianMixture, self).__init__()
-
+        self.device = device
+        
         # Configurations
         self.n_dims = n_dims
         self.n_clusters = n_clusters
@@ -87,7 +86,6 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         integral, _ = integrate.dblquad(f, x_min-x_pad, x_max+x_pad, y_min-y_pad, y_max+y_pad)
 
         self.add_integral(torch.Tensor([integral]), it)
-
 
 
     #===================================================================================================
@@ -196,21 +194,6 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         
         ax.set_title('Monotonic Gaussian Mixture')
         plt.savefig(save_to)
-
-
-    def get_grid(self, r, i, j, cond):
-        grid = np.meshgrid(r,r)
-
-        grid = np.stack(grid,2)
-        grid = grid.reshape(-1,2)
-        
-        num_point = len(grid)
-        grid_cond = np.tile(cond[None,:], [num_point, 1])
-        
-        grid_cond[:,i] = grid[:,0]
-        grid_cond[:,j] = grid[:,1]
-
-        return grid_cond
     
 
     def plot_heatmap(

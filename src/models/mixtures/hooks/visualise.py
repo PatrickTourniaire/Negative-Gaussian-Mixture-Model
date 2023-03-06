@@ -7,14 +7,7 @@ from matplotlib.patches import Ellipse
 
 class BaseHookVisualise():
 
-    def set_vis_config(self, res: int, vmin: int, vmax: int):
-        self.res = res
-        self.vmin = vmin
-        self.vmax = vmax
 
-    def _create_heatmap(self, log_likelihoods: torch.Tensor):
-        return (log_likelihoods.view(self.res, self.res).data.cpu().numpy()) 
-    
     def _confidence_ellipse(self, ax, sigma, mu, n_std=2.3, facecolor='none', **kwargs):
         pearson = sigma[0][1]/np.sqrt(sigma[0][0] * sigma[1][1])
         # Using a special case to obtain the eigenvalues of this
@@ -45,8 +38,17 @@ class BaseHookVisualise():
         ellipse.set_transform(transf + ax.transData)
         return ax.add_patch(ellipse)
 
-    def create_grid(self):
-        ticks = np.linspace(self.vmin, self.vmax, self.res + 1)[:-1] + 0.5 / self.res
-        X, Y = np.meshgrid(ticks, ticks)
 
-        return torch.from_numpy(np.vstack((X.ravel(), Y.ravel())).T).contiguous(), X, Y
+    def get_grid(self, r, i, j, cond):
+        grid = np.meshgrid(r,r)
+
+        grid = np.stack(grid,2)
+        grid = grid.reshape(-1,2)
+        
+        num_point = len(grid)
+        grid_cond = np.tile(cond[None,:], [num_point, 1])
+        
+        grid_cond[:,i] = grid[:,0]
+        grid_cond[:,j] = grid[:,1]
+
+        return grid_cond
