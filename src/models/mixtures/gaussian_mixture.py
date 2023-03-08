@@ -13,14 +13,60 @@ from .hooks import HookTensorBoard, BaseHookVisualise
 
 
 # Equations
-cholesky_comp = lambda L, D: torch.tril(L) @ torch.tril(L).t() + torch.eye(D)
+cholesky_comp = lambda L, D: L @ L.t() + torch.eye(D)
 mahalanobis   = lambda x, mu, S_inv: (x - mu).t() @ S_inv @ (x - mu)
+
+def _batch_mahalanobis(bL, bx):
+    """
+    Computes the squared Mahalanobis distance :math:`\mathbf{x}^\top\mathbf{M}^{-1}\mathbf{x}`
+    for a factored :math:`\mathbf{M} = \mathbf{L}\mathbf{L}^\top`.
+
+    Accepts batches for both bL and bx. They are not necessarily assumed to have the same batch
+    shape, but `bL` one should be able to broadcasted to `bx` one.
+    """
+    n = bx.size(-1)
+    bx_batch_shape = bx.shape[:-1]
+
+    # Assume that bL.shape = (i, 1, n, n), bx.shape = (..., i, j, n),
+    # we are going to make bx have shape (..., 1, j,  i, 1, n) to apply batched tri.solve
+    bx_batch_dims = len(bx_batch_shape)
+    bL_batch_dims = bL.dim() - 2
+    outer_batch_dims = bx_batch_dims - bL_batch_dims
+    old_batch_dims = outer_batch_dims + bL_batch_dims
+    new_batch_dims = outer_batch_dims + 2 * bL_batch_dims
+    # Reshape bx with the shape (..., 1, i, j, 1, n)
+    bx_new_shape = bx.shape[:outer_batch_dims]
+    for (sL, sx) in zip(bL.shape[:-2], bx.shape[outer_batch_dims:-1]):
+        bx_new_shape += (sx // sL, sL)
+    bx_new_shape += (n,)
+    bx = bx.reshape(bx_new_shape)
+    # Permute bx to make it have shape (..., 1, j, i, 1, n)
+    permute_dims = (list(range(outer_batch_dims)) +
+                    list(range(outer_batch_dims, new_batch_dims, 2)) +
+                    list(range(outer_batch_dims + 1, new_batch_dims, 2)) +
+                    [new_batch_dims])
+    bx = bx.permute(permute_dims)
+
+    flat_L = bL.reshape(-1, n, n)  # shape = b x n x n
+    flat_x = bx.reshape(-1, flat_L.size(0), n)  # shape = c x b x n
+    flat_x_swap = flat_x.permute(1, 2, 0)  # shape = b x n x c
+    M_swap = torch.linalg.solve_triangular(flat_L, flat_x_swap, upper=False).pow(2).sum(-2)  # shape = b x c
+    M = M_swap.t()  # shape = c x b
+
+    # Now we revert the above reshape and permute operators.
+    permuted_M = M.reshape(bx.shape[:-1])  # shape = (..., 1, j, i, 1)
+    permute_inv_dims = list(range(outer_batch_dims))
+    for i in range(bL_batch_dims):
+        permute_inv_dims += [outer_batch_dims + i, old_batch_dims + i]
+    reshaped_M = permuted_M.permute(permute_inv_dims)  # shape = (..., 1, i, j, 1)
+    return reshaped_M.reshape(bx_batch_shape)
 
 
 class GaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
-    def __init__(self, n_clusters: int, n_dims: int):
+    def __init__(self, n_clusters: int, n_dims: int, device: str):
         super(GaussianMixture, self).__init__()
+        self.device = device
 
         # Configurations
         self.n_dims = n_dims
@@ -57,7 +103,7 @@ class GaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
 
     def _validation(self, samples: torch.Tensor, it: int):
-        x_pad, y_pad = 15, 15
+        x_pad, y_pad = 10, 10
         x_min, x_max, y_min, y_max = self._samplerange(samples)
 
         f = lambda x, y: self.pdf(torch.Tensor([[x, y]])).data.cpu().numpy().astype(float)[0]
@@ -79,10 +125,10 @@ class GaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
         # Compute PDF for each cluster by weighted sum
         norm_constant    = lambda S: torch.sqrt(np.power(2 * np.pi, self.n_dims) * torch.det(S))
-        exponential      = lambda S, mu: - .5 * self._sqrd_mahalanobis(X, torch.inverse(S), mu)
-        density_function = lambda S, mu: (1 / norm_constant(S)) * torch.exp(exponential(S, mu))
-
-        component_likelihoods = [weights[i] * density_function(self.sigmas[i], self.means[i]) for i in range(self.n_clusters)]
+        exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+        density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+        
+        component_likelihoods = [weights[i] * density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i]) for i in range(self.n_clusters)]
 
         return torch.stack(component_likelihoods, dim=0).sum(dim=0)
     
@@ -91,15 +137,26 @@ class GaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         return torch.log(self.pdf(X))
     
 
+    def neglog_likelihood(self, X: torch.Tensor) -> torch.Tensor:
+        return - (self.log_likelihoods(X).logsumexp(dim=0) / X.shape[0])
+    
+
     def forward(self, X: torch.Tensor, it: int, validate: bool = False) -> torch.Tensor:
         if validate and (it % 100 == 0): self._validation(X, it)
+        out = self.neglog_likelihood(X)
 
-        out = - (self.log_likelihoods(X).logsumexp(dim=0) / X.shape[0])
         if not self.monitor: return out
         
         self.add_means(self.means, it)
         self.add_weights(self.tb_params['weights'], it)
         self.add_loss(out, it)
+
+        return out
+    
+
+    def val_loss(self, X: torch.Tensor, it: int) -> torch.Tensor:
+        out = self.neglog_likelihood(X)
+        self.add_valloss(out, it)
 
         return out
     

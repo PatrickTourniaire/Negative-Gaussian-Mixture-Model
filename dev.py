@@ -59,7 +59,7 @@ available_optimizers = {
 
 BASE_MODEL_NAME = 'sklearn_gmm'
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-print(device)
+
 console = Console()
 
 with  console.status("Loading dataset...") as status:
@@ -83,6 +83,7 @@ with  console.status("Loading dataset...") as status:
 
     optimizer = available_optimizers[model_config["optimizer"]]
     optimizer = optimizer(model.parameters(), lr=model_config['learning_rate'])
+    #optimizer = optimizer(model.parameters(), lr=model_config['learning_rate'], momentum=0.9)
     early_stopping = EarlyStopping(tolerance=5, min_delta=0.1)
 
     console.log(f'Model "{model_config["model_name"]}" loaded with the following config:')
@@ -100,11 +101,11 @@ with  console.status("Loading dataset...") as status:
     for it in range(model_config['iterations']):
         model.add_base_means(base_model.means_, it)
         model.add_base_weights(base_model.weights_, it)
-        
+
         optimizer.zero_grad()
 
         it_train_loss = model(torch.from_numpy(train_set), it, model_config['validate_pdf'])
-
+      
         with torch.no_grad(): 
             it_val_loss = model.val_loss(torch.from_numpy(val_set), it)
         
@@ -116,6 +117,8 @@ with  console.status("Loading dataset...") as status:
 
     console.log(f'Model "{model_config["model_name"]}" was trained successfully')
     model.clear_monitoring()
+
+    torch.save(model.state_dict(), f'out/saved_models/{args.experiment_name}')
 
     # ===========================================================================
     #                     VISUALISE NON-MONOTONIC MODEL
