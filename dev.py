@@ -7,6 +7,8 @@ from rich.console import Console
 from sklearn.mixture import GaussianMixture as SKGaussianMixture
 import argparse
 from scipy.special import logsumexp
+import glob
+import imageio
 
 # Local imports
 from src.models.mixtures.gaussian_mixture import GaussianMixture
@@ -54,7 +56,8 @@ available_models = {
 
 available_optimizers = {
     'sgd': torch.optim.SGD,
-    'adam': torch.optim.Adam
+    'adam': torch.optim.Adam,
+    'sgd_mom': torch.optim.SGD
 }
 
 BASE_MODEL_NAME = 'sklearn_gmm'
@@ -76,21 +79,31 @@ with  console.status("Loading dataset...") as status:
 
     status.update(status=f'Loading "{model_config["model_name"]}" model...')
 
+    path_sequences = f'out/sequences/{args.experiment_name}'
+    if not os.path.isdir(os.path.abspath(path_sequences)):
+        os.makedirs(os.path.abspath(path_sequences))
+    
+    path_models = f'out/models/{args.experiment_name}'
+    if not os.path.isdir(os.path.abspath(path_models)):
+        os.makedirs(os.path.abspath(path_models))
+
     # Model and optimiser
     model = available_models[model_config['model_name']](model_config['components'], 2, device)
     model.to(device)
     model.set_monitoring(os.path.abspath('runs'), args.experiment_name)
 
-    optimizer = available_optimizers[model_config["optimizer"]]
-    optimizer = optimizer(model.parameters(), lr=model_config['learning_rate'])
-    #optimizer = optimizer(model.parameters(), lr=model_config['learning_rate'], momentum=0.9)
+    optimizer_algo = available_optimizers[model_config["optimizer"]]
+    optimizer = optimizer_algo(model.parameters(), lr=model_config['learning_rate'])
+    if (model_config["optimizer"] == 'sgd_mom'):
+        optimizer = optimizer_algo(model.parameters(), lr=model_config['learning_rate'], momentum=0.9)
+
     early_stopping = EarlyStopping(tolerance=5, min_delta=0.1)
 
     console.log(f'Model "{model_config["model_name"]}" loaded with the following config:')
     console.log(json.dumps(model_config, indent=4))
 
     # Base model from sklearn with same number of components
-    base_model = SKGaussianMixture(n_components=model_config['components'], random_state=0, means_init=[[0,0], [0,0]]).fit(train_set)
+    base_model = SKGaussianMixture(n_components=model_config['components'], random_state=0).fit(train_set)
     base_loss = - (logsumexp(base_model.score_samples(train_set)) / train_set.shape[0])
     model.set_base_loss(base_loss)
 
@@ -103,11 +116,17 @@ with  console.status("Loading dataset...") as status:
         model.add_base_weights(base_model.weights_, it)
 
         optimizer.zero_grad()
-
         it_train_loss = model(torch.from_numpy(train_set), it, model_config['validate_pdf'])
       
         with torch.no_grad(): 
             it_val_loss = model.val_loss(torch.from_numpy(val_set), it)
+        
+        if it % 100 == 0:
+            model.plot_heatmap(
+                train_set,
+                val_set,
+                os.path.abspath(f'{path_sequences}/heatmap_it{it}.png')
+            )
         
         early_stopping(it_train_loss, it_val_loss)
         if early_stopping.early_stop: break
@@ -121,7 +140,7 @@ with  console.status("Loading dataset...") as status:
     torch.save(model.state_dict(), f'out/saved_models/{args.experiment_name}')
 
     # ===========================================================================
-    #                     VISUALISE NON-MONOTONIC MODEL
+    #                             VISUALISE MODEL
     # ===========================================================================
 
     status.update(status=f'Visualising "{model_config["model_name"]}" model...')
@@ -130,12 +149,20 @@ with  console.status("Loading dataset...") as status:
     model.plot_heatmap(
         train_set,
         val_set,
-        os.path.abspath(f'out/models/{args.experiment_name}_heatmap.pdf')
+        os.path.abspath(f'{path_models}/{args.experiment_name}_heatmap.pdf')
     )
 
     model.plot_contours(
         train_set,
-        os.path.abspath(f'out/models/{args.experiment_name}_contours.pdf')
+        os.path.abspath(f'{path_models}/{args.experiment_name}_contours.pdf')
+    )
+
+    paths_frames = glob.glob(f'{path_sequences}/*.png', recursive=True)
+    frames = [imageio.imread(f) for f in paths_frames]
+    imageio.mimsave(
+        f'{path_models}/{args.experiment_name}_anim.gif', 
+        frames, 
+        fps=(len(paths_frames) / 5.0)
     )
 
 console.log(f'[bold green] Experiment ran successfully!')

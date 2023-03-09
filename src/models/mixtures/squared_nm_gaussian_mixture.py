@@ -12,7 +12,7 @@ from .hooks import HookTensorBoard, BaseHookVisualise
 
 
 # Equations
-cholesky_comp = lambda L, D: L @ L.t() + torch.eye(D)
+cholesky_comp = lambda L, D: torch.tril(L) @ torch.tril(L).t()
 mahalanobis   = lambda x, mu, S_inv: (x - mu).t() @ S_inv @ (x - mu)
 
 
@@ -75,9 +75,11 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         # Parameters of component means (n_clusters, n_dim)
         self.means = nn.Parameter(torch.zeros(n_clusters, n_dims, dtype=torch.float64))
         # Parameters of matrices used for Cholesky composition (n_clusters, n_dim, n_dim)
-        self.chols = nn.Parameter(torch.zeros(n_clusters, n_dims, n_dims, dtype=torch.float64).normal_())
+        L = torch.ones(n_clusters, 1, 1) * torch.eye(n_dims, n_dims).view(1, n_dims, n_dims)
+        L = (L).type(torch.float64).contiguous()
+        self.chols = nn.Parameter(L)
         # Parameter for the weights of each mixture component (n_clusters,)
-        self.weights = nn.Parameter(torch.rand(n_clusters, dtype=torch.float64).normal_(-1,1))
+        self.weights = nn.Parameter(torch.zeros(n_clusters, dtype=torch.float64).normal_())
 
         # Parameters used for tensorboard
         self.tb_params = {}
@@ -107,8 +109,6 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
         z_term = 1 / torch.sqrt(np.power(2 * np.pi, self.n_dims) * torch.det(sigma_i + sigma_j))
         mahalanobis_dist = _batch_mahalanobis(torch.linalg.cholesky(sigma_i + sigma_j), (mu_i - mu_j))
-        #mahalanobis_dist = torch.matmul(torch.matmul((mu_i - mu_j).t(), torch.inverse(sigma_i + sigma_j)), (mu_i - mu_j))
-
 
         return z_term * torch.exp(- .5 * mahalanobis_dist)
     
@@ -181,7 +181,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
     
 
     def neglog_likelihood(self, X: torch.Tensor) -> torch.Tensor:
-        return - (self.log_likelihoods(X).logsumexp(dim=0) / X.shape[0])
+        return - (self.log_likelihoods(X).logsumexp(dim=0) / X.shape[0]) 
 
 
     def forward(self, X: torch.Tensor, it: int, validate: bool = False) -> torch.Tensor:

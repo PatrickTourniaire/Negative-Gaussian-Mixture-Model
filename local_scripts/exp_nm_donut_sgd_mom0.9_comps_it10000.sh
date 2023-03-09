@@ -10,33 +10,33 @@ python3 dev.py --experiment_name nm_mixture_sgd_comp2_it10000_lr0.1 \
     --it 5000 \
     --lr 0.1 \
     --validate_pdf 0 \
-    --optimizer sgd &
+    --optimizer sgd_mom &
 
-python3 dev.py --experiment_name nm_mixture_sgd_comp2_it10000_lr0.01 \
+python3 dev.py --experiment_name nm_mixture_sgd_comp3_it10000_lr0.1 \
     --model squared_nm_gaussian_mixture \
     --data donut \
-    --comp 2 \
+    --comp 3 \
     --it 5000 \
-    --lr 0.01 \
+    --lr 0.1 \
     --validate_pdf 0 \
-    --optimizer sgd &
+    --optimizer sgd_mom &
 
 
-python3 dev.py --experiment_name nm_mixture_sgd_comp2_it10000_lr0.001 \
+python3 dev.py --experiment_name nm_mixture_sgd_comp4_it10000_lr0.1 \
     --model squared_nm_gaussian_mixture \
     --data donut \
-    --comp 2 \
+    --comp 4 \
     --it 5000 \
-    --lr 0.001 \
+    --lr 0.1 \
     --validate_pdf 0 \
-    --optimizer sgd &
+    --optimizer sgd_mom &
 
 
-python3 dev.py --experiment_name nm_mixture_sgd_comp2_it10000_lr0.0001 \
+python3 dev.py --experiment_name nm_mixture_sgd_comp5_it10000_lr0.1 \
     --model squared_nm_gaussian_mixture \
     --data donut \
-    --comp 2 \
+    --comp 5 \
     --it 5000 \
-    --lr 0.0001 \
+    --lr 0.1 \
     --validate_pdf 0 \
-    --optimizer sgd &
+    --optimizer sgd_mom &
