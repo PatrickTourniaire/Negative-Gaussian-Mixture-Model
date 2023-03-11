@@ -57,7 +57,8 @@ available_models = {
 available_optimizers = {
     'sgd': torch.optim.SGD,
     'adam': torch.optim.Adam,
-    'sgd_mom': torch.optim.SGD
+    'sgd_mom': torch.optim.SGD,
+    'adagrad': torch.optim.Adagrad
 }
 
 BASE_MODEL_NAME = 'sklearn_gmm'
@@ -94,6 +95,7 @@ with  console.status("Loading dataset...") as status:
 
     optimizer_algo = available_optimizers[model_config["optimizer"]]
     optimizer = optimizer_algo(model.parameters(), lr=model_config['learning_rate'])
+    
     if (model_config["optimizer"] == 'sgd_mom'):
         optimizer = optimizer_algo(model.parameters(), lr=model_config['learning_rate'], momentum=0.9)
 
