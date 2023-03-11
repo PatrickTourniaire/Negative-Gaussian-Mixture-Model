@@ -161,3 +161,6 @@ cython_debug/
 
 # Custom
 runs/
+out/models
+out/sequences
+out/saved_models

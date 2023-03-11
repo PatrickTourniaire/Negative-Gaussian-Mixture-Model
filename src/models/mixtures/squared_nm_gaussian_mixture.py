@@ -72,17 +72,36 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         self.n_dims = n_dims
         self.n_clusters = n_clusters
 
+        # Initialisations
+        chols = self._initalise_diagonal(n_clusters, n_dims)
+
         # Parameters of component means (n_clusters, n_dim)
         self.means = nn.Parameter(torch.zeros(n_clusters, n_dims, dtype=torch.float64))
         # Parameters of matrices used for Cholesky composition (n_clusters, n_dim, n_dim)
-        L = torch.ones(n_clusters, 1, 1) * torch.eye(n_dims, n_dims).view(1, n_dims, n_dims)
-        L = (L).type(torch.float64).contiguous()
-        self.chols = nn.Parameter(L)
+        self.chols = nn.Parameter(chols)
         # Parameter for the weights of each mixture component (n_clusters,)
         self.weights = nn.Parameter(torch.zeros(n_clusters, dtype=torch.float64).normal_())
 
         # Parameters used for tensorboard
         self.tb_params = {}
+
+
+    #===================================================================================================
+    #                                          Initialisations
+    #===================================================================================================
+
+    def _initalise_diagonal(self, n_clusters: int, n_dims: int):
+        L = 2 * torch.ones(n_clusters, 1, 1) * torch.eye(n_dims, n_dims).view(1, n_dims, n_dims)
+        L = (L).type(torch.float64).contiguous()
+
+        return L
+    
+
+    def _initialise_full(self, n_clusters: int, n_dims: int):
+        L = 2 * torch.ones(n_clusters, 1, 1) * torch.ones(n_dims, n_dims).view(1, n_dims, n_dims)
+        L = (L).type(torch.float64).contiguous()
+
+        return L
     
 
     #===================================================================================================
@@ -263,5 +282,59 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         ax.scatter(val_samples[:,idx_i], val_samples[:,idx_j], 1, color="k", alpha=0.5)
         
         fig.colorbar(c, ax=ax)
+
+        plt.savefig(save_to)
+
+
+    def sequence_visualisation(
+            self, 
+            train_samples: torch.Tensor,
+            val_samples: torch.Tensor,
+            save_to: str):
+        idx_i, idx_j = 0,1
+        
+        fig, ax = plt.subplots(1,2, figsize=(12,6), sharex=True, sharey=True)
+        
+        # Plot confidence circles
+        ax[0].set_xlim([-8, 8])
+        ax[0].set_ylim([-8, 8])
+        ax[0].set_aspect('equal', 'box')
+
+        for i in range(len(self.tb_params['means'])):
+            sigma = self.tb_params['sigmas'][i].data.cpu().numpy()
+            mu = self.tb_params['means'][i].data.cpu().numpy()
+            
+            colour = 'blue' if self.tb_params['weights'][i] > 0 else 'red'
+            config = {
+                'edgecolor': colour,
+                'facecolor': colour,
+                'alpha': .2
+            }
+
+            self._confidence_ellipse(ax[0], sigma, mu, **config)
+            ax[0].scatter(mu[0], mu[1], c='red', s=3)
+        
+        ax[0].scatter(train_samples[:,idx_i], train_samples[:,idx_j], 1, color="r", alpha=0.5)
+        ax[0].scatter(val_samples[:,idx_i], val_samples[:,idx_j], 1, color="k", alpha=0.5)
+        
+        # Plot heatmap
+        ngrid = 100
+        eval_grid = np.linspace(-8,8,ngrid)
+        cond_values = np.zeros(2)
+
+        eval_points = self.get_grid(eval_grid, idx_i, idx_j, cond_values)
+        logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+
+        ax[1].set_xlim([-8, 8])
+        ax[1].set_ylim([-8, 8])
+        ax[1].set_aspect('equal', 'box')
+
+        c = ax[1].pcolor(eval_grid, eval_grid, logpdf.reshape(ngrid, ngrid), vmin=0)
+        ax[1].scatter(train_samples[:,idx_i], train_samples[:,idx_j], 1, color="r", alpha=0.5)
+        ax[1].scatter(val_samples[:,idx_i], val_samples[:,idx_j], 1, color="k", alpha=0.5)
+        
+        fig.subplots_adjust(right=0.8)
+        cbar_ax = fig.add_axes([0.85, 0.15, 0.05, 0.7])
+        fig.colorbar(c, cax=cbar_ax)
 
         plt.savefig(save_to)

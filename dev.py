@@ -122,10 +122,10 @@ with  console.status("Loading dataset...") as status:
             it_val_loss = model.val_loss(torch.from_numpy(val_set), it)
         
         if it % 100 == 0:
-            model.plot_heatmap(
+            model.sequence_visualisation(
                 train_set,
                 val_set,
-                os.path.abspath(f'{path_sequences}/heatmap_it{it}.png')
+                os.path.abspath(f'{path_sequences}/seq_it{it}.png')
             )
         
         early_stopping(it_train_loss, it_val_loss)
@@ -162,7 +162,7 @@ with  console.status("Loading dataset...") as status:
     imageio.mimsave(
         f'{path_models}/{args.experiment_name}_anim.gif', 
         frames, 
-        fps=(len(paths_frames) / 5.0)
+        fps=(len(paths_frames) / 10.0)
     )
 
 console.log(f'[bold green] Experiment ran successfully!')
