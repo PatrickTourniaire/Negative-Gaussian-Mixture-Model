@@ -3,11 +3,11 @@
 #if [ -z "$STY" ]; then exec screen -dm -S screenName /bin/bash "$0"; fi
 #conda activate nmmm
 
-python3 dev.py --experiment_name nm_mixture_sgd_mom0.9_reg10_comp2_it5000_lr0.1 \
+python3 experiment_builder.py --experiment_name nm_mixture_sgd_mom0.9_reg14_comp2_it5000_lr0.1 \
     --model squared_nm_gaussian_mixture \
     --data donut \
-    --comp 2 \
-    --it 10000 \
+    --comp 3 \
+    --it 25000 \
     --lr 0.1 \
     --validate_pdf 0 \
     --optimizer sgd_mom \
