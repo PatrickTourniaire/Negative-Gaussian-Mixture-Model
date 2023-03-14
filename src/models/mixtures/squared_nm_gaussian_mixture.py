@@ -64,19 +64,24 @@ def _batch_mahalanobis(bL, bx):
 
 class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
-    def __init__(self, n_clusters: int, n_dims: int, device: str):
+    def __init__(
+            self, 
+            n_clusters: int = 1, 
+            n_dims: int = 2, 
+            init_means=None,
+            init_sigmas=None):
         super(NMSquaredGaussianMixture, self).__init__()
-        self.device = device
         
         # Configurations
         self.n_dims = n_dims
         self.n_clusters = n_clusters
 
         # Initialisations
-        chols = self._initalise_diagonal(n_clusters, n_dims)
+        chols = self._initialise_full(n_clusters, n_dims) if init_sigmas is None else init_sigmas
+        means = self._zero_means(n_clusters, n_dims) if init_means is None else init_means
 
         # Parameters of component means (n_clusters, n_dim)
-        self.means = nn.Parameter(torch.zeros(n_clusters, n_dims, dtype=torch.float64))
+        self.means = nn.Parameter(means)
         # Parameters of matrices used for Cholesky composition (n_clusters, n_dim, n_dim)
         self.chols = nn.Parameter(chols)
         # Parameter for the weights of each mixture component (n_clusters,)
@@ -98,11 +103,14 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
     
 
     def _initialise_full(self, n_clusters: int, n_dims: int):
-        L = 2 * torch.ones(n_clusters, 1, 1) * torch.ones(n_dims, n_dims).view(1, n_dims, n_dims)
+        L = 2 * torch.normal(1, 1, size=(n_clusters, 1, 1)) * torch.ones(n_dims, n_dims).view(1, n_dims, n_dims)
         L = (L).type(torch.float64).contiguous()
 
         return L
     
+
+    def _zero_means(self, n_clusters: int, n_dims: int):
+        return torch.zeros(n_clusters, n_dims, dtype=torch.float64)
 
     #===================================================================================================
     #                                       INTERNAL COMPUTATIONS

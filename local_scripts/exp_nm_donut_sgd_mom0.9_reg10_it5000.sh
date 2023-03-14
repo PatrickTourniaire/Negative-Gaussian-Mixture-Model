@@ -3,14 +3,18 @@
 #if [ -z "$STY" ]; then exec screen -dm -S screenName /bin/bash "$0"; fi
 #conda activate nmmm
 
-python3 dev.py --experiment_name nm_mixture_adagrad_comp2_it5000_lr0.1 \
+python3 dev.py --experiment_name nm_mixture_sgd_mom0.9_reg10_comp2_it5000_lr0.1 \
     --model squared_nm_gaussian_mixture \
     --data donut \
     --comp 2 \
-    --it 5000 \
-    --lr 0.001 \
+    --it 10000 \
+    --lr 0.1 \
     --validate_pdf 0 \
-    --optimizer adagrad
+    --optimizer sgd_mom \
+    --initialisation random \
+    --covar_shape diag \
+    --covar_reg -10
+
 
 # python3 dev.py --experiment_name nm_mixture_adam_comp2_it5000_lr0.01 \
 #     --model squared_nm_gaussian_mixture \
