@@ -67,6 +67,8 @@ available_optimizers = {
 BASE_MODEL_NAME = 'sklearn_gmm'
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
+OUTPUT_REPO = str(os.path.abspath('test_out'))
+
 console = Console()
 
 with  console.status("Loading dataset...") as status:
@@ -74,6 +76,10 @@ with  console.status("Loading dataset...") as status:
     train_set = load_object('data/train', model_config['dataset'])
     val_set = load_object('data/val', model_config['dataset'])
     test_set = load_object('data/test', model_config['dataset'])
+
+    tensor_train_set = torch.from_numpy(train_set) if str(device) == 'cpu' else torch.from_numpy(train_set).cuda()
+    tensor_val_set = torch.from_numpy(val_set) if str(device) == 'cpu' else torch.from_numpy(val_set).cuda()
+    tensor_test_set = torch.from_numpy(test_set) if str(device) == 'cpu' else torch.from_numpy(test_set).cuda()
 
     console.log(f"Dataset \"{model_config['dataset']}\" loaded")
 
@@ -83,31 +89,42 @@ with  console.status("Loading dataset...") as status:
 
     status.update(status=f'Loading "{model_config["model_name"]}" model...')
 
-    path_sequences = f'out/sequences/{args.experiment_name}'
+    path_sequences = f'{OUTPUT_REPO}/sequences/{args.experiment_name}'
     if not os.path.isdir(os.path.abspath(path_sequences)):
         os.makedirs(os.path.abspath(path_sequences))
     
-    path_models = f'out/models/{args.experiment_name}'
+    path_models = f'{OUTPUT_REPO}/models/{args.experiment_name}'
     if not os.path.isdir(os.path.abspath(path_models)):
         os.makedirs(os.path.abspath(path_models))
     
     #=============================== INIT PARAMS ===============================
 
-    initaliser = GMMInitalisation(
+    initaliser_nmgmm = GMMInitalisation(
         n_components=model_config['components'],
         init_params=model_config['initialisation'],
         covariance_type=model_config['covar_shape'],
-        reg_covar=0
+        reg_covar=model_config['covar_reg']
+    )
+    initaliser_gmm = GMMInitalisation(
+        n_components=model_config['components'] ** 2,
+        init_params=model_config['initialisation'],
+        covariance_type=model_config['covar_shape'],
+        reg_covar=model_config['covar_reg']
     )
     random_seed = check_random_state(None)
-    initaliser.initialize_parameters(train_set, random_seed)
+    
+    initaliser_nmgmm.initialize_parameters(train_set, random_seed)
+    initaliser_gmm.initialize_parameters(train_set, random_seed)
 
-    _covariances = initaliser.covariances_
-    _means = initaliser.means_
+    _covariances_nmgmm = initaliser_nmgmm.covariances_
+    _covariances_gmm = initaliser_gmm.covariances_
+    
+    _means_nmgmm = initaliser_nmgmm.means_
+    _means_gmm = initaliser_gmm.means_
     
     if model_config['covar_shape'] == 'diag':
-        _covariances_s = np.array([np.diag(np.sqrt(S)) for S in _covariances])
-        _covariances = np.array([np.diag(S) for S in _covariances])
+        _covariances_nmgmm = np.array([np.diag(np.sqrt(S)) for S in _covariances_nmgmm])
+        _covariances_gmm = np.array([np.diag(S) for S in _covariances_gmm])
 
 
     #=============================== NMGMM SETUP ===============================
@@ -116,8 +133,8 @@ with  console.status("Loading dataset...") as status:
     model = available_models[model_config['model_name']](
         n_clusters = model_config['components'], 
         n_dims = 2,
-        init_means=torch.from_numpy(_means),
-        init_sigmas=torch.from_numpy(_covariances_s))
+        init_means=torch.from_numpy(_means_nmgmm),
+        init_sigmas=torch.from_numpy(_covariances_nmgmm))
 
     model.to(device)
     model.set_monitoring(os.path.abspath('runs'), args.experiment_name)
@@ -138,10 +155,10 @@ with  console.status("Loading dataset...") as status:
     
     # Base model from sklearn with same number of components
     base_model = SKGaussianMixture(
-        n_components=model_config['components'], 
+        n_components=model_config['components'] ** 2, 
         random_state=random_seed,
-        means_init=_means,
-        precisions_init=[inv(S) for S in _covariances]).fit(train_set)
+        means_init=_means_gmm,
+        precisions_init=[inv(S) for S in _covariances_gmm]).fit(train_set)
     base_loss = - (logsumexp(base_model.score_samples(train_set)) / train_set.shape[0])
     model.set_base_loss(base_loss)
 
@@ -157,14 +174,14 @@ with  console.status("Loading dataset...") as status:
         model.add_base_weights(base_model.weights_, it)
 
         optimizer.zero_grad()
-        it_train_loss = model(torch.from_numpy(train_set), it, model_config['validate_pdf'])
+        it_train_loss = model(tensor_train_set, it, model_config['validate_pdf'])
       
         with torch.no_grad(): 
-            it_val_loss = model.val_loss(torch.from_numpy(val_set), it)
+            it_val_loss = model.val_loss(tensor_val_set, it)
         
         if it % 100 == 0:
             model.sequence_visualisation(
-                train_set,
+                tensor_train_set,
                 val_set,
                 os.path.abspath(f'{path_sequences}/seq_it{it}.png')
             )
@@ -178,7 +195,7 @@ with  console.status("Loading dataset...") as status:
     console.log(f'Model "{model_config["model_name"]}" was trained successfully')
     model.clear_monitoring()
 
-    torch.save(model.state_dict(), f'out/saved_models/{args.experiment_name}')
+    torch.save(model.state_dict(), f'{OUTPUT_REPO}/saved_models/{args.experiment_name}')
 
 
     # ===========================================================================

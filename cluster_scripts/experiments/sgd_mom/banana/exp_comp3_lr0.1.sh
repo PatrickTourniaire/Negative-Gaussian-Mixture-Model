@@ -1,0 +1,11 @@
+python3 experiment_builder.py --experiment_name nmgmm_sgdmom_banana_comp3_lr0.1 \
+    --model squared_nm_gaussian_mixture \
+    --data banana \
+    --comp 3 \
+    --it 25000 \
+    --lr 0.1 \
+    --validate_pdf 0 \
+    --optimizer sgd_mom \
+    --initialisation random_from_data \
+    --covar_shape full \
+    --covar_reg 1
