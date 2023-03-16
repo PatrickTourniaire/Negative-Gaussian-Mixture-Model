@@ -9,7 +9,6 @@ from sklearn.mixture import GaussianMixture as SKGaussianMixture
 import argparse
 from scipy.special import logsumexp
 import glob
-import imageio
 
 # Local imports
 from src.models.mixtures.gaussian_mixture import GaussianMixture
@@ -65,9 +64,9 @@ available_optimizers = {
 }
 
 BASE_MODEL_NAME = 'sklearn_gmm'
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-OUTPUT_REPO = str(os.path.abspath('test_out'))
+OUTPUT_REPO = str(os.path.abspath('/exports/eddie/scratch/s1900878/experiment_out'))
 
 console = Console()
 
@@ -137,7 +136,7 @@ with  console.status("Loading dataset...") as status:
         init_sigmas=torch.from_numpy(_covariances_nmgmm))
 
     model.to(device)
-    model.set_monitoring(os.path.abspath('runs'), args.experiment_name)
+    model.set_monitoring(os.path.abspath('/exports/eddie/scratch/s1900878/runs'), args.experiment_name)
 
     optimizer_algo = available_optimizers[model_config["optimizer"]]
     optimizer = optimizer_algo(model.parameters(), lr=model_config['learning_rate'])
@@ -178,14 +177,8 @@ with  console.status("Loading dataset...") as status:
       
         with torch.no_grad(): 
             it_val_loss = model.val_loss(tensor_val_set, it)
-        
-        if it % 100 == 0:
-            model.sequence_visualisation(
-                tensor_train_set,
-                val_set,
-                os.path.abspath(f'{path_sequences}/seq_it{it}.png')
-            )
-        
+                
+
         early_stopping(it_train_loss, it_val_loss)
         if early_stopping.early_stop: break
 
@@ -206,22 +199,15 @@ with  console.status("Loading dataset...") as status:
     model_name_path = model_config["model_name"]
 
     model.plot_heatmap(
-        train_set,
-        val_set,
+        tensor_train_set,
+        tensor_val_set,
         os.path.abspath(f'{path_models}/{args.experiment_name}_heatmap.pdf')
     )
 
     model.plot_contours(
-        train_set,
+        tensor_train_set,
         os.path.abspath(f'{path_models}/{args.experiment_name}_contours.pdf')
     )
 
-    paths_frames = glob.glob(f'{path_sequences}/*.png', recursive=True)
-    frames = [imageio.imread(f) for f in paths_frames]
-    imageio.mimsave(
-        f'{path_models}/{args.experiment_name}_anim.gif', 
-        frames, 
-        fps=(len(paths_frames) / 10.0)
-    )
 
 console.log(f'[bold green] Experiment ran successfully!')

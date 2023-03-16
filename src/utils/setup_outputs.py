@@ -1,7 +1,7 @@
 import os
 
 if __name__ == '__main__':
-    base_repo = 'test_out'
+    base_repo = '/exports/eddie/scratch/s1900878/experiment_out'
     base_repo_subs = [
         'data_plots',
         'models',

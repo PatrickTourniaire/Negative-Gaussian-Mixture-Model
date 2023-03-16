@@ -277,7 +277,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         eval_points = self.get_grid(eval_grid, idx_i, idx_j, cond_values)
 
 
-        logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+        logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
 
         fig, ax = plt.subplots(1,1, figsize=(6,6), sharex=True, sharey=True)
 
@@ -286,8 +286,8 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         plt.axis('square')
 
         c = ax.pcolor(eval_grid, eval_grid, logpdf.reshape(ngrid, ngrid), vmin=0)
-        ax.scatter(train_samples[:,idx_i], train_samples[:,idx_j], 1, color="r", alpha=0.5)
-        ax.scatter(val_samples[:,idx_i], val_samples[:,idx_j], 1, color="k", alpha=0.5)
+        ax.scatter(train_samples[:,idx_i].cpu().numpy(), train_samples[:,idx_j].cpu().numpy(), 1, color="r", alpha=0.5)
+        ax.scatter(val_samples[:,idx_i].cpu().numpy(), val_samples[:,idx_j].cpu().numpy(), 1, color="k", alpha=0.5)
         
         fig.colorbar(c, ax=ax)
 
@@ -309,8 +309,8 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         ax[0].set_aspect('equal', 'box')
 
         for i in range(len(self.tb_params['means'])):
-            sigma = self.tb_params['sigmas'][i].data.cpu().numpy()
-            mu = self.tb_params['means'][i].data.cpu().numpy()
+            sigma = self.tb_params['sigmas'][i].cpu().numpy()
+            mu = self.tb_params['means'][i].cpu().numpy()
             
             colour = 'blue' if self.tb_params['weights'][i] > 0 else 'red'
             config = {
@@ -322,8 +322,8 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
             self._confidence_ellipse(ax[0], sigma, mu, **config)
             ax[0].scatter(mu[0], mu[1], c='red', s=3)
         
-        ax[0].scatter(train_samples[:,idx_i], train_samples[:,idx_j], 1, color="r", alpha=0.5)
-        ax[0].scatter(val_samples[:,idx_i], val_samples[:,idx_j], 1, color="k", alpha=0.5)
+        ax[0].scatter(train_samples[:,idx_i].cpu().numpy(), train_samples[:,idx_j].cpu().numpy(), 1, color="r", alpha=0.5)
+        ax[0].scatter(val_samples[:,idx_i].cpu().numpy(), val_samples[:,idx_j].cpu().numpy(), 1, color="k", alpha=0.5)
         
         # Plot heatmap
         ngrid = 100
@@ -331,15 +331,15 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         cond_values = np.zeros(2)
 
         eval_points = self.get_grid(eval_grid, idx_i, idx_j, cond_values)
-        logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+        logpdf = self.pdf(torch.from_numpy(eval_points).cuda()).cpu().numpy()
 
         ax[1].set_xlim([-8, 8])
         ax[1].set_ylim([-8, 8])
         ax[1].set_aspect('equal', 'box')
 
         c = ax[1].pcolor(eval_grid, eval_grid, logpdf.reshape(ngrid, ngrid), vmin=0)
-        ax[1].scatter(train_samples[:,idx_i], train_samples[:,idx_j], 1, color="r", alpha=0.5)
-        ax[1].scatter(val_samples[:,idx_i], val_samples[:,idx_j], 1, color="k", alpha=0.5)
+        ax[1].scatter(train_samples[:,idx_i].cpu().numpy(), train_samples[:,idx_j].cpu().numpy(), 1, color="r", alpha=0.5)
+        ax[1].scatter(val_samples[:,idx_i].cpu().numpy(), val_samples[:,idx_j].cpu().numpy(), 1, color="k", alpha=0.5)
         
         fig.subplots_adjust(right=0.8)
         cbar_ax = fig.add_axes([0.85, 0.15, 0.05, 0.7])

@@ -1,41 +1,364 @@
 WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
  https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
-
-CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
-To initialize your shell, run
-
-    $ conda init <SHELL_NAME>
-
-Currently supported shells are:
-  - bash
-  - fish
-  - tcsh
-  - xonsh
-  - zsh
-  - powershell
-
-See 'conda init --help' for more information and options.
-
-IMPORTANT: You may need to close and restart your shell after running 'conda init'.
-
-
-Traceback (most recent call last):
-  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/dev.py", line 2, in <module>
-    import torch
-ModuleNotFoundError: No module named 'torch'
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
 WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
  https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
 Traceback (most recent call last):
-  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/dev.py", line 12, in <module>
-    from src.models.mixtures.gaussian_mixture import GaussianMixture
-  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/gaussian_mixture.py", line 12, in <module>
-    from .hooks import HookTensorBoard, BaseHookVisualise
-  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/hooks/__init__.py", line 1, in <module>
-    from .tensorboard import HookTensorBoard
-  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/hooks/tensorboard.py", line 2, in <module>
-    from torch.utils.tensorboard import SummaryWriter
-  File "/home/s1900878/.conda/envs/nmmm/lib/python3.10/site-packages/torch/utils/tensorboard/__init__.py", line 1, in <module>
-    import tensorboard
-ModuleNotFoundError: No module named 'tensorboard'
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 182, in <module>
+    model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 326, in sequence_visualisation
+    ax[0].scatter(val_samples[:,idx_i].data.cpu().numpy(), val_samples[:,idx_j].data.cpu().numpy(), 1, color="k", alpha=0.5)
+AttributeError: 'memoryview' object has no attribute 'cpu'
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 182, in <module>
+    model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 326, in sequence_visualisation
+    ax[0].scatter(val_samples[:,idx_i].cpu().numpy(), val_samples[:,idx_j].cpu().numpy(), 1, color="k", alpha=0.5)
+AttributeError: 'numpy.ndarray' object has no attribute 'cpu'
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 182, in <module>
+    model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 334, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points).cuda()).cpu().numpy()
+RuntimeError: Can't call numpy() on Tensor that requires grad. Use tensor.detach().numpy() instead.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 201, in <module>
+    model.plot_heatmap(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 280, in plot_heatmap
+    logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 186, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 169, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 168, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
 WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
  https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
