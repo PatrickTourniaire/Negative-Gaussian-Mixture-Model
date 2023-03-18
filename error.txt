@@ -362,3 +362,1177 @@ Traceback (most recent call last):
 RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
 WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
  https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+wandb: Starting wandb agent 🕵️
+2023-03-18 20:54:44,762 - wandb.wandb_agent - INFO - Running runs: []
+2023-03-18 20:54:45,113 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 20:54:45,113 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 4
+	covar_reg: 0.22969834167514505
+	covar_shape: full
+	data: funnel
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.24502738516252465
+	model: squared_nm_gaussian_mixture
+	momentum: 0.9742095733529444
+	optimal_init: funnel
+	optimizer: sgd
+2023-03-18 20:54:45,127 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=4 --covar_reg=0.22969834167514505 --covar_shape=full --data=funnel --initialisation=random --iterations=3000 --learning_rate=0.24502738516252465 --model=squared_nm_gaussian_mixture --momentum=0.9742095733529444 --optimal_init=funnel --optimizer=sgd
+2023-03-18 20:54:50,140 - wandb.wandb_agent - INFO - Running runs: ['r477wdok']
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_205457-r477wdok
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run likely-sweep-1
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/mk508wyk
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/r477wdok
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+wandb: Starting wandb agent 🕵️
+2023-03-18 21:01:43,588 - wandb.wandb_agent - INFO - Running runs: []
+2023-03-18 21:01:44,044 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:01:44,045 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 3
+	covar_reg: 0.41283342461612127
+	covar_shape: full
+	data: funnel
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.7519960017646389
+	model: squared_nm_gaussian_mixture
+	momentum: 0.6716604280386627
+	optimal_init: funnel
+	optimizer: adagrad
+2023-03-18 21:01:44,070 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=3 --covar_reg=0.41283342461612127 --covar_shape=full --data=funnel --initialisation=random --iterations=3000 --learning_rate=0.7519960017646389 --model=squared_nm_gaussian_mixture --momentum=0.6716604280386627 --optimal_init=funnel --optimizer=adagrad
+2023-03-18 21:01:49,084 - wandb.wandb_agent - INFO - Running runs: ['zzehcqg1']
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_210155-zzehcqg1
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run frosty-sweep-2
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/mk508wyk
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/zzehcqg1
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+wandb: Starting wandb agent 🕵️
+2023-03-18 21:03:27,825 - wandb.wandb_agent - INFO - Running runs: []
+2023-03-18 21:03:28,166 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:03:28,166 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 3
+	covar_reg: 0.277105847980178
+	covar_shape: full
+	data: funnel
+	initialisation: random
+	iterations: 3000
+	learning_rate: 1.819732354288581
+	model: squared_nm_gaussian_mixture
+	momentum: 0.5409665210663159
+	optimal_init: funnel
+	optimizer: sgd_mom
+2023-03-18 21:03:28,175 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=3 --covar_reg=0.277105847980178 --covar_shape=full --data=funnel --initialisation=random --iterations=3000 --learning_rate=1.819732354288581 --model=squared_nm_gaussian_mixture --momentum=0.5409665210663159 --optimal_init=funnel --optimizer=sgd_mom
+2023-03-18 21:03:33,189 - wandb.wandb_agent - INFO - Running runs: ['7xlmq9sx']
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+wandb: Starting wandb agent 🕵️
+wandb: Starting wandb agent 🕵️
+2023-03-18 21:04:01,900 - wandb.wandb_agent - INFO - Running runs: []
+2023-03-18 21:04:02,253 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:04:02,253 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 3
+	covar_reg: 0
+	covar_shape: diag
+	data: ring
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.571869570123074
+	model: squared_nm_gaussian_mixture
+	momentum: 0.8696667552392182
+	optimal_init: none
+	optimizer: sgd
+2023-03-18 21:04:02,260 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=3 --covar_reg=0 --covar_shape=diag --data=ring --initialisation=random --iterations=3000 --learning_rate=0.571869570123074 --model=squared_nm_gaussian_mixture --momentum=0.8696667552392182 --optimal_init=none --optimizer=sgd
+2023-03-18 21:04:02,922 - wandb.wandb_agent - INFO - Running runs: []
+2023-03-18 21:04:03,293 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:04:03,294 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 2
+	covar_reg: 0
+	covar_shape: diag
+	data: ring
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.5046318362217573
+	model: squared_nm_gaussian_mixture
+	momentum: 0.8266672621222755
+	optimal_init: none
+	optimizer: sgd_mom
+2023-03-18 21:04:03,308 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=2 --covar_reg=0 --covar_shape=diag --data=ring --initialisation=random --iterations=3000 --learning_rate=0.5046318362217573 --model=squared_nm_gaussian_mixture --momentum=0.8266672621222755 --optimal_init=none --optimizer=sgd_mom
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_210338-7xlmq9sx
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run drawn-sweep-3
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/mk508wyk
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/7xlmq9sx
+2023-03-18 21:04:07,274 - wandb.wandb_agent - INFO - Running runs: ['98edaq1k']
+2023-03-18 21:04:08,323 - wandb.wandb_agent - INFO - Running runs: ['8guemx28']
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_210410-8guemx28
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run generous-sweep-2
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/sbeuqeen
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/8guemx28
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2023-03-18 21:04:34,156 - wandb.wandb_agent - INFO - Cleaning up finished run: 8guemx28
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: - 0.003 MB of 0.003 MB uploaded (0.000 MB deduped)wandb: \ 0.003 MB of 0.003 MB uploaded (0.000 MB deduped)wandb: | 0.015 MB of 0.015 MB uploaded (0.000 MB deduped)wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run generous-sweep-2 at: https://wandb.ai/ptourniaire/NMMMs/runs/8guemx28
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_210410-8guemx28/logs
+2023-03-18 21:04:40,200 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:04:40,201 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 4
+	covar_reg: 0
+	covar_shape: diag
+	data: ring
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.9548483161367836
+	model: squared_nm_gaussian_mixture
+	momentum: 0.7560026813114646
+	optimal_init: none
+	optimizer: adam
+2023-03-18 21:04:40,210 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=4 --covar_reg=0 --covar_shape=diag --data=ring --initialisation=random --iterations=3000 --learning_rate=0.9548483161367836 --model=squared_nm_gaussian_mixture --momentum=0.7560026813114646 --optimal_init=none --optimizer=adam
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_210414-98edaq1k
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run grateful-sweep-1
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/sbeuqeen
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/98edaq1k
+2023-03-18 21:04:45,224 - wandb.wandb_agent - INFO - Running runs: ['wxaeunuy']
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_210445-wxaeunuy
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run glorious-sweep-3
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/sbeuqeen
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/wxaeunuy
+Exception in thread Thread-76:
+Traceback (most recent call last):
+  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+    self.run()
+  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/tensorboard/summary/writer/event_file_writer.py", line 233, in run
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 168, in <module>
+    it_train_loss = model(tensor_train_set, it, model_config['validate_pdf'])
+  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 226, in forward
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/hooks/tensorboard.py", line 41, in add_means
+  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/torch/utils/tensorboard/writer.py", line 431, in add_scalars
+  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/torch/utils/tensorboard/writer.py", line 76, in __init__
+  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/tensorboard/summary/writer/event_file_writer.py", line 87, in __init__
+  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/tensorboard/summary/writer/event_file_writer.py", line 159, in __init__
+  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/threading.py", line 935, in start
+RuntimeError: can't start new thread
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+    self._record_writer.write(data)
+  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/tensorboard/summary/writer/record_writer.py", line 40, in write
+    self._writer.write(header + header_crc + data + footer_crc)
+  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/tensorboard/compat/tensorflow_stub/io/gfile.py", line 761, in write
+    self.fs.write(self.filename, file_content, self.binary_mode)
+  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/tensorboard/compat/tensorflow_stub/io/gfile.py", line 150, in write
+    self._write(filename, file_content, "wb" if binary_mode else "w")
+  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/tensorboard/compat/tensorflow_stub/io/gfile.py", line 164, in _write
+    with io.open(filename, mode, encoding=encoding) as f:
+MemoryError
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+wandb: Starting wandb agent 🕵️
+2023-03-18 21:09:47,680 - wandb.wandb_agent - INFO - Running runs: []
+2023-03-18 21:09:48,047 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:09:48,047 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 2
+	covar_reg: 0
+	covar_shape: diag
+	data: ring
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.3903082088966317
+	model: squared_nm_gaussian_mixture
+	momentum: 0.8740255696642698
+	optimal_init: none
+	optimizer: adagrad
+2023-03-18 21:09:48,061 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=2 --covar_reg=0 --covar_shape=diag --data=ring --initialisation=random --iterations=3000 --learning_rate=0.3903082088966317 --model=squared_nm_gaussian_mixture --momentum=0.8740255696642698 --optimal_init=none --optimizer=adagrad
+2023-03-18 21:09:53,075 - wandb.wandb_agent - INFO - Running runs: ['876zqgnv']
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_210959-876zqgnv
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run distinctive-sweep-4
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/sbeuqeen
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/876zqgnv
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2023-03-18 21:10:34,411 - wandb.wandb_agent - INFO - Cleaning up finished run: 876zqgnv
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run distinctive-sweep-4 at: https://wandb.ai/ptourniaire/NMMMs/runs/876zqgnv
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_210959-876zqgnv/logs
+2023-03-18 21:10:40,541 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:10:40,541 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 4
+	covar_reg: 0
+	covar_shape: diag
+	data: ring
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.568185964303041
+	model: squared_nm_gaussian_mixture
+	momentum: 0.6206521674918295
+	optimal_init: none
+	optimizer: adagrad
+2023-03-18 21:10:40,546 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=4 --covar_reg=0 --covar_shape=diag --data=ring --initialisation=random --iterations=3000 --learning_rate=0.568185964303041 --model=squared_nm_gaussian_mixture --momentum=0.6206521674918295 --optimal_init=none --optimizer=adagrad
+2023-03-18 21:10:45,560 - wandb.wandb_agent - INFO - Running runs: ['mltgy02m']
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211054-mltgy02m
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run icy-sweep-5
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/sbeuqeen
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/mltgy02m
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run icy-sweep-5 at: https://wandb.ai/ptourniaire/NMMMs/runs/mltgy02m
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211054-mltgy02m/logs
+2023-03-18 21:11:32,080 - wandb.wandb_agent - INFO - Cleaning up finished run: mltgy02m
+2023-03-18 21:11:32,531 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:11:32,531 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 2
+	covar_reg: 0
+	covar_shape: diag
+	data: ring
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.7324543967578822
+	model: squared_nm_gaussian_mixture
+	momentum: 0.8992679505034189
+	optimal_init: none
+	optimizer: sgd_mom
+2023-03-18 21:11:32,545 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=2 --covar_reg=0 --covar_shape=diag --data=ring --initialisation=random --iterations=3000 --learning_rate=0.7324543967578822 --model=squared_nm_gaussian_mixture --momentum=0.8992679505034189 --optimal_init=none --optimizer=sgd_mom
+2023-03-18 21:11:37,558 - wandb.wandb_agent - INFO - Running runs: ['d2bw0mmv']
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211145-d2bw0mmv
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run exalted-sweep-6
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/sbeuqeen
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/d2bw0mmv
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run exalted-sweep-6 at: https://wandb.ai/ptourniaire/NMMMs/runs/d2bw0mmv
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211145-d2bw0mmv/logs
+2023-03-18 21:12:29,246 - wandb.wandb_agent - INFO - Cleaning up finished run: d2bw0mmv
+2023-03-18 21:12:29,684 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:12:29,685 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 4
+	covar_reg: 0
+	covar_shape: diag
+	data: ring
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.4810768724877109
+	model: squared_nm_gaussian_mixture
+	momentum: 0.723765578559213
+	optimal_init: none
+	optimizer: sgd
+2023-03-18 21:12:29,688 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=4 --covar_reg=0 --covar_shape=diag --data=ring --initialisation=random --iterations=3000 --learning_rate=0.4810768724877109 --model=squared_nm_gaussian_mixture --momentum=0.723765578559213 --optimal_init=none --optimizer=sgd
+2023-03-18 21:12:34,700 - wandb.wandb_agent - INFO - Running runs: ['zih26upx']
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211242-zih26upx
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run glamorous-sweep-7
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/sbeuqeen
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/zih26upx
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run glamorous-sweep-7 at: https://wandb.ai/ptourniaire/NMMMs/runs/zih26upx
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211242-zih26upx/logs
+2023-03-18 21:13:21,219 - wandb.wandb_agent - INFO - Cleaning up finished run: zih26upx
+2023-03-18 21:13:21,931 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:13:21,932 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 3
+	covar_reg: 0
+	covar_shape: diag
+	data: ring
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.9910021473351583
+	model: squared_nm_gaussian_mixture
+	momentum: 0.8454704531215647
+	optimal_init: none
+	optimizer: adagrad
+2023-03-18 21:13:21,938 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=3 --covar_reg=0 --covar_shape=diag --data=ring --initialisation=random --iterations=3000 --learning_rate=0.9910021473351583 --model=squared_nm_gaussian_mixture --momentum=0.8454704531215647 --optimal_init=none --optimizer=adagrad
+2023-03-18 21:13:26,952 - wandb.wandb_agent - INFO - Running runs: ['muxvk6mq']
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211335-muxvk6mq
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run lucky-sweep-8
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/sbeuqeen
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/muxvk6mq
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run lucky-sweep-8 at: https://wandb.ai/ptourniaire/NMMMs/runs/muxvk6mq
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211335-muxvk6mq/logs
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+2023-03-18 21:14:18,647 - wandb.wandb_agent - ERROR - Detected 5 failed runs in a row, shutting down.
+2023-03-18 21:14:18,652 - wandb.wandb_agent - INFO - To change this value set WANDB_AGENT_MAX_INITIAL_FAILURES=val
+wandb: Terminating and syncing runs. Press ctrl-c to kill.
+wandb: Starting wandb agent 🕵️
+wandb: Starting wandb agent 🕵️
+wandb: Starting wandb agent 🕵️
+2023-03-18 21:14:24,774 - wandb.wandb_agent - INFO - Running runs: []
+2023-03-18 21:14:25,218 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:14:25,218 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 4
+	covar_reg: 0.7997258431882954
+	covar_shape: full
+	data: funnel
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.7993640155296347
+	model: squared_nm_gaussian_mixture
+	momentum: 0.9432015164916092
+	optimal_init: funnel
+	optimizer: sgd
+2023-03-18 21:14:25,246 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=4 --covar_reg=0.7997258431882954 --covar_shape=full --data=funnel --initialisation=random --iterations=3000 --learning_rate=0.7993640155296347 --model=squared_nm_gaussian_mixture --momentum=0.9432015164916092 --optimal_init=funnel --optimizer=sgd
+2023-03-18 21:14:27,849 - wandb.wandb_agent - INFO - Running runs: []
+2023-03-18 21:14:27,893 - wandb.wandb_agent - INFO - Running runs: []
+2023-03-18 21:14:28,293 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:14:28,294 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 2
+	covar_reg: 0.618241294115375
+	covar_shape: full
+	data: funnel
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.19431157451896217
+	model: squared_nm_gaussian_mixture
+	momentum: 0.9994647331015633
+	optimal_init: funnel
+	optimizer: sgd
+2023-03-18 21:14:28,322 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=2 --covar_reg=0.618241294115375 --covar_shape=full --data=funnel --initialisation=random --iterations=3000 --learning_rate=0.19431157451896217 --model=squared_nm_gaussian_mixture --momentum=0.9994647331015633 --optimal_init=funnel --optimizer=sgd
+2023-03-18 21:14:28,334 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:14:28,335 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 4
+	covar_reg: 0
+	covar_shape: diag
+	data: ring
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.6293249695688146
+	model: squared_nm_gaussian_mixture
+	momentum: 0.4670672515033987
+	optimal_init: none
+	optimizer: sgd
+2023-03-18 21:14:28,344 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=4 --covar_reg=0 --covar_shape=diag --data=ring --initialisation=random --iterations=3000 --learning_rate=0.6293249695688146 --model=squared_nm_gaussian_mixture --momentum=0.4670672515033987 --optimal_init=none --optimizer=sgd
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+2023-03-18 21:14:30,259 - wandb.wandb_agent - INFO - Running runs: ['c9rxz8hx']
+2023-03-18 21:14:33,337 - wandb.wandb_agent - INFO - Running runs: ['urqp2cha']
+2023-03-18 21:14:33,357 - wandb.wandb_agent - INFO - Running runs: ['yliapgb2']
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211428-c9rxz8hx
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run olive-sweep-4
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/mk508wyk
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/c9rxz8hx
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2023-03-18 21:14:50,929 - wandb.wandb_agent - INFO - Cleaning up finished run: c9rxz8hx
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211436-yliapgb2
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run sparkling-sweep-9
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/sbeuqeen
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/yliapgb2
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211436-urqp2cha
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run toasty-sweep-5
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/mk508wyk
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/urqp2cha
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run olive-sweep-4 at: https://wandb.ai/ptourniaire/NMMMs/runs/c9rxz8hx
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211428-c9rxz8hx/logs
+2023-03-18 21:14:57,499 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:14:57,499 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 2
+	covar_reg: 0.20333237233715573
+	covar_shape: full
+	data: funnel
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.7437388266979805
+	model: squared_nm_gaussian_mixture
+	momentum: 0.7128490380016262
+	optimal_init: funnel
+	optimizer: adam
+2023-03-18 21:14:57,509 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=2 --covar_reg=0.20333237233715573 --covar_shape=full --data=funnel --initialisation=random --iterations=3000 --learning_rate=0.7437388266979805 --model=squared_nm_gaussian_mixture --momentum=0.7128490380016262 --optimal_init=funnel --optimizer=adam
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2023-03-18 21:15:00,542 - wandb.wandb_agent - INFO - Cleaning up finished run: urqp2cha
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+2023-03-18 21:15:02,575 - wandb.wandb_agent - INFO - Running runs: ['6e54qn7z']
+2023-03-18 21:15:04,348 - wandb.wandb_agent - INFO - Cleaning up finished run: yliapgb2
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run toasty-sweep-5 at: https://wandb.ai/ptourniaire/NMMMs/runs/urqp2cha
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211436-urqp2cha/logs
+2023-03-18 21:15:06,970 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:15:06,971 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 4
+	covar_reg: 0.790456913806283
+	covar_shape: full
+	data: funnel
+	initialisation: random
+	iterations: 3000
+	learning_rate: 1.560940529639758
+	model: squared_nm_gaussian_mixture
+	momentum: 0.5916311848557825
+	optimal_init: funnel
+	optimizer: sgd
+2023-03-18 21:15:06,987 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=4 --covar_reg=0.790456913806283 --covar_shape=full --data=funnel --initialisation=random --iterations=3000 --learning_rate=1.560940529639758 --model=squared_nm_gaussian_mixture --momentum=0.5916311848557825 --optimal_init=funnel --optimizer=sgd
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run sparkling-sweep-9 at: https://wandb.ai/ptourniaire/NMMMs/runs/yliapgb2
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211436-yliapgb2/logs
+2023-03-18 21:15:12,000 - wandb.wandb_agent - INFO - Running runs: ['u2xbu1oc']
+2023-03-18 21:15:12,135 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:15:12,135 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 2
+	covar_reg: 0
+	covar_shape: diag
+	data: ring
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.6469972813762029
+	model: squared_nm_gaussian_mixture
+	momentum: 0.9479748173276368
+	optimal_init: none
+	optimizer: sgd
+2023-03-18 21:15:12,141 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=2 --covar_reg=0 --covar_shape=diag --data=ring --initialisation=random --iterations=3000 --learning_rate=0.6469972813762029 --model=squared_nm_gaussian_mixture --momentum=0.9479748173276368 --optimal_init=none --optimizer=sgd
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211501-6e54qn7z
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run expert-sweep-6
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/mk508wyk
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/6e54qn7z
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+2023-03-18 21:15:17,154 - wandb.wandb_agent - INFO - Running runs: ['v2n3cuxb']
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run expert-sweep-6 at: https://wandb.ai/ptourniaire/NMMMs/runs/6e54qn7z
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211501-6e54qn7z/logs
+2023-03-18 21:15:28,453 - wandb.wandb_agent - INFO - Cleaning up finished run: 6e54qn7z
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211513-u2xbu1oc
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run gallant-sweep-7
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/mk508wyk
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/u2xbu1oc
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211516-v2n3cuxb
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run confused-sweep-10
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/sbeuqeen
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/v2n3cuxb
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+2023-03-18 21:15:31,242 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:15:31,246 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 2
+	covar_reg: 0.35008380433525654
+	covar_shape: full
+	data: funnel
+	initialisation: random
+	iterations: 3000
+	learning_rate: 1.6091262805740314
+	model: squared_nm_gaussian_mixture
+	momentum: 0.6574151892839653
+	optimal_init: funnel
+	optimizer: sgd_mom
+2023-03-18 21:15:31,255 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=2 --covar_reg=0.35008380433525654 --covar_shape=full --data=funnel --initialisation=random --iterations=3000 --learning_rate=1.6091262805740314 --model=squared_nm_gaussian_mixture --momentum=0.6574151892839653 --optimal_init=funnel --optimizer=sgd_mom
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run confused-sweep-10 at: https://wandb.ai/ptourniaire/NMMMs/runs/v2n3cuxb
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211516-v2n3cuxb/logs
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+2023-03-18 21:15:36,318 - wandb.wandb_agent - INFO - Running runs: ['m9qxojl5']
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run gallant-sweep-7 at: https://wandb.ai/ptourniaire/NMMMs/runs/u2xbu1oc
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211513-u2xbu1oc/logs
+2023-03-18 21:15:37,868 - wandb.wandb_agent - INFO - Cleaning up finished run: v2n3cuxb
+2023-03-18 21:15:38,342 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:15:38,342 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 2
+	covar_reg: 0
+	covar_shape: diag
+	data: ring
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.9547133487252978
+	model: squared_nm_gaussian_mixture
+	momentum: 0.8915411579119829
+	optimal_init: none
+	optimizer: sgd_mom
+2023-03-18 21:15:38,351 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=2 --covar_reg=0 --covar_shape=diag --data=ring --initialisation=random --iterations=3000 --learning_rate=0.9547133487252978 --model=squared_nm_gaussian_mixture --momentum=0.8915411579119829 --optimal_init=none --optimizer=sgd_mom
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+2023-03-18 21:15:43,011 - wandb.wandb_agent - INFO - Cleaning up finished run: u2xbu1oc
+2023-03-18 21:15:43,366 - wandb.wandb_agent - INFO - Running runs: ['yv7newc2']
+2023-03-18 21:15:43,637 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:15:43,637 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 4
+	covar_reg: 0.947564601344628
+	covar_shape: full
+	data: funnel
+	initialisation: random
+	iterations: 3000
+	learning_rate: 1.850428479832364
+	model: squared_nm_gaussian_mixture
+	momentum: 0.6271168858267238
+	optimal_init: funnel
+	optimizer: sgd
+2023-03-18 21:15:43,649 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=4 --covar_reg=0.947564601344628 --covar_shape=full --data=funnel --initialisation=random --iterations=3000 --learning_rate=1.850428479832364 --model=squared_nm_gaussian_mixture --momentum=0.6271168858267238 --optimal_init=funnel --optimizer=sgd
+2023-03-18 21:15:48,664 - wandb.wandb_agent - INFO - Running runs: ['o841a13u']
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211535-m9qxojl5
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run silver-sweep-8
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/mk508wyk
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/m9qxojl5
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run silver-sweep-8 at: https://wandb.ai/ptourniaire/NMMMs/runs/m9qxojl5
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211535-m9qxojl5/logs
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211549-o841a13u
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run apricot-sweep-9
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/mk508wyk
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/o841a13u
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211542-yv7newc2
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run astral-sweep-11
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/sbeuqeen
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/yv7newc2
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+2023-03-18 21:16:02,187 - wandb.wandb_agent - INFO - Cleaning up finished run: m9qxojl5
+2023-03-18 21:16:02,660 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:16:02,660 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 2
+	covar_reg: 0.7163047960126548
+	covar_shape: full
+	data: funnel
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.979179671053178
+	model: squared_nm_gaussian_mixture
+	momentum: 0.6521200957130955
+	optimal_init: funnel
+	optimizer: adam
+2023-03-18 21:16:02,668 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=2 --covar_reg=0.7163047960126548 --covar_shape=full --data=funnel --initialisation=random --iterations=3000 --learning_rate=0.979179671053178 --model=squared_nm_gaussian_mixture --momentum=0.6521200957130955 --optimal_init=funnel --optimizer=adam
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run astral-sweep-11 at: https://wandb.ai/ptourniaire/NMMMs/runs/yv7newc2
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211542-yv7newc2/logs
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run apricot-sweep-9 at: https://wandb.ai/ptourniaire/NMMMs/runs/o841a13u
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211549-o841a13u/logs
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+2023-03-18 21:16:07,713 - wandb.wandb_agent - INFO - Running runs: ['o085kiq7']
+2023-03-18 21:16:09,184 - wandb.wandb_agent - INFO - Cleaning up finished run: yv7newc2
+2023-03-18 21:16:09,314 - wandb.wandb_agent - INFO - Cleaning up finished run: o841a13u
+2023-03-18 21:16:09,723 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:16:09,723 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 4
+	covar_reg: 0
+	covar_shape: diag
+	data: ring
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.7100074368048658
+	model: squared_nm_gaussian_mixture
+	momentum: 0.9468254862038756
+	optimal_init: none
+	optimizer: adagrad
+2023-03-18 21:16:09,761 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=4 --covar_reg=0 --covar_shape=diag --data=ring --initialisation=random --iterations=3000 --learning_rate=0.7100074368048658 --model=squared_nm_gaussian_mixture --momentum=0.9468254862038756 --optimal_init=none --optimizer=adagrad
+2023-03-18 21:16:09,821 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:16:09,822 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 3
+	covar_reg: 0.3164979030713974
+	covar_shape: full
+	data: funnel
+	initialisation: random
+	iterations: 3000
+	learning_rate: 1.2989779927484175
+	model: squared_nm_gaussian_mixture
+	momentum: 0.8221866170900325
+	optimal_init: funnel
+	optimizer: sgd
+2023-03-18 21:16:09,845 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=3 --covar_reg=0.3164979030713974 --covar_shape=full --data=funnel --initialisation=random --iterations=3000 --learning_rate=1.2989779927484175 --model=squared_nm_gaussian_mixture --momentum=0.8221866170900325 --optimal_init=funnel --optimizer=sgd
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+2023-03-18 21:16:14,776 - wandb.wandb_agent - INFO - Running runs: ['e6clk51g']
+2023-03-18 21:16:14,859 - wandb.wandb_agent - INFO - Running runs: ['svagpvoi']
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211606-o085kiq7
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run wise-sweep-10
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/mk508wyk
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/o085kiq7
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run wise-sweep-10 at: https://wandb.ai/ptourniaire/NMMMs/runs/o085kiq7
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211606-o085kiq7/logs
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211614-svagpvoi
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run azure-sweep-11
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/mk508wyk
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/svagpvoi
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211613-e6clk51g
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run royal-sweep-12
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/sbeuqeen
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/e6clk51g
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+2023-03-18 21:16:33,605 - wandb.wandb_agent - INFO - Cleaning up finished run: o085kiq7
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run royal-sweep-12 at: https://wandb.ai/ptourniaire/NMMMs/runs/e6clk51g
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211613-e6clk51g/logs
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run azure-sweep-11 at: https://wandb.ai/ptourniaire/NMMMs/runs/svagpvoi
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211614-svagpvoi/logs
+2023-03-18 21:16:40,656 - wandb.wandb_agent - INFO - Cleaning up finished run: e6clk51g
+2023-03-18 21:16:40,732 - wandb.wandb_agent - INFO - Cleaning up finished run: svagpvoi
+2023-03-18 21:16:41,161 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:16:41,161 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 4
+	covar_reg: 0
+	covar_shape: diag
+	data: ring
+	initialisation: random
+	iterations: 3000
+	learning_rate: 0.5449396040786612
+	model: squared_nm_gaussian_mixture
+	momentum: 0.7668916707939688
+	optimal_init: none
+	optimizer: sgd_mom
+2023-03-18 21:16:41,167 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=4 --covar_reg=0 --covar_shape=diag --data=ring --initialisation=random --iterations=3000 --learning_rate=0.5449396040786612 --model=squared_nm_gaussian_mixture --momentum=0.7668916707939688 --optimal_init=none --optimizer=sgd_mom
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+2023-03-18 21:16:46,207 - wandb.wandb_agent - INFO - Running runs: ['iwrh93rp']
+2023-03-18 21:16:47,028 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:16:47,106 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 2
+	covar_reg: 0.9471841004536584
+	covar_shape: full
+	data: funnel
+	initialisation: random
+	iterations: 3000
+	learning_rate: 1.912768045050868
+	model: squared_nm_gaussian_mixture
+	momentum: 0.7694030430071563
+	optimal_init: funnel
+	optimizer: adagrad
+2023-03-18 21:16:47,200 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=2 --covar_reg=0.9471841004536584 --covar_shape=full --data=funnel --initialisation=random --iterations=3000 --learning_rate=1.912768045050868 --model=squared_nm_gaussian_mixture --momentum=0.7694030430071563 --optimal_init=funnel --optimizer=adagrad
+2023-03-18 21:16:47,260 - wandb.wandb_agent - INFO - Agent received command: run
+2023-03-18 21:16:47,401 - wandb.wandb_agent - INFO - Agent starting run with config:
+	components: 3
+	covar_reg: 0.5300729866079232
+	covar_shape: full
+	data: funnel
+	initialisation: random
+	iterations: 3000
+	learning_rate: 1.7298320726336005
+	model: squared_nm_gaussian_mixture
+	momentum: 0.625180182389385
+	optimal_init: funnel
+	optimizer: sgd
+2023-03-18 21:16:47,640 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sweep_experiment.py --components=3 --covar_reg=0.5300729866079232 --covar_shape=full --data=funnel --initialisation=random --iterations=3000 --learning_rate=1.7298320726336005 --model=squared_nm_gaussian_mixture --momentum=0.625180182389385 --optimal_init=funnel --optimizer=sgd
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+2023-03-18 21:16:52,211 - wandb.wandb_agent - INFO - Running runs: ['rnar7efu']
+2023-03-18 21:16:52,652 - wandb.wandb_agent - INFO - Running runs: ['vkrfg8cd']
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211645-iwrh93rp
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run celestial-sweep-13
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/sbeuqeen
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/iwrh93rp
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211651-vkrfg8cd
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run comfy-sweep-13
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/mk508wyk
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/vkrfg8cd
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230318_211651-rnar7efu
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run glowing-sweep-12
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/mk508wyk
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/rnar7efu
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run comfy-sweep-13 at: https://wandb.ai/ptourniaire/NMMMs/runs/vkrfg8cd
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211651-vkrfg8cd/logs
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run celestial-sweep-13 at: https://wandb.ai/ptourniaire/NMMMs/runs/iwrh93rp
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211645-iwrh93rp/logs
+Traceback (most recent call last):
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 189, in <module>
+    fig = model.sequence_visualisation(
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 339, in sequence_visualisation
+    logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 192, in pdf
+    l_a = density_function(self.sigmas[i], torch.linalg.cholesky(self.sigmas[i]), self.means[i])
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 175, in <lambda>
+    density_function = lambda S, L, mu: (1 / norm_constant(S)) * torch.exp(exponential(L, mu))
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 174, in <lambda>
+    exponential      = lambda L, mu: - .5 * _batch_mahalanobis(L, (X - mu))
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+2023-03-18 21:17:08,283 - wandb.wandb_agent - ERROR - Detected 5 failed runs in a row, shutting down.
+2023-03-18 21:17:08,289 - wandb.wandb_agent - INFO - To change this value set WANDB_AGENT_MAX_INITIAL_FAILURES=val
+wandb: Terminating and syncing runs. Press ctrl-c to kill.
+wandb: 
+wandb: Run history:
+wandb: iteration ▁
+wandb: 
+wandb: Run summary:
+wandb: iteration 0
+wandb: 
+wandb: 🚀 View run glowing-sweep-12 at: https://wandb.ai/ptourniaire/NMMMs/runs/rnar7efu
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230318_211651-rnar7efu/logs
+2023-03-18 21:17:12,093 - wandb.wandb_agent - ERROR - Detected 5 failed runs in a row, shutting down.
+2023-03-18 21:17:12,100 - wandb.wandb_agent - INFO - To change this value set WANDB_AGENT_MAX_INITIAL_FAILURES=val
+wandb: Terminating and syncing runs. Press ctrl-c to kill.
+2023-03-18 21:17:18,173 - wandb.wandb_agent - ERROR - Detected 5 failed runs in a row, shutting down.
+2023-03-18 21:17:18,181 - wandb.wandb_agent - INFO - To change this value set WANDB_AGENT_MAX_INITIAL_FAILURES=val
+wandb: Terminating and syncing runs. Press ctrl-c to kill.

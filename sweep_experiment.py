@@ -115,9 +115,9 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm = _covariances_nmgmm
         _means_nmgmm[0] = [5, -5]
         _means_nmgmm[1] = [5, 5]
-        _weights_nmgmm = torch.zeros(model_config['components'], dtype=torch.float64).normal_(1, 0.5)
-        _weights_nmgmm[0] = torch.Tensor([-1])
-        _weights_nmgmm[1] = torch.Tensor([-1])
+        _weights_nmgmm = torch.zeros(model_config['components'], dtype=torch.float64).normal_(1, 0.5).cuda()
+        _weights_nmgmm[0] = torch.Tensor([-1]).cuda()
+        _weights_nmgmm[1] = torch.Tensor([-1]).cuda()
 
 
     #=============================== NMGMM SETUP ===============================
@@ -126,8 +126,8 @@ with  console.status("Loading dataset...") as status:
     model = available_models[model_config['model_name']](
         n_clusters = model_config['components'], 
         n_dims = 2,
-        init_means=torch.from_numpy(_means_nmgmm),
-        init_sigmas=torch.from_numpy(_covariances_nmgmm))
+        init_means=torch.from_numpy(_means_nmgmm).cuda(),
+        init_sigmas=torch.from_numpy(_covariances_nmgmm).cuda())
 
     model.to(device)
     model.set_monitoring(os.path.abspath('runs'), 'test')

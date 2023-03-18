@@ -11,13 +11,13 @@ parameters:
     min: 0.4
     max: 1.0
   optimizer:
-    values: ["sgd_mom", "sgd", "adam", "adagrad"]
+    values: ["sgd_mom", "sgd"]
   components:
     values: [2, 3, 4]
   data:
     value: 'ring'
   iterations:
-    value: 3000
+    value: 10000
   model:
     value: 'squared_nm_gaussian_mixture'
   initialisation:
