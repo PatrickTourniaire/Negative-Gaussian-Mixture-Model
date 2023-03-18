@@ -164,3 +164,7 @@ runs/
 out/models
 out/sequences
 out/saved_models
+
+wandb
+cached
+out/.DS_Store

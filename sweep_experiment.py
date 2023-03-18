@@ -10,6 +10,7 @@ import argparse
 from scipy.special import logsumexp
 import glob
 import wandb
+import yaml
 
 # Local imports
 from src.models.mixtures.gaussian_mixture import GaussianMixture
@@ -21,35 +22,25 @@ from src.utils.early_stopping import EarlyStopping
 from src.utils.initialisation_procedures import GMMInitalisation, check_random_state
 
 
-parser = argparse.ArgumentParser()
 
-parser.add_argument("--experiment_name", help="Name of experiment")
-parser.add_argument("--model", help="Name of the model to experiment")
-parser.add_argument("--data", help="Name of the pickle data file to train on")
-parser.add_argument("--comp", help="Number of mixture components")
-parser.add_argument("--it", help="Number of iterations for training")
-parser.add_argument("--lr", help="Learning rate for the SGD optimiser")
-parser.add_argument("--validate_pdf", help="To use grid sampling to validate the pdf")
-parser.add_argument("--optimizer", help="Which optimizer to use")
-parser.add_argument("--initialisation", help="Initialisation technique to use")
-parser.add_argument("--covar_shape", help="Shape of the initialised covariance matrix")
-parser.add_argument("--covar_reg", help="Regularisation constant added to the digonal matrix")
+with open('sweeps/sweep_ring.yaml') as file:
+        config = yaml.load(file, Loader=yaml.FullLoader)
 
-args = parser.parse_args()
+run = wandb.init(config=config)
 
 # Experiment configuration
 model_config = {
-    'model_name': args.model,
-    'dataset': args.data,
-    'components': int(args.comp),
-    'iterations': int(args.it),
-    'learning_rate': float(args.lr),
-    'validate_pdf': bool(int(args.validate_pdf)),
-    'optimizer': args.optimizer,
-    'initialisation': args.initialisation,
-    'covar_shape': args.covar_shape,
-    'covar_reg': float(args.covar_reg),
-    'optimal_init': 'funnel'
+    'model_name': wandb.config.model,
+    'dataset': wandb.config.data,
+    'components': wandb.config.components,
+    'iterations': wandb.config.iterations,
+    'learning_rate': wandb.config.learning_rate,
+    'optimizer': wandb.config.optimizer,
+    'initialisation': wandb.config.initialisation,
+    'covar_shape': wandb.config.covar_shape,
+    'covar_reg': wandb.config.covar_reg,
+    'optimal_init': wandb.config.optimal_init,
+    'validate_pdf': False
 }
 
 available_models = {
@@ -64,11 +55,6 @@ available_optimizers = {
     'sgd_mom': torch.optim.SGD,
     'adagrad': torch.optim.Adagrad
 }
-
-wandb.init(
-    project="NMMMs",
-    config={**model_config}
-)
 
 BASE_MODEL_NAME = 'sklearn_gmm'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -95,14 +81,6 @@ with  console.status("Loading dataset...") as status:
     # ===========================================================================
 
     status.update(status=f'Loading "{model_config["model_name"]}" model...')
-
-    path_sequences = f'{OUTPUT_REPO}/sequences/{args.experiment_name}'
-    if not os.path.isdir(os.path.abspath(path_sequences)):
-        os.makedirs(os.path.abspath(path_sequences))
-    
-    path_models = f'{OUTPUT_REPO}/models/{args.experiment_name}'
-    if not os.path.isdir(os.path.abspath(path_models)):
-        os.makedirs(os.path.abspath(path_models))
     
     #=============================== INIT PARAMS ===============================
 
@@ -152,15 +130,13 @@ with  console.status("Loading dataset...") as status:
         init_sigmas=torch.from_numpy(_covariances_nmgmm))
 
     model.to(device)
-    model.set_monitoring(os.path.abspath('runs'), args.experiment_name)
+    model.set_monitoring(os.path.abspath('runs'), 'test')
 
     optimizer_algo = available_optimizers[model_config["optimizer"]]
     optimizer = optimizer_algo(model.parameters(), lr=model_config['learning_rate'])
     
     if (model_config["optimizer"] == 'sgd_mom'):
-        optimizer = optimizer_algo(model.parameters(), lr=model_config['learning_rate'], momentum=0.9)
-
-    early_stopping = EarlyStopping(tolerance=5, min_delta=0.1)
+        optimizer = optimizer_algo(model.parameters(), lr=model_config['learning_rate'], momentum=wandb.config.momentum)
 
     console.log(f'Model "{model_config["model_name"]}" loaded with the following config:')
     console.log(json.dumps(model_config, indent=4))
@@ -209,15 +185,12 @@ with  console.status("Loading dataset...") as status:
             "iteration": it
         })
 
-        if it % 1000 == 0:
+        if it % 10 == 0:
             fig = model.sequence_visualisation(
                 tensor_train_set,
-                tensor_val_set
+                tensor_val_set,
             )
-            wandb.log({f'sequence_plot_it{it}': wandb.Image(fig)})
-
-        early_stopping(it_train_loss, it_val_loss)
-        if early_stopping.early_stop: break
+            wandb.log({f'sequence_plot': wandb.Image(fig)})
 
         it_train_loss.backward()
         optimizer.step()
@@ -225,26 +198,6 @@ with  console.status("Loading dataset...") as status:
     console.log(f'Model "{model_config["model_name"]}" was trained successfully')
     model.clear_monitoring()
 
-    torch.save(model.state_dict(), f'{OUTPUT_REPO}/saved_models/{args.experiment_name}')
-
-
-    # ===========================================================================
-    #                             VISUALISE MODEL
-    # ===========================================================================
-
-    status.update(status=f'Visualising "{model_config["model_name"]}" model...')
-    model_name_path = model_config["model_name"]
-
-    model.plot_heatmap(
-        tensor_train_set,
-        tensor_val_set,
-        os.path.abspath(f'{path_models}/{args.experiment_name}_heatmap.pdf')
-    )
-
-    model.plot_contours(
-        tensor_train_set,
-        os.path.abspath(f'{path_models}/{args.experiment_name}_contours.pdf')
-    )
 
 wandb.finish()
 console.log(f'[bold green] Experiment ran successfully!')

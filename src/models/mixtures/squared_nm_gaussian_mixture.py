@@ -69,7 +69,8 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
             n_clusters: int = 1, 
             n_dims: int = 2, 
             init_means=None,
-            init_sigmas=None):
+            init_sigmas=None,
+            init_weights=None):
         super(NMSquaredGaussianMixture, self).__init__()
         
         # Configurations
@@ -79,13 +80,14 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         # Initialisations
         chols = self._initialise_full(n_clusters, n_dims) if init_sigmas is None else init_sigmas
         means = self._zero_means(n_clusters, n_dims) if init_means is None else init_means
+        weights = self._normal_weights(n_clusters) if init_weights is None else init_weights
 
         # Parameters of component means (n_clusters, n_dim)
         self.means = nn.Parameter(means)
         # Parameters of matrices used for Cholesky composition (n_clusters, n_dim, n_dim)
         self.chols = nn.Parameter(chols)
         # Parameter for the weights of each mixture component (n_clusters,)
-        self.weights = nn.Parameter(torch.zeros(n_clusters, dtype=torch.float64).normal_())
+        self.weights = nn.Parameter(weights)
 
         # Parameters used for tensorboard
         self.tb_params = {}
@@ -111,6 +113,10 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
     def _zero_means(self, n_clusters: int, n_dims: int):
         return torch.zeros(n_clusters, n_dims, dtype=torch.float64)
+    
+
+    def _normal_weights(self, n_clusters: int):
+        return torch.zeros(n_clusters, dtype=torch.float64).normal_()
 
     #===================================================================================================
     #                                       INTERNAL COMPUTATIONS
@@ -277,7 +283,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         eval_points = self.get_grid(eval_grid, idx_i, idx_j, cond_values)
 
 
-        logpdf = self.pdf(torch.from_numpy(eval_points)).cpu().numpy()
+        logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
 
         fig, ax = plt.subplots(1,1, figsize=(6,6), sharex=True, sharey=True)
 
@@ -286,11 +292,10 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         plt.axis('square')
 
         c = ax.pcolor(eval_grid, eval_grid, logpdf.reshape(ngrid, ngrid), vmin=0)
-        ax.scatter(train_samples[:,idx_i].cpu().numpy(), train_samples[:,idx_j].cpu().numpy(), 1, color="r", alpha=0.5)
-        ax.scatter(val_samples[:,idx_i].cpu().numpy(), val_samples[:,idx_j].cpu().numpy(), 1, color="k", alpha=0.5)
+        ax.scatter(train_samples[:,idx_i].data.cpu().numpy(), train_samples[:,idx_j].data.cpu().numpy(), 1, color="r", alpha=0.5)
+        ax.scatter(val_samples[:,idx_i].data.cpu().numpy(), val_samples[:,idx_j].data.cpu().numpy(), 1, color="k", alpha=0.5)
         
         fig.colorbar(c, ax=ax)
-
         plt.savefig(save_to)
 
 
@@ -298,7 +303,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
             self, 
             train_samples: torch.Tensor,
             val_samples: torch.Tensor,
-            save_to: str):
+            save_to: str = None):
         idx_i, idx_j = 0,1
         
         fig, ax = plt.subplots(1,2, figsize=(12,6), sharex=True, sharey=True)
@@ -309,8 +314,8 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         ax[0].set_aspect('equal', 'box')
 
         for i in range(len(self.tb_params['means'])):
-            sigma = self.tb_params['sigmas'][i].cpu().numpy()
-            mu = self.tb_params['means'][i].cpu().numpy()
+            sigma = self.tb_params['sigmas'][i].data.cpu().numpy()
+            mu = self.tb_params['means'][i].data.cpu().numpy()
             
             colour = 'blue' if self.tb_params['weights'][i] > 0 else 'red'
             config = {
@@ -322,8 +327,8 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
             self._confidence_ellipse(ax[0], sigma, mu, **config)
             ax[0].scatter(mu[0], mu[1], c='red', s=3)
         
-        ax[0].scatter(train_samples[:,idx_i].cpu().numpy(), train_samples[:,idx_j].cpu().numpy(), 1, color="r", alpha=0.5)
-        ax[0].scatter(val_samples[:,idx_i].cpu().numpy(), val_samples[:,idx_j].cpu().numpy(), 1, color="k", alpha=0.5)
+        ax[0].scatter(train_samples[:,idx_i].data.cpu().numpy(), train_samples[:,idx_j].data.cpu().numpy(), 1, color="r", alpha=0.5)
+        ax[0].scatter(val_samples[:,idx_i].data.cpu().numpy(), val_samples[:,idx_j].data.cpu().numpy(), 1, color="k", alpha=0.5)
         
         # Plot heatmap
         ngrid = 100
@@ -331,18 +336,50 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         cond_values = np.zeros(2)
 
         eval_points = self.get_grid(eval_grid, idx_i, idx_j, cond_values)
-        logpdf = self.pdf(torch.from_numpy(eval_points).cuda()).cpu().numpy()
+        logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
 
         ax[1].set_xlim([-8, 8])
         ax[1].set_ylim([-8, 8])
         ax[1].set_aspect('equal', 'box')
 
         c = ax[1].pcolor(eval_grid, eval_grid, logpdf.reshape(ngrid, ngrid), vmin=0)
-        ax[1].scatter(train_samples[:,idx_i].cpu().numpy(), train_samples[:,idx_j].cpu().numpy(), 1, color="r", alpha=0.5)
-        ax[1].scatter(val_samples[:,idx_i].cpu().numpy(), val_samples[:,idx_j].cpu().numpy(), 1, color="k", alpha=0.5)
+        ax[1].scatter(train_samples[:,idx_i].data.cpu().numpy(), train_samples[:,idx_j].data.cpu().numpy(), 1, color="r", alpha=0.5)
+        ax[1].scatter(val_samples[:,idx_i].data.cpu().numpy(), val_samples[:,idx_j].data.cpu().numpy(), 1, color="k", alpha=0.5)
         
         fig.subplots_adjust(right=0.8)
         cbar_ax = fig.add_axes([0.85, 0.15, 0.05, 0.7])
         fig.colorbar(c, cax=cbar_ax)
 
+        if save_to is None: return fig
+
         plt.savefig(save_to)
+
+
+    #===================================================================================================
+    #                                       WANDB LOGGING
+    #===================================================================================================
+
+    def log_means(self, wandb, it: int):
+        for i in range(len(self.tb_params['means'])):
+            wandb.log({
+                "means": {
+                    "X": {
+                        f'component_{i}': self.tb_params['means'][i][0],
+                        'iteration': it
+                    },
+                    "Y": {
+                        f'component_{i}': self.tb_params['means'][i][1],
+                        'iteration': it
+                    }
+                }
+            })
+
+
+    def log_weights(self, wandb, it: int):
+        for i in range(len(self.tb_params['weights'])):
+            wandb.log({
+                "weights": {
+                    f'component_{i}': self.tb_params['weights'][i],
+                    'iteration': it
+                }
+            })
