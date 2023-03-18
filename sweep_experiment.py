@@ -11,6 +11,7 @@ from scipy.special import logsumexp
 import glob
 import wandb
 import yaml
+from torch.utils.data import Dataset
 
 # Local imports
 from src.models.mixtures.gaussian_mixture import GaussianMixture
@@ -21,7 +22,16 @@ from src.utils.pickle_handler import *
 from src.utils.early_stopping import EarlyStopping
 from src.utils.initialisation_procedures import GMMInitalisation, check_random_state
 
+class ArtificialDataset(Dataset):
+    def __init__(self, X):
+        super(ArtificialDataset, self).__init__()
+        self.X = X
 
+    def __len__(self):
+        return self.X.shape[0]
+
+    def __getitem__(self, index):
+        return self.X[index]
 
 with open('sweeps/sweep_ring.yaml') as file:
         config = yaml.load(file, Loader=yaml.FullLoader)
@@ -40,6 +50,7 @@ model_config = {
     'covar_shape': wandb.config.covar_shape,
     'covar_reg': wandb.config.covar_reg,
     'optimal_init': wandb.config.optimal_init,
+    'batch_size': wandb.config.batch_size,
     'validate_pdf': False
 }
 
@@ -70,9 +81,9 @@ with  console.status("Loading dataset...") as status:
     val_set = load_object('data/val', model_config['dataset'])
     test_set = load_object('data/test', model_config['dataset'])
 
-    tensor_train_set = torch.from_numpy(train_set) if str(device) == 'cpu' else torch.from_numpy(train_set).cuda()
-    tensor_val_set = torch.from_numpy(val_set) if str(device) == 'cpu' else torch.from_numpy(val_set).cuda()
-    tensor_test_set = torch.from_numpy(test_set) if str(device) == 'cpu' else torch.from_numpy(test_set).cuda()
+    tensor_train_set = torch.from_numpy(train_set).to(device) 
+    tensor_val_set = torch.from_numpy(val_set).to(device) 
+    tensor_test_set = torch.from_numpy(test_set).to(device)
 
     console.log(f"Dataset \"{model_config['dataset']}\" loaded")
 
@@ -115,9 +126,9 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm = _covariances_nmgmm
         _means_nmgmm[0] = [5, -5]
         _means_nmgmm[1] = [5, 5]
-        _weights_nmgmm = torch.zeros(model_config['components'], dtype=torch.float64).normal_(1, 0.5).cuda()
-        _weights_nmgmm[0] = torch.Tensor([-1]).cuda()
-        _weights_nmgmm[1] = torch.Tensor([-1]).cuda()
+        _weights_nmgmm = torch.zeros(model_config['components'], dtype=torch.float64, device=device).normal_(1, 0.5)
+        _weights_nmgmm[0] = torch.Tensor([-1], device=device)
+        _weights_nmgmm[1] = torch.Tensor([-1], device=device) 
 
 
     #=============================== NMGMM SETUP ===============================
@@ -126,8 +137,8 @@ with  console.status("Loading dataset...") as status:
     model = available_models[model_config['model_name']](
         n_clusters = model_config['components'], 
         n_dims = 2,
-        init_means=torch.from_numpy(_means_nmgmm).cuda(),
-        init_sigmas=torch.from_numpy(_covariances_nmgmm).cuda())
+        init_means=torch.from_numpy(_means_nmgmm).to(device),
+        init_sigmas=torch.from_numpy(_covariances_nmgmm).to(device))
 
     model.to(device)
     model.set_monitoring(os.path.abspath('runs'), 'test')
@@ -160,12 +171,21 @@ with  console.status("Loading dataset...") as status:
     
     status.update(status=f'Training "{model_config["model_name"]}" model...')
 
+    traindata = ArtificialDataset(tensor_train_set)
+    trainloader = torch.utils.data.DataLoader(traindata, batch_size=model_config['batch_size'], shuffle=True)
+
     for it in range(model_config['iterations']):
         model.add_base_means(base_model.means_, it)
         model.add_base_weights(base_model.weights_, it)
 
-        optimizer.zero_grad()
-        it_train_loss = model(tensor_train_set, it, model_config['validate_pdf'])
+        train_loss = 0
+        for data in trainloader:
+            optimizer.zero_grad()
+            it_train_loss = model(data, it, model_config['validate_pdf'])
+            train_loss += it_train_loss
+
+            it_train_loss.backward()
+            optimizer.step()
       
         with torch.no_grad(): 
             it_val_loss = model.val_loss(tensor_val_set, it)
@@ -174,7 +194,7 @@ with  console.status("Loading dataset...") as status:
         model.log_weights(wandb, it)
         wandb.log({
             "train": {
-               "loss":  it_train_loss
+               "loss":  train_loss / model_config['batch_size']
             },
             "validation": {
                 "loss": it_val_loss
@@ -185,15 +205,13 @@ with  console.status("Loading dataset...") as status:
             "iteration": it
         })
 
-        if it % 10 == 0:
+        if it % 100 == 0:
             fig = model.sequence_visualisation(
                 tensor_train_set,
                 tensor_val_set,
             )
             wandb.log({f'sequence_plot': wandb.Image(fig)})
 
-        it_train_loss.backward()
-        optimizer.step()
 
     console.log(f'Model "{model_config["model_name"]}" was trained successfully')
     model.clear_monitoring()

@@ -8,7 +8,7 @@ python3.10 experiment_builder.py --experiment_name nm_mixture_sgd_mom0.9_reg14_c
     --data funnel \
     --comp 3 \
     --it 5000 \
-    --lr 0.5 \
+    --lr 0.01 \
     --validate_pdf 0 \
     --optimizer sgd_mom \
     --initialisation random \

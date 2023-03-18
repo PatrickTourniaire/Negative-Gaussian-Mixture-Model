@@ -5,19 +5,19 @@ metric:
   goal: minimize
 parameters:
   learning_rate:
-    min: 0.01
-    max: 2.0
+    min: 0.001
+    max: 0.1
   momentum:
-    min: 0.4
+    min: 0.0
     max: 1.0
   optimizer:
-    values: ["sgd_mom", "sgd"]
+    value: "sgd_mom"
   components:
     values: [2, 3, 4]
   data:
     value: 'funnel'
   iterations:
-    value: 10000
+    value: 1000
   model:
     value: 'squared_nm_gaussian_mixture'
   initialisation:
@@ -29,6 +29,8 @@ parameters:
   covar_reg:
     min: 0.01
     max: 1.0
+  batch_size:
+    values: [32, 64, 128]
 early_terminate:
   type: hyperband
   max_iter: 27

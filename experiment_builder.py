@@ -10,6 +10,7 @@ import argparse
 from scipy.special import logsumexp
 import glob
 import wandb
+from torch.utils.data import Dataset
 
 # Local imports
 from src.models.mixtures.gaussian_mixture import GaussianMixture
@@ -20,6 +21,17 @@ from src.utils.pickle_handler import *
 from src.utils.early_stopping import EarlyStopping
 from src.utils.initialisation_procedures import GMMInitalisation, check_random_state
 
+
+class ArtificialDataset(Dataset):
+    def __init__(self, X):
+        super(ArtificialDataset, self).__init__()
+        self.X = X
+
+    def __len__(self):
+        return self.X.shape[0]
+
+    def __getitem__(self, index):
+        return self.X[index]
 
 parser = argparse.ArgumentParser()
 
@@ -49,6 +61,7 @@ model_config = {
     'initialisation': args.initialisation,
     'covar_shape': args.covar_shape,
     'covar_reg': float(args.covar_reg),
+    'batch_size': 128,
     'optimal_init': 'funnel'
 }
 
@@ -184,21 +197,30 @@ with  console.status("Loading dataset...") as status:
     
     status.update(status=f'Training "{model_config["model_name"]}" model...')
 
+    traindata = ArtificialDataset(tensor_train_set)
+    trainloader = torch.utils.data.DataLoader(traindata, batch_size=128, shuffle=True)
+
     for it in range(model_config['iterations']):
         model.add_base_means(base_model.means_, it)
         model.add_base_weights(base_model.weights_, it)
+        
+        train_loss = 0
+        for data in trainloader:
+            optimizer.zero_grad()
+            it_train_loss = model(data, it, model_config['validate_pdf'])
+            train_loss += it_train_loss
 
-        optimizer.zero_grad()
-        it_train_loss = model(tensor_train_set, it, model_config['validate_pdf'])
+            it_train_loss.backward()
+            optimizer.step()
       
         with torch.no_grad(): 
             it_val_loss = model.val_loss(tensor_val_set, it)
-        
+            
         model.log_means(wandb, it)
         model.log_weights(wandb, it)
         wandb.log({
             "train": {
-               "loss":  it_train_loss
+               "loss":  train_loss / model_config['batch_size']
             },
             "validation": {
                 "loss": it_val_loss
@@ -209,7 +231,7 @@ with  console.status("Loading dataset...") as status:
             "iteration": it
         })
 
-        if it % 1000 == 0:
+        if it % 50 == 0:
             fig = model.sequence_visualisation(
                 tensor_train_set,
                 tensor_val_set
@@ -218,9 +240,6 @@ with  console.status("Loading dataset...") as status:
 
         early_stopping(it_train_loss, it_val_loss)
         if early_stopping.early_stop: break
-
-        it_train_loss.backward()
-        optimizer.step()
 
     console.log(f'Model "{model_config["model_name"]}" was trained successfully')
     model.clear_monitoring()
