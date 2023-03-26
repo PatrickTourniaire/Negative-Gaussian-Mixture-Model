@@ -36,7 +36,7 @@ class ArtificialDataset(Dataset):
 with open('sweeps/sweep_ring.yaml') as file:
         config = yaml.load(file, Loader=yaml.FullLoader)
 
-run = wandb.init(config=config)
+run = wandb.init(entity="ptourniaire", project="NMMMs", config=config)
 
 # Experiment configuration
 model_config = {
@@ -118,18 +118,22 @@ with  console.status("Loading dataset...") as status:
     _means_nmgmm = initaliser_nmgmm.means_
     _means_gmm = initaliser_gmm.means_
     
+    _weights_nmgmm = None
+
     if model_config['covar_shape'] == 'diag':
         _covariances_nmgmm = np.array([np.diag(np.sqrt(S)) for S in _covariances_nmgmm])
         _covariances_gmm = np.array([np.diag(S) for S in _covariances_gmm])
     
-    if model_config['optimal_init'] == 'funnel':
-        _covariances_nmgmm = _covariances_nmgmm
-        _means_nmgmm[0] = [5, -5]
-        _means_nmgmm[1] = [5, 5]
-        _weights_nmgmm = torch.zeros(model_config['components'], dtype=torch.float64, device=device).normal_(1, 0.5)
-        _weights_nmgmm[0] = torch.Tensor([-1], device=device)
-        _weights_nmgmm[1] = torch.Tensor([-1], device=device) 
+    if model_config['optimal_init'] == 'funnel' and model_config['components'] == 3:
+        _means_nmgmm[0] = [3.5, 4] 
+        _means_nmgmm[1] = [3.5, -4]
+        _means_nmgmm[2] = [-1, 0] 
 
+        _covariances_nmgmm[0] = [[2, 0], [-1, 1.5]]
+        _covariances_nmgmm[1] = [[2, 0], [1, 1.5]]
+        _covariances_nmgmm[2] = [[5, 0], [0, 5]]  
+
+        _weights_nmgmm = torch.tensor([-0.33, -0.33, 0], dtype=torch.float64)
 
     #=============================== NMGMM SETUP ===============================
     
@@ -137,11 +141,11 @@ with  console.status("Loading dataset...") as status:
     model = available_models[model_config['model_name']](
         n_clusters = model_config['components'], 
         n_dims = 2,
-        init_means=torch.from_numpy(_means_nmgmm).to(device),
-        init_sigmas=torch.from_numpy(_covariances_nmgmm).to(device))
+        init_means=torch.from_numpy(_means_nmgmm).cuda(),
+        init_sigmas=torch.from_numpy(_covariances_nmgmm).cuda(),
+        init_weights=_weights_nmgmm)
 
     model.to(device)
-    model.set_monitoring(os.path.abspath('runs'), 'test')
 
     optimizer_algo = available_optimizers[model_config["optimizer"]]
     optimizer = optimizer_algo(model.parameters(), lr=model_config['learning_rate'])
@@ -175,20 +179,17 @@ with  console.status("Loading dataset...") as status:
     trainloader = torch.utils.data.DataLoader(traindata, batch_size=model_config['batch_size'], shuffle=True)
 
     for it in range(model_config['iterations']):
-        model.add_base_means(base_model.means_, it)
-        model.add_base_weights(base_model.weights_, it)
-
         train_loss = 0
         for data in trainloader:
             optimizer.zero_grad()
-            it_train_loss = model(data, it, model_config['validate_pdf'])
+            it_train_loss = model(data.cuda(), it, model_config['validate_pdf'])
             train_loss += it_train_loss
 
             it_train_loss.backward()
             optimizer.step()
       
         with torch.no_grad(): 
-            it_val_loss = model.val_loss(tensor_val_set, it)
+            it_val_loss = model.val_loss(tensor_val_set.cuda(), it)
         
         model.log_means(wandb, it)
         model.log_weights(wandb, it)
@@ -207,14 +208,13 @@ with  console.status("Loading dataset...") as status:
 
         if it % 100 == 0:
             fig = model.sequence_visualisation(
-                tensor_train_set,
-                tensor_val_set,
+                tensor_train_set.to(device),
+                tensor_val_set.to(device),
             )
             wandb.log({f'sequence_plot': wandb.Image(fig)})
 
 
     console.log(f'Model "{model_config["model_name"]}" was trained successfully')
-    model.clear_monitoring()
 
 
 wandb.finish()

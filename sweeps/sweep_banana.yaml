@@ -15,7 +15,7 @@ parameters:
   components:
     values: [2, 3, 4]
   data:
-    value: 'funnel'
+    value: 'banana'
   iterations:
     value: 3000
   model:
