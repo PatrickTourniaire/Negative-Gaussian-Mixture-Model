@@ -46,6 +46,9 @@ parser.add_argument("--optimizer", help="Which optimizer to use")
 parser.add_argument("--initialisation", help="Initialisation technique to use")
 parser.add_argument("--covar_shape", help="Shape of the initialised covariance matrix")
 parser.add_argument("--covar_reg", help="Regularisation constant added to the digonal matrix")
+parser.add_argument("--optimal_init", help="Use optimial initailisation for a particular dataset")
+parser.add_argument("--batch_size", help="Specify batch size for training and validation")
+parser.add_argument("--sparsity", help="Sparsity prior to regulate the weights")
 
 args = parser.parse_args()
 
@@ -61,8 +64,9 @@ model_config = {
     'initialisation': args.initialisation,
     'covar_shape': args.covar_shape,
     'covar_reg': float(args.covar_reg),
-    'batch_size': 32,
-    'optimal_init': 'funnel'
+    'batch_size': int(args.batch_size),
+    'optimal_init': args.optimal_init,
+    'sparsity': float(args.sparsity)
 }
 
 available_models = {
@@ -145,7 +149,6 @@ with  console.status("Loading dataset...") as status:
 
     _weights_nmgmm = None
 
-    print(_covariances_nmgmm)
     
     if model_config['covar_shape'] == 'diag':
         _covariances_nmgmm = np.array([np.diag(np.sqrt(S)) for S in _covariances_nmgmm])
@@ -170,6 +173,14 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm = torch.stack([torch.sqrt(torch.diag(x)) - torch.diag(i) for i, x in init_zip])
         _covariances_nmgmm = _covariances_nmgmm.cpu().numpy()
 
+    if model_config['optimal_init'] == 'banana' and model_config['components'] == 2:
+        _means_nmgmm[0] = [0, 8] 
+        _means_nmgmm[1] = [0, 5]
+
+        _covariances_nmgmm[0] = [[3, 0], [0, 5]]
+        _covariances_nmgmm[1] = [[4.5, 0], [0, 7]]
+
+        _weights_nmgmm = torch.tensor([-0.8, 1.8], dtype=torch.float64)
 
     #=============================== NMGMM SETUP ===============================
     
@@ -180,7 +191,8 @@ with  console.status("Loading dataset...") as status:
         n_dims = 2,
         init_means=torch.from_numpy(_means_nmgmm),
         init_sigmas=torch.from_numpy(_covariances_nmgmm),
-        init_weights=_weights_nmgmm)
+        init_weights=_weights_nmgmm,
+        sparsity=model_config['sparsity'])
 
     model.to(device)
     model.set_monitoring(os.path.abspath('runs'), args.experiment_name)
@@ -225,27 +237,31 @@ with  console.status("Loading dataset...") as status:
         model.add_base_weights(base_model.weights_, it)
         
         train_loss = 0
+        train_total = 0
         for data in trainloader:
             optimizer.zero_grad()
             it_train_loss = model(data, it, model_config['validate_pdf'])
+            train_total += 1
             train_loss += it_train_loss
 
             it_train_loss.backward()
             optimizer.step()
 
         val_loss = 0
+        val_total = 0
         with torch.no_grad(): 
             for data in valloader:
                 val_loss += model.val_loss(tensor_val_set, it)
+                val_total += 1
             
         model.log_means(wandb, it)
         model.log_weights(wandb, it)
         wandb.log({
             "train": {
-               "loss":  train_loss / model_config['batch_size']
+               "loss":  train_loss / train_total
             },
             "validation": {
-                "loss": val_loss / model_config['batch_size']
+                "loss": val_loss / val_total
             },
             "baseline": {
                 "loss": base_loss

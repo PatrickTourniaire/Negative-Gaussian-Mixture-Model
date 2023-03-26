@@ -135,6 +135,15 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm[2] = [[5, 0], [0, 5]]  
 
         _weights_nmgmm = torch.tensor([-0.33, -0.33, 0], dtype=torch.float64)
+    
+    if model_config['optimal_init'] == 'banana' and model_config['components'] == 2:
+        _means_nmgmm[0] = [0, 8] 
+        _means_nmgmm[1] = [0, 5]
+
+        _covariances_nmgmm[0] = [[3, 0], [0, 5]]
+        _covariances_nmgmm[1] = [[4.5, 0], [0, 7]]
+
+        _weights_nmgmm = torch.tensor([-0.8, 1.8], dtype=torch.float64)
 
     #=============================== NMGMM SETUP ===============================
     

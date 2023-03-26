@@ -72,7 +72,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
             init_means=None,
             init_sigmas=None,
             init_weights=None,
-            sparsity: float = 0):
+            sparsity: float = 0.0):
         super(NMSquaredGaussianMixture, self).__init__()
         
         self.device = device
