@@ -219,7 +219,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
     def forward(self, X: torch.Tensor, it: int, validate: bool = False) -> torch.Tensor:
         if validate and (it % 100 == 0): self._validation(X, it)
-        out = self.neglog_likelihood(X)
+        out = self.neglog_likelihood(X)  + 0.2 * (1 - self.tb_params['weights'].sum()).abs()
 
         if not self.monitor: return out
         
@@ -306,11 +306,11 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
             save_to: str = None):
         idx_i, idx_j = 0,1
         
-        fig, ax = plt.subplots(1,2, figsize=(12,6), sharex=True, sharey=True)
+        fig, ax = plt.subplots(1,3, figsize=(24,8), sharex=True, sharey=True)
         
         # Plot confidence circles
-        ax[0].set_xlim([-8, 8])
-        ax[0].set_ylim([-8, 8])
+        ax[0].set_xlim([-10, 10])
+        ax[0].set_ylim([-10, 10])
         ax[0].set_aspect('equal', 'box')
 
         for i in range(len(self.tb_params['means'])):
@@ -332,19 +332,26 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         
         # Plot heatmap
         ngrid = 100
-        eval_grid = np.linspace(-8,8,ngrid)
+        eval_grid = np.linspace(-10,10,ngrid)
         cond_values = np.zeros(2)
 
         eval_points = self.get_grid(eval_grid, idx_i, idx_j, cond_values)
         logpdf = self.pdf(torch.from_numpy(eval_points)).data.cpu().numpy()
 
-        ax[1].set_xlim([-8, 8])
-        ax[1].set_ylim([-8, 8])
+        ax[1].set_xlim([-10, 10])
+        ax[1].set_ylim([-10, 10])
         ax[1].set_aspect('equal', 'box')
 
         c = ax[1].pcolor(eval_grid, eval_grid, logpdf.reshape(ngrid, ngrid), vmin=0)
         ax[1].scatter(train_samples[:,idx_i].data.cpu().numpy(), train_samples[:,idx_j].data.cpu().numpy(), 1, color="r", alpha=0.5)
         ax[1].scatter(val_samples[:,idx_i].data.cpu().numpy(), val_samples[:,idx_j].data.cpu().numpy(), 1, color="k", alpha=0.5)
+
+        # Plot heatmap - no points
+        ax[2].set_xlim([-10, 10])
+        ax[2].set_ylim([-10, 10])
+        ax[2].set_aspect('equal', 'box')
+
+        c = ax[2].pcolor(eval_grid, eval_grid, logpdf.reshape(ngrid, ngrid))
         
         fig.subplots_adjust(right=0.8)
         cbar_ax = fig.add_axes([0.85, 0.15, 0.05, 0.7])

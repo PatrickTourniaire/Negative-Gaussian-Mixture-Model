@@ -61,7 +61,7 @@ model_config = {
     'initialisation': args.initialisation,
     'covar_shape': args.covar_shape,
     'covar_reg': float(args.covar_reg),
-    'batch_size': 128,
+    'batch_size': 32,
     'optimal_init': 'funnel'
 }
 
@@ -80,6 +80,7 @@ available_optimizers = {
 
 wandb.init(
     project="NMMMs",
+    entity="ptourniaire",
     config={**model_config}
 )
 
@@ -141,18 +142,33 @@ with  console.status("Loading dataset...") as status:
     
     _means_nmgmm = initaliser_nmgmm.means_
     _means_gmm = initaliser_gmm.means_
+
+    _weights_nmgmm = None
+
+    print(_covariances_nmgmm)
     
     if model_config['covar_shape'] == 'diag':
         _covariances_nmgmm = np.array([np.diag(np.sqrt(S)) for S in _covariances_nmgmm])
         _covariances_gmm = np.array([np.diag(S) for S in _covariances_gmm])
     
-    if model_config['optimal_init'] == 'funnel':
-        _covariances_nmgmm = _covariances_nmgmm
-        _means_nmgmm[0] = [5, -5]
-        _means_nmgmm[1] = [5, 5]
-        _weights_nmgmm = torch.zeros(model_config['components'], dtype=torch.float64).normal_(1, 0.5)
-        _weights_nmgmm[0] = torch.Tensor([-1])
-        _weights_nmgmm[1] = torch.Tensor([-1])
+    if model_config['optimal_init'] == 'funnel' and model_config['components'] == 3:
+        _means_nmgmm[0] = [3.5, 4] 
+        _means_nmgmm[1] = [3.5, -4]
+        _means_nmgmm[2] = [-1, 0] 
+
+        _covariances_nmgmm[0] = [[2, 0], [-1, 1.5]]
+        _covariances_nmgmm[1] = [[2, 0], [1, 1.5]]
+        _covariances_nmgmm[2] = [[5, 0], [0, 5]]
+
+        _weights_nmgmm = torch.tensor([-0.33, -0.33, 0], dtype=torch.float64)
+
+    if model_config['optimal_init'] == 'mor' and model_config['components'] == 3:
+        init_zip = zip(
+            [torch.tensor([0, 0]), torch.tensor([1.5, 1.5]), torch.tensor([0.5, 0.5])], 
+            torch.torch.from_numpy(initaliser_nmgmm.covariances_)
+        )
+        _covariances_nmgmm = torch.stack([torch.sqrt(torch.diag(x)) - torch.diag(i) for i, x in init_zip])
+        _covariances_nmgmm = _covariances_nmgmm.cpu().numpy()
 
 
     #=============================== NMGMM SETUP ===============================
@@ -162,7 +178,8 @@ with  console.status("Loading dataset...") as status:
         n_clusters = model_config['components'], 
         n_dims = 2,
         init_means=torch.from_numpy(_means_nmgmm),
-        init_sigmas=torch.from_numpy(_covariances_nmgmm))
+        init_sigmas=torch.from_numpy(_covariances_nmgmm),
+        init_weights=_weights_nmgmm)
 
     model.to(device)
     model.set_monitoring(os.path.abspath('runs'), args.experiment_name)
@@ -198,7 +215,9 @@ with  console.status("Loading dataset...") as status:
     status.update(status=f'Training "{model_config["model_name"]}" model...')
 
     traindata = ArtificialDataset(tensor_train_set)
-    trainloader = torch.utils.data.DataLoader(traindata, batch_size=128, shuffle=True)
+    valdata = ArtificialDataset(tensor_val_set)
+    trainloader = torch.utils.data.DataLoader(traindata, batch_size=model_config['batch_size'], shuffle=True)
+    valloader = torch.utils.data.DataLoader(traindata, batch_size=model_config['batch_size'], shuffle=True)
 
     for it in range(model_config['iterations']):
         model.add_base_means(base_model.means_, it)
@@ -212,9 +231,11 @@ with  console.status("Loading dataset...") as status:
 
             it_train_loss.backward()
             optimizer.step()
-      
+
+        val_loss = 0
         with torch.no_grad(): 
-            it_val_loss = model.val_loss(tensor_val_set, it)
+            for data in valloader:
+                val_loss += model.val_loss(tensor_val_set, it)
             
         model.log_means(wandb, it)
         model.log_weights(wandb, it)
@@ -223,7 +244,7 @@ with  console.status("Loading dataset...") as status:
                "loss":  train_loss / model_config['batch_size']
             },
             "validation": {
-                "loss": it_val_loss
+                "loss": val_loss / model_config['batch_size']
             },
             "baseline": {
                 "loss": base_loss
@@ -231,14 +252,17 @@ with  console.status("Loading dataset...") as status:
             "iteration": it
         })
 
-        if it % 50 == 0:
+        if it % 10 == 0:
             fig = model.sequence_visualisation(
                 tensor_train_set,
                 tensor_val_set
             )
             wandb.log({f'sequence_plot_it{it}': wandb.Image(fig)})
 
-        early_stopping(it_train_loss, it_val_loss)
+        early_stopping(
+            train_loss / model_config['batch_size'], 
+            val_loss / model_config['batch_size']
+        )
         if early_stopping.early_stop: break
 
     console.log(f'Model "{model_config["model_name"]}" was trained successfully')

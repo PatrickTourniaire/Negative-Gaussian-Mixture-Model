@@ -39,4 +39,4 @@ if __name__ == '__main__':
     DATA_TYPE = sys.argv[2]
 
     data_provider = DataProvider(DATA_NAME, 'data')
-    data_provider.create(DATA_TYPE, 10000, 2000, 2000)
+    data_provider.create(DATA_TYPE, 1000, 200, 200)
