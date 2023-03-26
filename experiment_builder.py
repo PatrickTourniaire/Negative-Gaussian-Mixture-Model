@@ -175,6 +175,7 @@ with  console.status("Loading dataset...") as status:
     
     # Model and optimiser
     model = available_models[model_config['model_name']](
+        device,
         n_clusters = model_config['components'], 
         n_dims = 2,
         init_means=torch.from_numpy(_means_nmgmm),

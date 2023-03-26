@@ -51,6 +51,7 @@ model_config = {
     'covar_reg': wandb.config.covar_reg,
     'optimal_init': wandb.config.optimal_init,
     'batch_size': wandb.config.batch_size,
+    'sparsity': wandb.config.sparsity,
     'validate_pdf': False
 }
 
@@ -139,11 +140,13 @@ with  console.status("Loading dataset...") as status:
     
     # Model and optimiser
     model = available_models[model_config['model_name']](
+        device,
         n_clusters = model_config['components'], 
         n_dims = 2,
-        init_means=torch.from_numpy(_means_nmgmm).cuda(),
-        init_sigmas=torch.from_numpy(_covariances_nmgmm).cuda(),
-        init_weights=_weights_nmgmm)
+        init_means=torch.from_numpy(_means_nmgmm).to(device),
+        init_sigmas=torch.from_numpy(_covariances_nmgmm).to(device),
+        init_weights=_weights_nmgmm,
+        sparsity=model_config['sparsity'])
 
     model.to(device)
 
@@ -182,14 +185,14 @@ with  console.status("Loading dataset...") as status:
         train_loss = 0
         for data in trainloader:
             optimizer.zero_grad()
-            it_train_loss = model(data.cuda(), it, model_config['validate_pdf'])
+            it_train_loss = model(data.to(device), it, model_config['validate_pdf'])
             train_loss += it_train_loss
 
             it_train_loss.backward()
             optimizer.step()
       
         with torch.no_grad(): 
-            it_val_loss = model.val_loss(tensor_val_set.cuda(), it)
+            it_val_loss = model.val_loss(tensor_val_set.to(device), it)
         
         model.log_means(wandb, it)
         model.log_weights(wandb, it)

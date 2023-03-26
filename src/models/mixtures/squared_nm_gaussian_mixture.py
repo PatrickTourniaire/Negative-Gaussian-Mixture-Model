@@ -66,16 +66,23 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
     def __init__(
             self, 
+            device,
             n_clusters: int = 1, 
             n_dims: int = 2, 
             init_means=None,
             init_sigmas=None,
-            init_weights=None):
+            init_weights=None,
+            sparsity: float = 0):
         super(NMSquaredGaussianMixture, self).__init__()
         
+        self.device = device
+
         # Configurations
         self.n_dims = n_dims
         self.n_clusters = n_clusters
+
+        # Hyperparameters
+        self.sparsity = sparsity
 
         # Initialisations
         chols = self._initialise_full(n_clusters, n_dims) if init_sigmas is None else init_sigmas
@@ -156,7 +163,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         x_pad, y_pad = 10, 10
         x_min, x_max, y_min, y_max = self._samplerange(samples)
 
-        f = lambda x, y: self.pdf(torch.tensor([[x, y]]).cuda()).data.cpu().numpy().astype(float)[0]
+        f = lambda x, y: self.pdf(torch.tensor([[x, y]]).to(self.device)).data.cpu().numpy().astype(float)[0]
         integral, _ = integrate.dblquad(f, x_min-x_pad, x_max+x_pad, y_min-y_pad, y_max+y_pad)
 
         self.add_integral(torch.tensor([integral]), it)
@@ -216,10 +223,9 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
     def neglog_likelihood(self, X: torch.Tensor) -> torch.Tensor:
         return - (self.log_likelihoods(X).logsumexp(dim=0) / X.shape[0]) 
 
-
     def forward(self, X: torch.Tensor, it: int, validate: bool = False) -> torch.Tensor:
         if validate and (it % 100 == 0): self._validation(X, it)
-        out = self.neglog_likelihood(X)  + 0.2 * (1 - self.tb_params['weights'].sum()).abs()
+        out = self.neglog_likelihood(X)  + self.sparsity * (1 - self.tb_params['weights'].sum()).abs()
 
         return out
 
@@ -276,7 +282,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         eval_points = self.get_grid(eval_grid, idx_i, idx_j, cond_values)
 
 
-        logpdf = self.pdf(torch.from_numpy(eval_points).cuda()).data.cpu().numpy()
+        logpdf = self.pdf(torch.from_numpy(eval_points).to(self.device)).data.cpu().numpy()
 
         fig, ax = plt.subplots(1,1, figsize=(6,6), sharex=True, sharey=True)
 
@@ -329,7 +335,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
         cond_values = np.zeros(2)
 
         eval_points = self.get_grid(eval_grid, idx_i, idx_j, cond_values)
-        logpdf = self.pdf(torch.from_numpy(eval_points).cuda()).data.cpu().numpy()
+        logpdf = self.pdf(torch.from_numpy(eval_points).to(self.device)).data.cpu().numpy()
 
         ax[1].set_xlim([-10, 10])
         ax[1].set_ylim([-10, 10])
