@@ -5,8 +5,8 @@
 
 python3.10 experiment_builder.py --experiment_name nm_mixture_sgd_mom0.9_reg14_comp2_it5000_lr0.1 \
     --model squared_nm_gaussian_mixture \
-    --data banana \
-    --comp 2 \
+    --data cosine \
+    --comp 6 \
     --it 100 \
     --lr 0.005 \
     --validate_pdf 0 \
@@ -15,7 +15,7 @@ python3.10 experiment_builder.py --experiment_name nm_mixture_sgd_mom0.9_reg14_c
     --covar_shape full \
     --covar_reg 4.4 \
     --batch_size 32 \
-    --optimal_init banana \
+    --optimal_init cosine \
     --sparsity 0.1
 
 
