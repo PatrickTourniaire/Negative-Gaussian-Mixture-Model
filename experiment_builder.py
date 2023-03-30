@@ -190,14 +190,14 @@ with  console.status("Loading dataset...") as status:
         _means_nmgmm[4] = [-3.1, -5]
         _means_nmgmm[5] = [3.1, -5]
 
-        _covariances_nmgmm[0] = 1.5 * np.array([[4, 0], [0, 6]])
+        _covariances_nmgmm[0] = 1.3 * np.array([[7, 0], [0, 6]])
         _covariances_nmgmm[1] = [[0.5, 0], [0, 2.5]]
         _covariances_nmgmm[2] = [[0.5, 0], [0, 2.5]]
         _covariances_nmgmm[3] = [[0.5, 0], [0, 2.5]]
-        _covariances_nmgmm[4] = [[0.3, 0], [0, 2.5]]
-        _covariances_nmgmm[5] = [[0.3, 0], [0, 2.5]]
+        _covariances_nmgmm[4] = [[0.5, 0], [0, 2.5]]
+        _covariances_nmgmm[5] = [[0.5, 0], [0, 2.5]]
 
-        _weights_nmgmm = torch.tensor([.17, -.17, -.17, -.17, .17, -.17])
+        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001, 0.001, 0.001])
 
     #=============================== NMGMM SETUP ===============================
     
