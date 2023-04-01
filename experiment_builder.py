@@ -41,6 +41,7 @@ parser.add_argument("--data", help="Name of the pickle data file to train on")
 parser.add_argument("--comp", help="Number of mixture components")
 parser.add_argument("--it", help="Number of iterations for training")
 parser.add_argument("--lr", help="Learning rate for the SGD optimiser")
+parser.add_argument("--momentum", help="Momentum for SGD with momentum")
 parser.add_argument("--validate_pdf", help="To use grid sampling to validate the pdf")
 parser.add_argument("--optimizer", help="Which optimizer to use")
 parser.add_argument("--initialisation", help="Initialisation technique to use")
@@ -66,6 +67,7 @@ model_config = {
     'covar_reg': float(args.covar_reg),
     'batch_size': int(args.batch_size),
     'optimal_init': args.optimal_init,
+    'momentum': float(args.momentum),
     'sparsity': float(args.sparsity)
 }
 
@@ -87,6 +89,8 @@ wandb.init(
     entity="ptourniaire",
     config={**model_config}
 )
+
+checkpoints = [0, 1, 19]
 
 BASE_MODEL_NAME = 'sklearn_gmm'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -218,7 +222,7 @@ with  console.status("Loading dataset...") as status:
     optimizer = optimizer_algo(model.parameters(), lr=model_config['learning_rate'])
     
     if (model_config["optimizer"] == 'sgd_mom'):
-        optimizer = optimizer_algo(model.parameters(), lr=model_config['learning_rate'], momentum=0.9)
+        optimizer = optimizer_algo(model.parameters(), lr=model_config['learning_rate'], momentum=model_config['momentum'])
 
     early_stopping = EarlyStopping(tolerance=5, min_delta=0.1)
 
@@ -244,6 +248,9 @@ with  console.status("Loading dataset...") as status:
     
     status.update(status=f'Training "{model_config["model_name"]}" model...')
 
+    train_loss_vis = []
+    val_loss_vis = []
+
     traindata = ArtificialDataset(tensor_train_set)
     valdata = ArtificialDataset(tensor_val_set)
     trainloader = torch.utils.data.DataLoader(traindata, batch_size=model_config['batch_size'], shuffle=True)
@@ -255,21 +262,42 @@ with  console.status("Loading dataset...") as status:
         
         train_loss = 0
         train_total = 0
+
+        train_loss_batch_vis = []
+
         for data in trainloader:
             optimizer.zero_grad()
+            
+            train_loss_batch_vis.append(model.neglog_likelihood(data))
             it_train_loss = model(data, it, model_config['validate_pdf'])
             train_total += 1
             train_loss += it_train_loss
 
             it_train_loss.backward()
             optimizer.step()
+        
+        train_loss_vis.append(train_loss_batch_vis)
 
         val_loss = 0
         val_total = 0
+
+        val_loss_batch_vis = []
+
         with torch.no_grad(): 
+            
             for data in valloader:
+                val_loss_batch_vis.append(model.neglog_likelihood(data))
                 val_loss += model.val_loss(tensor_val_set, it)
                 val_total += 1
+            
+        val_loss_vis.append(val_loss_batch_vis)
+
+        
+        if it in checkpoints:
+            torch.save(
+                model.state_dict(), 
+                f'{OUTPUT_REPO}/saved_models/checkpoint{it}_{args.experiment_name}'
+            )
             
         model.log_means(wandb, it)
         model.log_weights(wandb, it)
@@ -322,6 +350,9 @@ with  console.status("Loading dataset...") as status:
         tensor_train_set,
         os.path.abspath(f'{path_models}/{args.experiment_name}_contours.pdf')
     )
+
+    save_object(train_loss_vis, path_models, 'train_loss_vis')
+    save_object(val_loss_vis, path_models, 'val_loss_vis')
 
 wandb.finish()
 console.log(f'[bold green] Experiment ran successfully!')
