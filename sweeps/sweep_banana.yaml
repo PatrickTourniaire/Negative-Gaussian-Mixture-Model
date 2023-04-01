@@ -13,7 +13,7 @@ parameters:
   optimizer:
     value: "sgd_mom"
   components:
-    value: 3
+    value: 2
   data:
     value: 'banana'
   iterations:
