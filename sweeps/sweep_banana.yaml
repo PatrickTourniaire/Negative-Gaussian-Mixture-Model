@@ -5,32 +5,34 @@ metric:
   goal: minimize
 parameters:
   learning_rate:
-    min: 0.001
-    max: 0.1
+    min: 0.0001
+    max: 0.01
   momentum:
-    min: 0.0
+    min: 0.2
     max: 1.0
   optimizer:
-    values: ["sgd_mom", "sgd", "adam", "adagrad"]
+    value: "sgd_mom"
   components:
-    values: [2, 3, 4]
+    value: 3
   data:
     value: 'banana'
   iterations:
-    value: 3000
+    value: 500
   model:
     value: 'squared_nm_gaussian_mixture'
   initialisation:
-    value: 'random_from_data'
+    value: 'random'
   covar_shape:
-    value: 'full'
+    value: 'diag'
   optimal_init:
-    value: 'none'
+    value: 'banana'
   covar_reg:
-    min: 0.01
-    max: 3.0
+    value: 4.4
+  sparsity:
+    min: 0.0
+    max: 1.0
   batch_size:
-    values: [32, 64, 128]
+    values: [8, 16, 32, 64]
 early_terminate:
   type: hyperband
   max_iter: 27

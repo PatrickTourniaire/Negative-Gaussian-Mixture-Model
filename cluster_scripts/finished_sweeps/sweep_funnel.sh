@@ -13,7 +13,7 @@
 # Request 16 GB system RAM
 # the total system RAM available to the job is the value specified here multiplied by
 # the number of requested GPUs (above)
-#$ -l h_vmem=16G
+#$ -l h_vmem=18G
 
 # Initialise the environment modules and load CUDA version 8.0.61
 . /etc/profile.d/modules.sh
@@ -23,4 +23,4 @@ module load cuda/11.0.2
 source activate nmmm
 
 # Run the program
-wandb agent ptourniaire/NMMMs/jgm8s6tu
+wandb agent ptourniaire/NMMMs/567tw6xe

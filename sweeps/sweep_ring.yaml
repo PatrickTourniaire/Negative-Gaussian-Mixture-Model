@@ -5,19 +5,19 @@ metric:
   goal: minimize
 parameters:
   learning_rate:
-    min: 0.001
-    max: 0.1
+    min: 0.0001
+    max: 0.01
   momentum:
-    min: 0.4
+    min: 0.2
     max: 1.0
   optimizer:
     value: "sgd_mom"
   components:
-    values: [2, 3, 4]
+    value: 3
   data:
     value: 'ring'
   iterations:
-    value: 1000
+    value: 500
   model:
     value: 'squared_nm_gaussian_mixture'
   initialisation:
@@ -28,8 +28,11 @@ parameters:
     value: 'none'
   covar_reg:
     value: 0.0
+  sparsity:
+    min: 0.0
+    max: 1.0
   batch_size:
-    values: [32, 64, 128]
+    values: [8, 16, 32, 64]
 early_terminate:
   type: hyperband
   max_iter: 27
