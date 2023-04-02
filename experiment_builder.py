@@ -90,7 +90,7 @@ wandb.init(
     config={**model_config}
 )
 
-checkpoints = [0, 1, 19]
+checkpoints = [0, 1, 19, 99]
 
 BASE_MODEL_NAME = 'sklearn_gmm'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -167,7 +167,7 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm[1] = [[2, 0], [1, 1.5]]
         _covariances_nmgmm[2] = [[5, 0], [0, 5]]
 
-        _weights_nmgmm = torch.tensor([-0.33, -0.33, 0], dtype=torch.float64)
+        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001], dtype=torch.float64)
 
     if model_config['optimal_init'] == 'mor' and model_config['components'] == 3:
         init_zip = zip(
@@ -184,7 +184,7 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm[0] = [[3, 0], [0, 5]]
         _covariances_nmgmm[1] = [[4.5, 0], [0, 7]]
 
-        _weights_nmgmm = torch.tensor([-0.8, 1.8], dtype=torch.float64)
+        _weights_nmgmm = torch.tensor([0.5, 0.5], dtype=torch.float64)
     
     if model_config['optimal_init'] == 'cosine' and model_config['components'] == 6:
         _means_nmgmm[0] = [0, 0.5] 
@@ -194,12 +194,13 @@ with  console.status("Loading dataset...") as status:
         _means_nmgmm[4] = [-3.1, -5]
         _means_nmgmm[5] = [3.1, -5]
 
-        _covariances_nmgmm[0] = 1.3 * np.array([[7, 0], [0, 6]])
-        _covariances_nmgmm[1] = [[0.5, 0], [0, 2.5]]
-        _covariances_nmgmm[2] = [[0.5, 0], [0, 2.5]]
-        _covariances_nmgmm[3] = [[0.5, 0], [0, 2.5]]
-        _covariances_nmgmm[4] = [[0.5, 0], [0, 2.5]]
-        _covariances_nmgmm[5] = [[0.5, 0], [0, 2.5]]
+        _covariances_nmgmm = initaliser_nmgmm.covariances_
+        _covariances_nmgmm[0] = 1.5 * np.array([[4, 0], [0, 6]])
+        _covariances_nmgmm[1] = [[0.2, 0], [0, 2.5]]
+        _covariances_nmgmm[2] = [[0.2, 0], [0, 2.5]]
+        _covariances_nmgmm[3] = [[0.2, 0], [0, 2.5]]
+        _covariances_nmgmm[4] = [[0.2, 0], [0, 2.5]]
+        _covariances_nmgmm[5] = [[0.2, 0], [0, 2.5]]
 
         _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001, 0.001, 0.001])
 

@@ -1,0 +1,39 @@
+program: sweep_experiment.py
+method: bayes
+metric:
+  name: validation.loss
+  goal: minimize
+parameters:
+  learning_rate:
+    min: 0.0001
+    max: 0.01
+  momentum:
+    min: 0.2
+    max: 1.0
+  optimizer:
+    value: "sgd_mom"
+  components:
+    value: 6
+  data:
+    value: 'cosine'
+  iterations:
+    value: 100
+  model:
+    value: 'squared_nm_gaussian_mixture'
+  initialisation:
+    value: 'random'
+  covar_shape:
+    value: 'full'
+  optimal_init:
+    value: 'cosine'
+  covar_reg:
+    value: 4.4
+  sparsity:
+    min: 0.0
+    max: 1.0
+  batch_size:
+    values: [8, 16, 32, 64]
+early_terminate:
+  type: hyperband
+  max_iter: 27
+  s: 2
