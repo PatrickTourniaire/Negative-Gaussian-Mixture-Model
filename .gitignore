@@ -168,3 +168,4 @@ out/saved_models
 wandb
 cached
 out/.DS_Store
+*.pdf

@@ -147,21 +147,20 @@ with  console.status("Loading dataset...") as status:
     
     if model_config['optimal_init'] == 'cosine' and model_config['components'] == 6:
         _means_nmgmm[0] = [0, 0.5] 
-        _means_nmgmm[1] = [-1.5, 5.5]
-        _means_nmgmm[2] = [-0.1, -5]
-        _means_nmgmm[3] = [1.5, 5.5]
-        _means_nmgmm[4] = [-3.1, -5]
-        _means_nmgmm[5] = [3.1, -5]
+        _means_nmgmm[1] = [-1.5, 3]
+        _means_nmgmm[2] = [-0.1, -3]
+        _means_nmgmm[3] = [1.5, 3]
+        _means_nmgmm[4] = [-3.1, -3]
+        _means_nmgmm[5] = [3.1, -3] 
 
-        _covariances_nmgmm = initaliser_nmgmm.covariances_
-        _covariances_nmgmm[0] = 1.5 * np.array([[4, 0], [0, 6]])
-        _covariances_nmgmm[1] = [[0.2, 0], [0, 2.5]]
-        _covariances_nmgmm[2] = [[0.2, 0], [0, 2.5]]
-        _covariances_nmgmm[3] = [[0.2, 0], [0, 2.5]]
-        _covariances_nmgmm[4] = [[0.2, 0], [0, 2.5]]
-        _covariances_nmgmm[5] = [[0.2, 0], [0, 2.5]]
+        _covariances_nmgmm[0] = 1.5 * np.array([[3, 0], [0, 3]])
+        _covariances_nmgmm[1] = [[0.3, 0], [0, 1.5]]
+        _covariances_nmgmm[2] = [[0.3, 0], [0, 1.5]]
+        _covariances_nmgmm[3] = [[0.3, 0], [0, 1.5]]
+        _covariances_nmgmm[4] = [[0.3, 0], [0, 1.5]]
+        _covariances_nmgmm[5] = [[0.3, 0], [0, 1.5]]
 
-        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001, 0.001, 0.001])
+        weights = torch.tensor([.001, .001, .001, .001, .001, .001])
 
     #=============================== NMGMM SETUP ===============================
     
