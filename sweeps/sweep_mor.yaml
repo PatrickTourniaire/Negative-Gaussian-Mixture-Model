@@ -18,9 +18,9 @@ parameters:
   optimizer:
     value: "sgd_mom"
   components:
-    value: 6
+    values: [3, 4]
   data:
-    value: 'cosine'
+    value: 'mor'
   iterations:
     value: 100
   model:
@@ -28,9 +28,9 @@ parameters:
   initialisation:
     value: 'random'
   covar_shape:
-    value: 'full'
+    value: 'diag'
   optimal_init:
-    value: 'cosine'
+    value: 'mor'
   covar_reg:
     value: 4.4
   sparsity:

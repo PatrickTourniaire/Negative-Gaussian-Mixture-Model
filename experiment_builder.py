@@ -90,7 +90,7 @@ wandb.init(
     config={**model_config}
 )
 
-checkpoints = [0, 1, 19, 99]
+checkpoints = [0, 9, 19, 29, 39, 49, 59, 69, 79, 89, 99]
 
 BASE_MODEL_NAME = 'sklearn_gmm'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -177,16 +177,14 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm = torch.stack([torch.sqrt(torch.diag(x)) - torch.diag(i) for i, x in init_zip])
         _covariances_nmgmm = _covariances_nmgmm.cpu().numpy()
 
-    if model_config['optimal_init'] == 'banana' and model_config['components'] == 3:
-        _means_nmgmm[0] = [0, 5]
-        _means_nmgmm[1] = [0, 9] 
-        _means_nmgmm[2] = [0, 11] 
+    if model_config['optimal_init'] == 'banana' and model_config['components'] == 2:
+        _means_nmgmm[0] = [0, 8] 
+        _means_nmgmm[1] = [0, 5]
 
-        _covariances_nmgmm[0] = [[4.5, 0], [0, 7]]
-        _covariances_nmgmm[1] = [[2, 0], [0, 2]]
-        _covariances_nmgmm[2] = [[2, 0], [0, 2]]
+        _covariances_nmgmm[0] = [[2, 0], [0, 5]]
+        _covariances_nmgmm[1] = [[7, 0], [0, 7]]
 
-        weights = torch.tensor([0.1, -0.1, 0.1], dtype=torch.float64)
+        _weights_nmgmm = torch.tensor([.001, .001], dtype=torch.float64)
     
     if model_config['optimal_init'] == 'cosine' and model_config['components'] == 6:
         _means_nmgmm[0] = [0, 0.5] 
