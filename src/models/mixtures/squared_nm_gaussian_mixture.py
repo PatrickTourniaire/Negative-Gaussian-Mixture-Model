@@ -244,6 +244,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
     def plot_contours(self, samples: torch.Tensor):
         fig, ax = plt.subplots()
+        samples = samples.data.cpu().numpy()
         x, y = samples[:,0], samples[:,1]
         ax.scatter(x, y, s=0.5)
 

@@ -2,7 +2,7 @@
 
 # Grid Engine options (lines prefixed with #$)
 # Runtime limit of 1 hour:
-#$ -l h_rt=2:00:00
+#$ -l h_rt=10:00:00
 #
 # Set working directory to the directory where the job is submitted from:
 #$ -cwd
@@ -34,6 +34,6 @@ python3.10 experiment_builder.py --experiment_name nm_banana \
     --initialisation random \
     --covar_shape full \
     --covar_reg 4.4 \
-    --batch_size 8 \
+    --batch_size 32 \
     --optimal_init banana \
     --sparsity 0.48
