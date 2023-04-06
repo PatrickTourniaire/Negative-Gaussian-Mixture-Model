@@ -96,7 +96,8 @@ checkpoints = [i - 1 if i > 0 else i
 BASE_MODEL_NAME = 'sklearn_gmm'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-OUTPUT_REPO = str(os.path.abspath('out/'))
+OUTPUT_REPO = str(os.path.abspath('/exports/eddie/scratch/s1900878/out/'))
+#OUTPUT_REPO = str(os.path.abspath('out/'))
 
 console = Console()
 
@@ -259,7 +260,7 @@ with  console.status("Loading dataset...") as status:
 
 
     #============================== SKLEARN GMM ================================
-    
+    """
     # Base model from sklearn with same number of components
     base_model = SKGaussianMixture(
         n_components=model_config['components'] ** 2, 
@@ -270,6 +271,7 @@ with  console.status("Loading dataset...") as status:
     model.set_base_loss(base_loss)
 
     console.log(f'Model "{BASE_MODEL_NAME}" loaded')
+    """
     
 
     #============================= TRAINING NMGMM ==============================
@@ -284,10 +286,7 @@ with  console.status("Loading dataset...") as status:
     trainloader = torch.utils.data.DataLoader(traindata, batch_size=model_config['batch_size'], shuffle=True)
     valloader = torch.utils.data.DataLoader(traindata, batch_size=model_config['batch_size'], shuffle=True)
 
-    for it in range(model_config['iterations']):
-        model.add_base_means(base_model.means_, it)
-        model.add_base_weights(base_model.weights_, it)
-        
+    for it in range(model_config['iterations']):        
         train_loss = 0
         train_total = 0
 
@@ -296,15 +295,14 @@ with  console.status("Loading dataset...") as status:
         for data in trainloader:
             optimizer.zero_grad()
             
-            train_loss_batch_vis.append(model.neglog_likelihood(data))
+            loss = model.neglog_likelihood(data)
+            train_loss_batch_vis.append(loss)
             it_train_loss = model(data, it, model_config['validate_pdf'])
             train_total += 1
-            train_loss += it_train_loss
+            train_loss += loss
 
             it_train_loss.backward()
             optimizer.step()
-        
-        train_loss_vis.append(train_loss_batch_vis)
 
         val_loss = 0
         val_total = 0
@@ -314,44 +312,38 @@ with  console.status("Loading dataset...") as status:
         with torch.no_grad(): 
             
             for data in valloader:
-                val_loss_batch_vis.append(model.neglog_likelihood(data))
-                val_loss += model.val_loss(tensor_val_set, it)
+                loss = model.neglog_likelihood(data)
+                val_loss_batch_vis.append(loss)
+                val_loss += loss
                 val_total += 1
-
-        val_loss_vis.append(val_loss_batch_vis)
-
         
         if it in checkpoints:
             torch.save(
                 model.state_dict(), 
                 f'{OUTPUT_REPO}/saved_models/checkpoint{it}_{args.experiment_name}'
             )
-            save_object(train_loss_vis, path_models, 'train_loss_vis')
-            save_object(val_loss_vis, path_models, 'val_loss_vis')
+
+            fig = model.plot_heatmap()
+            wandb.log({f'heatmap_plot_it{it}': wandb.Image(fig)})
+
+            fig = model.plot_contours(tensor_train_set)
+            wandb.log({f'contour_plot_it{it}': wandb.Image(fig)})
+            
             
         model.log_means(wandb, it)
         model.log_weights(wandb, it)
         wandb.log({
             "train": {
-               "loss":  train_loss / train_total
+               "loss":  train_loss / train_total,
+               "loss_batch": train_loss_batch_vis,
+               "it": it
             },
             "validation": {
-                "loss": val_loss / val_total
-            },
-            "baseline": {
-                "loss": base_loss
-            },
-            "iteration": it
+                "loss": val_loss / val_total,
+                "loss_batch": val_loss_batch_vis,
+                "it": it
+            }
         })
-
-        if it % 100 == 0:
-            fig = model.sequence_visualisation(
-                tensor_train_set,
-                tensor_val_set
-            )
-            wandb.log({f'sequence_plot_it{it}': wandb.Image(fig)})
-
-        if early_stopping.early_stop: break
 
     console.log(f'Model "{model_config["model_name"]}" was trained successfully')
     model.clear_monitoring()

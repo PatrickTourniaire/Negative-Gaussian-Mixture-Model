@@ -7,6 +7,7 @@ from matplotlib import pyplot as plt
 from torch import linalg
 from scipy import integrate
 from torch.nn.functional import softmax
+import matplotlib.ticker as mticker
 
 # Local imports
 from .hooks import HookTensorBoard, BaseHookVisualise
@@ -226,7 +227,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
     def forward(self, X: torch.Tensor, it: int, validate: bool = False) -> torch.Tensor:
         if validate and (it % 100 == 0): self._validation(X, it)
-        out = self.neglog_likelihood(X)  #+ self.sparsity * softmax(self.tb_params['weights'], 0).sqrt().mean()
+        out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights'], 0).sqrt().mean()
 
         return out
 
@@ -241,13 +242,20 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
     #                                       VISUALISATION METHODS
     #===================================================================================================
 
-    def plot_contours(self, samples: torch.Tensor, save_to: str):
-        _, ax = plt.subplots()
+    def plot_contours(self, samples: torch.Tensor):
+        fig, ax = plt.subplots()
         x, y = samples[:,0], samples[:,1]
         ax.scatter(x, y, s=0.5)
 
-        ax.axvline(c='grey', lw=1)
-        ax.axhline(c='grey', lw=1)
+        ax.axvline(c='grey', lw=1, alpha=.5)
+        ax.axhline(c='grey', lw=1, alpha=.5)
+
+        ax.set_xlim([-8, 8])
+        ax.set_ylim([-8, 8])
+
+        ax.yaxis.set_major_formatter(mticker.NullFormatter())
+        ax.xaxis.set_major_formatter(mticker.NullFormatter())
+        ax.set_aspect('equal', adjustable='box')
 
         for i in range(len(self.tb_params['means'])):
             sigma = self.tb_params['sigmas'][i].data.cpu().numpy()
@@ -263,23 +271,18 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
             self._confidence_ellipse(ax, sigma, mu, **config)
             ax.scatter(mu[0], mu[1], c='red', s=3)
         
-        ax.set_title('Non-Monotonic Gaussian Mixture')
-        plt.savefig(save_to)
+        fig.tight_layout()
+
+        return fig
     
 
-    def plot_heatmap(
-            self, 
-            train_samples: torch.Tensor,
-            val_samples: torch.Tensor,
-            save_to: str):
+    def plot_heatmap(self):
         idx_i, idx_j = 0,1
 
         ngrid = 100
         eval_grid = np.linspace(-8,8,ngrid)
 
         cond_values = np.zeros(2)
-        epsilon = 1.5
-
         eval_points = self.get_grid(eval_grid, idx_i, idx_j, cond_values)
 
 
@@ -287,16 +290,24 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
         fig, ax = plt.subplots(1,1, figsize=(6,6), sharex=True, sharey=True)
 
+        ax.yaxis.set_major_formatter(mticker.NullFormatter())
+        ax.xaxis.set_major_formatter(mticker.NullFormatter())
+        ax.set_aspect('equal', adjustable='box')
+
         ax.set_xlim([-8, 8])
         ax.set_ylim([-8, 8])
-        plt.axis('square')
+
+        asp = np.diff(ax.get_xlim())[0] / np.diff(ax.get_ylim())[0]
+        ax.set_aspect(asp)
 
         c = ax.pcolor(eval_grid, eval_grid, logpdf.reshape(ngrid, ngrid), vmin=0)
-        ax.scatter(train_samples[:,idx_i].data.cpu().numpy(), train_samples[:,idx_j].data.cpu().numpy(), 1, color="r", alpha=0.5)
-        ax.scatter(val_samples[:,idx_i].data.cpu().numpy(), val_samples[:,idx_j].data.cpu().numpy(), 1, color="k", alpha=0.5)
+        #ax.scatter(train_samples[:,idx_i].data.cpu().numpy(), train_samples[:,idx_j].data.cpu().numpy(), 1, color="r", alpha=0.5)
+        #ax.scatter(val_samples[:,idx_i].data.cpu().numpy(), val_samples[:,idx_j].data.cpu().numpy(), 1, color="k", alpha=0.5)
         
         fig.colorbar(c, ax=ax)
-        plt.savefig(save_to)
+        fig.tight_layout()
+
+        return fig
 
 
     def sequence_visualisation(
