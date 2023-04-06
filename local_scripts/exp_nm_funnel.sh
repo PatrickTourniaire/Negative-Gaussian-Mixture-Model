@@ -4,7 +4,7 @@
 python3.10 experiment_builder.py --experiment_name nm_funnel \
     --model squared_nm_gaussian_mixture \
     --data funnel \
-    --comp 3 \
+    --comp 5 \
     --it 500 \
     --lr 0.0001 \
     --momentum 0.94 \
@@ -13,6 +13,6 @@ python3.10 experiment_builder.py --experiment_name nm_funnel \
     --initialisation random \
     --covar_shape full \
     --covar_reg 4.4 \
-    --batch_size 8 \
+    --batch_size 16 \
     --optimal_init funnel \
     --sparsity 0.89

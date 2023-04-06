@@ -25,7 +25,7 @@ source activate nmmm
 python3.10 experiment_builder.py --experiment_name nm_funnel \
     --model squared_nm_gaussian_mixture \
     --data funnel \
-    --comp 3 \
+    --comp 5 \
     --it 500 \
     --lr 0.0001 \
     --momentum 0.94 \

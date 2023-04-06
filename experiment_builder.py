@@ -170,6 +170,21 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm[2] = [[7, 0], [0, 7]]
 
         _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001], dtype=torch.float64)
+    
+    if model_config['optimal_init'] == 'funnel' and model_config['components'] == 5:
+        _means_nmgmm[0] = [3.5, 4] 
+        _means_nmgmm[1] = [3.5, -4]
+        _means_nmgmm[2] = [3.5, 4] 
+        _means_nmgmm[3] = [3.5, -4]
+        _means_nmgmm[4] = [-1, 0] 
+
+        _covariances_nmgmm[0] = [[2, 0], [-1, 1.5]]
+        _covariances_nmgmm[1] = [[2, 0], [1, 1.5]]
+        _covariances_nmgmm[2] = [[2, 0], [-1, 1.5]]
+        _covariances_nmgmm[3] = [[2, 0], [1, 1.5]]
+        _covariances_nmgmm[4] = [[6, 0], [0, 6]]
+
+        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001, 0.001], dtype=torch.float64)
 
     if model_config['optimal_init'] == 'mor' and model_config['components'] == 3:
         init_zip = zip(
