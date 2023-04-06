@@ -18,7 +18,7 @@ parameters:
   optimizer:
     value: "sgd_mom"
   components:
-    value: 3
+    values: [3, 5]
   data:
     value: 'funnel'
   iterations:

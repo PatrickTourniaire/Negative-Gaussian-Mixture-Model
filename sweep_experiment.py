@@ -132,9 +132,24 @@ with  console.status("Loading dataset...") as status:
 
         _covariances_nmgmm[0] = [[2, 0], [-1, 1.5]]
         _covariances_nmgmm[1] = [[2, 0], [1, 1.5]]
-        _covariances_nmgmm[2] = [[5, 0], [0, 5]]
+        _covariances_nmgmm[2] = [[7, 0], [0, 7]]
 
         _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001], dtype=torch.float64)
+    
+    if model_config['optimal_init'] == 'funnel' and model_config['components'] == 5:
+        _means_nmgmm[0] = [3.5, 4] 
+        _means_nmgmm[1] = [3.5, -4]
+        _means_nmgmm[2] = [3.5, 4] 
+        _means_nmgmm[3] = [3.5, -4]
+        _means_nmgmm[4] = [-1, 0] 
+
+        _covariances_nmgmm[0] = [[2, 0], [-1, 1.5]]
+        _covariances_nmgmm[1] = [[2, 0], [1, 1.5]]
+        _covariances_nmgmm[2] = [[2, 0], [-1, 1.5]]
+        _covariances_nmgmm[3] = [[2, 0], [1, 1.5]]
+        _covariances_nmgmm[4] = [[6, 0], [0, 6]]
+
+        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001, 0.001], dtype=torch.float64)
 
     if model_config['optimal_init'] == 'mor' and model_config['components'] == 3:
         init_zip = zip(
@@ -145,13 +160,25 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm = _covariances_nmgmm.cpu().numpy()
 
     if model_config['optimal_init'] == 'banana' and model_config['components'] == 2:
-        _means_nmgmm[0] = [0, 8] 
-        _means_nmgmm[1] = [0, 5]
+        _means_nmgmm[0] = [0, 5]
+        _means_nmgmm[1] = [0, 10]
 
-        _covariances_nmgmm[0] = [[2, 0], [0, 5]]
-        _covariances_nmgmm[1] = [[7, 0], [0, 7]]
+        _covariances_nmgmm[0] = [[7, 0], [0, 7]]
+        _covariances_nmgmm[1] = [[2.5, 0], [0, 5]]
 
-        _weights_nmgmm = torch.tensor([.001, .001], dtype=torch.float64)
+        _weights_nmgmm = torch.tensor([0.001, 0.001], dtype=torch.float64)
+
+    if model_config['optimal_init'] == 'banana' and model_config['components'] == 3:
+        _means_nmgmm[0] = [0, 5]
+        _means_nmgmm[1] = [0, 10]
+        _means_nmgmm[2] = [0, 10]
+
+        _covariances_nmgmm[0] = [[7, 0], [0, 7]]
+        _covariances_nmgmm[1] = [[2.5, 0], [0, 5]]
+        _covariances_nmgmm[2] = [[2.5, 0], [0, 5]]
+
+        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001], dtype=torch.float64)
+
     
     if model_config['optimal_init'] == 'cosine' and model_config['components'] == 6:
         _means_nmgmm[0] = [0, 0.5] 
@@ -168,20 +195,30 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm[4] = [[0.3, 0], [0, 1.5]]
         _covariances_nmgmm[5] = [[0.3, 0], [0, 1.5]]
 
-        weights = torch.tensor([.001, .001, .001, .001, .001, .001])
+        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001, 0.001, 0.001], dtype=torch.float64)
+
     
-    if model_config['optimal_init'] == 'mor' and model_config['components'] == 4:
+    if model_config['optimal_init'] == 'mor' and model_config['components'] == 6:
         _means_nmgmm[0] = [0, 0] 
         _means_nmgmm[1] = [0, 0]
         _means_nmgmm[2] = [0, 0]
         _means_nmgmm[3] = [0, 0]
+        _means_nmgmm[4] = [0, 0]
+        _means_nmgmm[5] = [0, 0]
+        _means_nmgmm[6] = [0, 0]
+        _means_nmgmm[7] = [0, 0]
 
         _covariances_nmgmm[0] = [[3.5, 0], [0, 3.5]]
         _covariances_nmgmm[1] = [[2.5, 0], [0, 2.5]]
         _covariances_nmgmm[2] = [[1.5, 0], [0, 1.5]]
         _covariances_nmgmm[3] = [[0.5, 0], [0, 0.5]]
+        _covariances_nmgmm[4] = [[2.5, 0], [0, 2.5]]
+        _covariances_nmgmm[5] = [[0.5, 0], [0, 0.5]]
+        _covariances_nmgmm[6] = [[0.2, 0], [0, 0.2]]
+        _covariances_nmgmm[7] = [[0.1, 0], [0, 0.1]]
 
-        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001])
+        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001], dtype=torch.float64)
+
     
     if model_config['optimal_init'] == 'spiral' and model_config['components'] == 4:
         _means_nmgmm[0] = [0, 0] 
@@ -194,8 +231,9 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm[2] = [[1, 1], [-0.5, 0.3]]
         _covariances_nmgmm[3] = [[1, 0.5], [0.5, 0.3]]
 
+        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001], dtype=torch.float64)
 
-        weights = torch.tensor([0.001, 0.001, 0.001, 0.001])
+
 
     #=============================== NMGMM SETUP ===============================
     

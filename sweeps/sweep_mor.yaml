@@ -18,7 +18,7 @@ parameters:
   optimizer:
     value: "sgd_mom"
   components:
-    values: [3, 4]
+    values: [3, 6]
   data:
     value: 'mor'
   iterations:

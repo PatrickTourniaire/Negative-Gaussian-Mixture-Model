@@ -223,7 +223,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
     
 
     def neglog_likelihood(self, X: torch.Tensor) -> torch.Tensor:
-        return - (self.log_likelihoods(X).logsumexp(dim=0) / X.shape[0]) 
+        return - torch.mean(self.log_likelihoods(X))
 
     def forward(self, X: torch.Tensor, it: int, validate: bool = False) -> torch.Tensor:
         if validate and (it % 100 == 0): self._validation(X, it)

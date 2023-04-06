@@ -23,4 +23,4 @@ module load cuda/11.0.2
 source activate nmmm
 
 # Run the program
-wandb agent ptourniaire/NMMMs/lud1xgpg
+wandb agent ptourniaire/NMMMs/8ra3fwlj
