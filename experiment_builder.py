@@ -90,7 +90,8 @@ wandb.init(
     config={**model_config}
 )
 
-checkpoints = [0, 9, 19, 29, 39, 49, 59, 69, 79, 89, 99]
+checkpoints = [i - 1 if i > 0 else i 
+               for i in range(0, model_config['iterations'] + 10, 10)]
 
 BASE_MODEL_NAME = 'sklearn_gmm'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -178,10 +179,10 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm = _covariances_nmgmm.cpu().numpy()
 
     if model_config['optimal_init'] == 'banana' and model_config['components'] == 2:
-        _means_nmgmm[0] = [0, 8] 
+        _means_nmgmm[0] = [0, 10] 
         _means_nmgmm[1] = [0, 5]
 
-        _covariances_nmgmm[0] = [[2, 0], [0, 5]]
+        _covariances_nmgmm[0] = [[2.5, 0], [0, 5]]
         _covariances_nmgmm[1] = [[7, 0], [0, 7]]
 
         _weights_nmgmm = torch.tensor([.001, .001], dtype=torch.float64)

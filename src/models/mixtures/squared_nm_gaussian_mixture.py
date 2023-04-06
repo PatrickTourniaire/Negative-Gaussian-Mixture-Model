@@ -6,6 +6,7 @@ import torch.optim
 from matplotlib import pyplot as plt
 from torch import linalg
 from scipy import integrate
+from torch.nn.functional import softmax
 
 # Local imports
 from .hooks import HookTensorBoard, BaseHookVisualise
@@ -225,7 +226,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
     def forward(self, X: torch.Tensor, it: int, validate: bool = False) -> torch.Tensor:
         if validate and (it % 100 == 0): self._validation(X, it)
-        out = self.neglog_likelihood(X)  + self.sparsity * self.tb_params['weights'].abs().sum()
+        out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights'], 0).sqrt().mean()
 
         return out
 
