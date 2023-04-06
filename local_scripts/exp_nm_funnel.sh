@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-python3 experiment_builder.py --experiment_name nm_funnel \
+python3.10 experiment_builder.py --experiment_name nm_funnel \
     --model squared_nm_gaussian_mixture \
     --data funnel \
     --comp 3 \

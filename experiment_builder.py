@@ -96,7 +96,7 @@ checkpoints = [i - 1 if i > 0 else i
 BASE_MODEL_NAME = 'sklearn_gmm'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-OUTPUT_REPO = str(os.path.abspath('out/'))
+OUTPUT_REPO = str(os.path.abspath('/exports/eddie/scratch/s1900878/out/'))
 
 console = Console()
 
