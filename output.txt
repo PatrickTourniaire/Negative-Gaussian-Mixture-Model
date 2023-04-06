@@ -108,3 +108,89 @@ CUDA_VISIBLE_DEVICES: 3,7
                "sparsity": 0.19                                                 
            }                                                                    
            Model "sklearn_gmm" loaded                  experiment_builder.py:272
+CUDA_VISIBLE_DEVICES: 1,4
+[14:17:48] Dataset "ring" loaded                       experiment_builder.py:115
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:258
+           with the following config:                                           
+           {                                           experiment_builder.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "ring",                                               
+               "components": 3,                                                 
+               "iterations": 500,                                               
+               "learning_rate": 0.0005,                                         
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 4.4,                                                
+               "batch_size": 8,                                                 
+               "optimal_init": "none",                                          
+               "momentum": 0.79,                                                
+               "sparsity": 0.19                                                 
+           }                                                                    
+CUDA_VISIBLE_DEVICES: 1,4
+CUDA_VISIBLE_DEVICES: 5,0
+CUDA_VISIBLE_DEVICES: 7,0
+[14:32:47] Dataset "ring" loaded                       experiment_builder.py:115
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:258
+           with the following config:                                           
+           {                                           experiment_builder.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "ring",                                               
+               "components": 3,                                                 
+               "iterations": 500,                                               
+               "learning_rate": 0.0005,                                         
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 4.4,                                                
+               "batch_size": 8,                                                 
+               "optimal_init": "none",                                          
+               "momentum": 0.79,                                                
+               "sparsity": 0.19                                                 
+           }                                                                    
+CUDA_VISIBLE_DEVICES: 0,5
+[14:38:12] Dataset "funnel" loaded                     experiment_builder.py:115
+[14:38:13] Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:258
+           with the following config:                                           
+           {                                           experiment_builder.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "funnel",                                             
+               "components": 3,                                                 
+               "iterations": 500,                                               
+               "learning_rate": 0.0001,                                         
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "full",                                           
+               "covar_reg": 4.4,                                                
+               "batch_size": 8,                                                 
+               "optimal_init": "funnel",                                        
+               "momentum": 0.94,                                                
+               "sparsity": 0.89                                                 
+           }                                                                    
+CUDA_VISIBLE_DEVICES: 3,2
+[16:01:32] Dataset "banana" loaded                     experiment_builder.py:115
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:258
+           with the following config:                                           
+           {                                           experiment_builder.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "banana",                                             
+               "components": 2,                                                 
+               "iterations": 500,                                               
+               "learning_rate": 0.0005,                                         
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "full",                                           
+               "covar_reg": 4.4,                                                
+               "batch_size": 8,                                                 
+               "optimal_init": "banana",                                        
+               "momentum": 0.94,                                                
+               "sparsity": 0.48                                                 
+           }                                                                    
