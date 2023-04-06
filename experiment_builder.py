@@ -166,7 +166,7 @@ with  console.status("Loading dataset...") as status:
 
         _covariances_nmgmm[0] = [[2, 0], [-1, 1.5]]
         _covariances_nmgmm[1] = [[2, 0], [1, 1.5]]
-        _covariances_nmgmm[2] = [[5, 0], [0, 5]]
+        _covariances_nmgmm[2] = [[7, 0], [0, 7]]
 
         _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001], dtype=torch.float64)
 
@@ -317,7 +317,7 @@ with  console.status("Loading dataset...") as status:
                 val_loss_batch_vis.append(model.neglog_likelihood(data))
                 val_loss += model.val_loss(tensor_val_set, it)
                 val_total += 1
-            
+
         val_loss_vis.append(val_loss_batch_vis)
 
         
@@ -326,6 +326,8 @@ with  console.status("Loading dataset...") as status:
                 model.state_dict(), 
                 f'{OUTPUT_REPO}/saved_models/checkpoint{it}_{args.experiment_name}'
             )
+            save_object(train_loss_vis, path_models, 'train_loss_vis')
+            save_object(val_loss_vis, path_models, 'val_loss_vis')
             
         model.log_means(wandb, it)
         model.log_weights(wandb, it)
@@ -342,17 +344,13 @@ with  console.status("Loading dataset...") as status:
             "iteration": it
         })
 
-        if it % 10 == 0:
+        if it % 100 == 0:
             fig = model.sequence_visualisation(
                 tensor_train_set,
                 tensor_val_set
             )
             wandb.log({f'sequence_plot_it{it}': wandb.Image(fig)})
 
-        early_stopping(
-            train_loss / model_config['batch_size'], 
-            val_loss / model_config['batch_size']
-        )
         if early_stopping.early_stop: break
 
     console.log(f'Model "{model_config["model_name"]}" was trained successfully')
