@@ -25,7 +25,7 @@ source activate nmmm
 python3.10 experiment_builder.py --experiment_name nm_banana \
     --model squared_nm_gaussian_mixture \
     --data banana \
-    --comp 2 \
+    --comp 3 \
     --it 500 \
     --lr 0.0005 \
     --momentum 0.94 \

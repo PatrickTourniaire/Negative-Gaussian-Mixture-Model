@@ -227,7 +227,7 @@ class NMSquaredGaussianMixture(nn.Module, HookTensorBoard, BaseHookVisualise):
 
     def forward(self, X: torch.Tensor, it: int, validate: bool = False) -> torch.Tensor:
         if validate and (it % 100 == 0): self._validation(X, it)
-        out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights'], 0).sqrt().mean()
+        out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
 
         return out
 

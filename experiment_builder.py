@@ -96,8 +96,8 @@ checkpoints = [i - 1 if i > 0 else i
 BASE_MODEL_NAME = 'sklearn_gmm'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-OUTPUT_REPO = str(os.path.abspath('/exports/eddie/scratch/s1900878/out/'))
-#OUTPUT_REPO = str(os.path.abspath('out/'))
+#OUTPUT_REPO = str(os.path.abspath('/exports/eddie/scratch/s1900878/out/'))
+OUTPUT_REPO = str(os.path.abspath('out/'))
 
 console = Console()
 
@@ -179,14 +179,16 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm = torch.stack([torch.sqrt(torch.diag(x)) - torch.diag(i) for i, x in init_zip])
         _covariances_nmgmm = _covariances_nmgmm.cpu().numpy()
 
-    if model_config['optimal_init'] == 'banana' and model_config['components'] == 2:
-        _means_nmgmm[0] = [0, 10] 
-        _means_nmgmm[1] = [0, 5]
+    if model_config['optimal_init'] == 'banana' and model_config['components'] == 3:
+        _means_nmgmm[0] = [0, 5]
+        _means_nmgmm[1] = [0, 10]
+        _means_nmgmm[2] = [0, 10]
 
-        _covariances_nmgmm[0] = [[2.5, 0], [0, 5]]
-        _covariances_nmgmm[1] = [[7, 0], [0, 7]]
+        _covariances_nmgmm[0] = [[7, 0], [0, 7]]
+        _covariances_nmgmm[1] = [[2.5, 0], [0, 5]]
+        _covariances_nmgmm[2] = [[2.5, 0], [0, 5]]
 
-        _weights_nmgmm = torch.tensor([.001, .001], dtype=torch.float64)
+        _weights_nmgmm = torch.tensor([.001, .001, .001])
     
     if model_config['optimal_init'] == 'cosine' and model_config['components'] == 6:
         _means_nmgmm[0] = [0, 0.5] 
@@ -203,20 +205,27 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm[4] = [[0.3, 0], [0, 1.5]]
         _covariances_nmgmm[5] = [[0.3, 0], [0, 1.5]]
 
-        weights = torch.tensor([.001, .001, .001, .001, .001, .001])
+        _weights_nmgmm = torch.tensor([.001, .001, .001, .001, .001, .001])
     
-    if model_config['optimal_init'] == 'mor' and model_config['components'] == 4:
+    if model_config['optimal_init'] == 'mor' and model_config['components'] == 6:
         _means_nmgmm[0] = [0, 0] 
         _means_nmgmm[1] = [0, 0]
         _means_nmgmm[2] = [0, 0]
         _means_nmgmm[3] = [0, 0]
+        _means_nmgmm[4] = [0, 0]
+        _means_nmgmm[5] = [0, 0]
+        _means_nmgmm[6] = [0, 0]
+        _means_nmgmm[7] = [0, 0]
 
         _covariances_nmgmm[0] = [[3.5, 0], [0, 3.5]]
         _covariances_nmgmm[1] = [[2.5, 0], [0, 2.5]]
         _covariances_nmgmm[2] = [[1.5, 0], [0, 1.5]]
         _covariances_nmgmm[3] = [[0.5, 0], [0, 0.5]]
+        _covariances_nmgmm[4] = [[2.5, 0], [0, 2.5]]
+        _covariances_nmgmm[5] = [[0.5, 0], [0, 0.5]]
+        _covariances_nmgmm[6] = [[0.2, 0], [0, 0.2]]
+        _covariances_nmgmm[7] = [[0.1, 0], [0, 0.1]]
 
-        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001])
     
     if model_config['optimal_init'] == 'spiral' and model_config['components'] == 4:
         _means_nmgmm[0] = [0, 0] 
@@ -230,7 +239,7 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm[3] = [[1, 0.5], [0.5, 0.3]]
 
 
-        weights = torch.tensor([0.001, 0.001, 0.001, 0.001])
+        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001])
 
     #=============================== NMGMM SETUP ===============================
     
@@ -358,16 +367,7 @@ with  console.status("Loading dataset...") as status:
     status.update(status=f'Visualising "{model_config["model_name"]}" model...')
     model_name_path = model_config["model_name"]
 
-    model.plot_heatmap(
-        tensor_train_set,
-        tensor_val_set,
-        os.path.abspath(f'{path_models}/{args.experiment_name}_heatmap.pdf')
-    )
-
-    model.plot_contours(
-        tensor_train_set,
-        os.path.abspath(f'{path_models}/{args.experiment_name}_contours.pdf')
-    )
+    
 
     save_object(train_loss_vis, path_models, 'train_loss_vis')
     save_object(val_loss_vis, path_models, 'val_loss_vis')
