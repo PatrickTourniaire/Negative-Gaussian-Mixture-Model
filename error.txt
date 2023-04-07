@@ -1,165 +1,773 @@
 WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
  https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
-wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
-wandb: wandb version 0.14.1 is available!  To upgrade, please run:
-wandb:  $ pip install wandb --upgrade
-wandb: Tracking run with wandb version 0.14.0
-wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230406_104603-3irjxjp4
-wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run ferengi-manoeuvre-2228
-wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
-wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/3irjxjp4
 WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
  https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
-wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
-wandb: wandb version 0.14.1 is available!  To upgrade, please run:
-wandb:  $ pip install wandb --upgrade
-wandb: Tracking run with wandb version 0.14.0
-wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230406_105256-oqe5e0r4
-wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run trill-cube-2229
-wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
-wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/oqe5e0r4
 WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
  https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+wandb: Starting wandb agent 🕵️
+wandb: Starting wandb agent 🕵️
+wandb: Starting wandb agent 🕵️
+2023-04-07 12:06:51,752 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:06:51,817 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:06:52,214 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:06:52,214 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 64
+	components: 6
+	covar_reg: 4.4
+	covar_shape: full
+	data: cosine
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.00029033452595969724
+	model: squared_nm_gaussian_mixture
+	momentum: 0.7152448037680489
+	optimal_init: cosine
+	optimizer: sgd_mom
+	sparsity: 0.7916008652297498
+2023-04-07 12:06:52,222 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=64 --components=6 --covar_reg=4.4 --covar_shape=full --data=cosine --initialisation=random --iterations=100 --learning_rate=0.00029033452595969724 --model=squared_nm_gaussian_mixture --momentum=0.7152448037680489 --optimal_init=cosine --optimizer=sgd_mom --sparsity=0.7916008652297498
+2023-04-07 12:06:52,251 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:06:52,252 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 16
+	components: 3
+	covar_reg: 4.4
+	covar_shape: diag
+	data: funnel
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.00031134804208395706
+	model: squared_nm_gaussian_mixture
+	momentum: 0.3989071012826011
+	optimal_init: funnel
+	optimizer: sgd_mom
+	sparsity: 0.3663065116639117
+2023-04-07 12:06:52,263 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=16 --components=3 --covar_reg=4.4 --covar_shape=diag --data=funnel --initialisation=random --iterations=100 --learning_rate=0.00031134804208395706 --model=squared_nm_gaussian_mixture --momentum=0.3989071012826011 --optimal_init=funnel --optimizer=sgd_mom --sparsity=0.3663065116639117
+2023-04-07 12:06:55,218 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:06:55,688 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:06:55,688 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 64
+	components: 3
+	covar_reg: 4.4
+	covar_shape: diag
+	data: banana
+	initialisation: random
+	iterations: 100
+	learning_rate: 9.19011232401648e-05
+	model: squared_nm_gaussian_mixture
+	momentum: 0.7711562828321338
+	optimal_init: banana
+	optimizer: sgd_mom
+	sparsity: 0.7679710372017409
+2023-04-07 12:06:55,704 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=64 --components=3 --covar_reg=4.4 --covar_shape=diag --data=banana --initialisation=random --iterations=100 --learning_rate=9.19011232401648e-05 --model=squared_nm_gaussian_mixture --momentum=0.7711562828321338 --optimal_init=banana --optimizer=sgd_mom --sparsity=0.7679710372017409
+2023-04-07 12:06:57,236 - wandb.wandb_agent - INFO - Running runs: ['pnk130ry']
+2023-04-07 12:06:57,276 - wandb.wandb_agent - INFO - Running runs: ['2rfsnsmm']
+2023-04-07 12:07:00,718 - wandb.wandb_agent - INFO - Running runs: ['ydjcv13a']
 wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+wandb: Starting wandb agent 🕵️
+wandb: Starting wandb agent 🕵️
+wandb: Starting wandb agent 🕵️
+wandb: wandb version 0.14.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
 wandb: wandb version 0.14.1 is available!  To upgrade, please run:
 wandb:  $ pip install wandb --upgrade
 wandb: Tracking run with wandb version 0.14.0
-wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230406_110350-b501xrgx
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_120714-2rfsnsmm
 wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run trill-quark-2231
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_120714-pnk130ry
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run crimson-sweep-1
 wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
-wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/b501xrgx
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/4vvtipn7
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/2rfsnsmm
+wandb: Syncing run leafy-sweep-1
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/wh7ligsw
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/pnk130ry
+2023-04-07 12:07:42,694 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:07:42,791 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:07:43,094 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:07:43,094 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 16
+	components: 6
+	covar_reg: 4.4
+	covar_shape: diag
+	data: mor
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.0009334807540918838
+	model: squared_nm_gaussian_mixture
+	momentum: 0.4791687132011335
+	optimal_init: mor
+	optimizer: sgd_mom
+	sparsity: 0.3802676830283773
+2023-04-07 12:07:43,118 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:07:43,127 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 16
+	components: 4
+	covar_reg: 4.4
+	covar_shape: diag
+	data: spiral
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.0009196828317243164
+	model: squared_nm_gaussian_mixture
+	momentum: 0.195412853162363
+	optimal_init: spiral
+	optimizer: sgd_mom
+	sparsity: 0.5035269825294209
+2023-04-07 12:07:43,142 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=16 --components=4 --covar_reg=4.4 --covar_shape=diag --data=spiral --initialisation=random --iterations=100 --learning_rate=0.0009196828317243164 --model=squared_nm_gaussian_mixture --momentum=0.195412853162363 --optimal_init=spiral --optimizer=sgd_mom --sparsity=0.5035269825294209
+wandb: wandb version 0.14.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_120715-ydjcv13a
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run fluent-sweep-1
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/jcedd9jg
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/ydjcv13a
+2023-04-07 12:07:43,169 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=16 --components=6 --covar_reg=4.4 --covar_shape=diag --data=mor --initialisation=random --iterations=100 --learning_rate=0.0009334807540918838 --model=squared_nm_gaussian_mixture --momentum=0.4791687132011335 --optimal_init=mor --optimizer=sgd_mom --sparsity=0.3802676830283773
+2023-04-07 12:07:43,979 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:07:44,321 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:07:44,326 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 16
+	components: 3
+	covar_reg: 0
+	covar_shape: diag
+	data: ring
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.0003029229978739286
+	model: squared_nm_gaussian_mixture
+	momentum: 0.738839731990915
+	optimal_init: none
+	optimizer: sgd_mom
+	sparsity: 0.16342489542012428
+2023-04-07 12:07:44,358 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=16 --components=3 --covar_reg=0 --covar_shape=diag --data=ring --initialisation=random --iterations=100 --learning_rate=0.0003029229978739286 --model=squared_nm_gaussian_mixture --momentum=0.738839731990915 --optimal_init=none --optimizer=sgd_mom --sparsity=0.16342489542012428
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
+2023-04-07 12:07:48,156 - wandb.wandb_agent - INFO - Running runs: ['qh6zf5ag']
+2023-04-07 12:07:48,187 - wandb.wandb_agent - INFO - Running runs: ['zz9o2zrv']
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
+2023-04-07 12:07:49,375 - wandb.wandb_agent - INFO - Running runs: ['2ndaw650']
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+wandb: wandb version 0.14.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_120756-qh6zf5ag
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run lively-sweep-1
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/8ra3fwlj
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/qh6zf5ag
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
+wandb: wandb version 0.14.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_120758-zz9o2zrv
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run dark-sweep-34
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/0wy7jmsg
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/zz9o2zrv
 Traceback (most recent call last):
-  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 325, in <module>
-    torch.save(
-  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/torch/serialization.py", line 440, in save
-    with _open_zipfile_writer(f) as opened_zipfile:
-  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/torch/serialization.py", line 315, in _open_zipfile_writer
-    return container(name_or_buffer)
-  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/torch/serialization.py", line 288, in __init__
-    super().__init__(torch._C.PyTorchFileWriter(str(name)))
-RuntimeError: Parent directory /exports/eddie/scratch/s1900878/out/saved_models does not exist.
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 208, in <module>
+    _means_nmgmm[6] = [0, 0]
+IndexError: index 6 is out of bounds for axis 0 with size 6
+2023-04-07 12:08:14,021 - wandb.wandb_agent - INFO - Cleaning up finished run: zz9o2zrv
 wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
-wandb: 🚀 View run trill-quark-2231 at: https://wandb.ai/ptourniaire/NMMMs/runs/b501xrgx
+wandb: 🚀 View run dark-sweep-34 at: https://wandb.ai/ptourniaire/NMMMs/runs/zz9o2zrv
 wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
-wandb: Find logs at: ./wandb/run-20230406_110350-b501xrgx/logs
-WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
- https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
-wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Find logs at: ./wandb/run-20230407_120758-zz9o2zrv/logs
+2023-04-07 12:08:19,654 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:08:19,654 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 32
+	components: 6
+	covar_reg: 4.4
+	covar_shape: diag
+	data: mor
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.00012055432326247252
+	model: squared_nm_gaussian_mixture
+	momentum: 0.6026229953017732
+	optimal_init: mor
+	optimizer: sgd_mom
+	sparsity: 0.5307494460446027
+2023-04-07 12:08:19,690 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=32 --components=6 --covar_reg=4.4 --covar_shape=diag --data=mor --initialisation=random --iterations=100 --learning_rate=0.00012055432326247252 --model=squared_nm_gaussian_mixture --momentum=0.6026229953017732 --optimal_init=mor --optimizer=sgd_mom --sparsity=0.5307494460446027
 wandb: wandb version 0.14.1 is available!  To upgrade, please run:
 wandb:  $ pip install wandb --upgrade
 wandb: Tracking run with wandb version 0.14.0
-wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230406_131319-s3fpoma8
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_120757-2ndaw650
 wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run trill-unimatrix-2239
+wandb: Syncing run classic-sweep-1
 wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
-wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/s3fpoma8
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/vwcfgjdb
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/2ndaw650
+2023-04-07 12:08:24,705 - wandb.wandb_agent - INFO - Running runs: ['8n4ok1gq']
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+wandb: wandb version 0.14.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_120834-8n4ok1gq
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run vague-sweep-19
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/0wy7jmsg
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/8n4ok1gq
 Traceback (most recent call last):
-  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 325, in <module>
-    torch.save(
-  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/torch/serialization.py", line 440, in save
-    with _open_zipfile_writer(f) as opened_zipfile:
-  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/torch/serialization.py", line 315, in _open_zipfile_writer
-    return container(name_or_buffer)
-  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/torch/serialization.py", line 288, in __init__
-    super().__init__(torch._C.PyTorchFileWriter(str(name)))
-RuntimeError: Parent directory /exports/eddie/scratch/s1900878/out/saved_models does not exist.
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 208, in <module>
+    _means_nmgmm[6] = [0, 0]
+IndexError: index 6 is out of bounds for axis 0 with size 6
 wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
-wandb: 🚀 View run trill-unimatrix-2239 at: https://wandb.ai/ptourniaire/NMMMs/runs/s3fpoma8
+wandb: 🚀 View run vague-sweep-19 at: https://wandb.ai/ptourniaire/NMMMs/runs/8n4ok1gq
 wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
-wandb: Find logs at: ./wandb/run-20230406_131319-s3fpoma8/logs
-WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
- https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+wandb: Find logs at: ./wandb/run-20230407_120834-8n4ok1gq/logs
+2023-04-07 12:08:50,529 - wandb.wandb_agent - INFO - Cleaning up finished run: 8n4ok1gq
+2023-04-07 12:08:50,777 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:08:50,777 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 32
+	components: 6
+	covar_reg: 4.4
+	covar_shape: diag
+	data: mor
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.00023665846879750935
+	model: squared_nm_gaussian_mixture
+	momentum: 0.9767720297895226
+	optimal_init: mor
+	optimizer: sgd_mom
+	sparsity: 0.4961754962518546
+2023-04-07 12:08:50,786 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=32 --components=6 --covar_reg=4.4 --covar_shape=diag --data=mor --initialisation=random --iterations=100 --learning_rate=0.00023665846879750935 --model=squared_nm_gaussian_mixture --momentum=0.9767720297895226 --optimal_init=mor --optimizer=sgd_mom --sparsity=0.4961754962518546
+2023-04-07 12:08:55,800 - wandb.wandb_agent - INFO - Running runs: ['mgy92s6q']
 wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
 wandb: wandb version 0.14.1 is available!  To upgrade, please run:
 wandb:  $ pip install wandb --upgrade
 wandb: Tracking run with wandb version 0.14.0
-wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230406_133127-itqlstml
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_120905-mgy92s6q
 wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run dax-resistance-2240
+wandb: Syncing run denim-sweep-35
 wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
-wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/itqlstml
-WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
- https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
-wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
-wandb: wandb version 0.14.1 is available!  To upgrade, please run:
-wandb:  $ pip install wandb --upgrade
-wandb: Tracking run with wandb version 0.14.0
-wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230406_141718-pu7f8sb4
-wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run vulcan-maquis-2247
-wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
-wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/pu7f8sb4
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/0wy7jmsg
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/mgy92s6q
 Traceback (most recent call last):
-  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 329, in <module>
-    fig = model.plot_contours(tensor_train_set)
-  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 248, in plot_contours
-    ax.scatter(x, y, s=0.5)
-  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/matplotlib/__init__.py", line 1442, in inner
-    return func(ax, *map(sanitize_sequence, args), **kwargs)
-  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/matplotlib/axes/_axes.py", line 4581, in scatter
-    x = np.ma.ravel(x)
-  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/numpy/ma/core.py", line 6821, in __call__
-    marr = asanyarray(a)
-  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/numpy/ma/core.py", line 8053, in asanyarray
-    return masked_array(a, dtype=dtype, copy=False, keep_mask=True, subok=True)
-  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/numpy/ma/core.py", line 2826, in __new__
-    _data = np.array(data, dtype=dtype, copy=copy,
-  File "/exports/eddie/scratch/s1900878/anaconda/envs/nmmm/lib/python3.10/site-packages/torch/_tensor.py", line 970, in __array__
-    return self.numpy()
-TypeError: can't convert cuda:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first.
+  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/sweep_experiment.py", line 208, in <module>
+    _means_nmgmm[6] = [0, 0]
+IndexError: index 6 is out of bounds for axis 0 with size 6
 wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
-wandb: 🚀 View run vulcan-maquis-2247 at: https://wandb.ai/ptourniaire/NMMMs/runs/pu7f8sb4
-wandb: Synced 6 W&B file(s), 1 media file(s), 2 artifact file(s) and 0 other file(s)
-wandb: Find logs at: ./wandb/run-20230406_141718-pu7f8sb4/logs
-WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
- https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
-Traceback (most recent call last):
-  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 18, in <module>
-    from src.models.mixtures.squared_nm_gaussian_mixture import NMSquaredGaussianMixture
-  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 248
-    x, y = samples[:,0], samples[:,1]
-TabError: inconsistent use of tabs and spaces in indentation
-WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
- https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
-Traceback (most recent call last):
-  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/experiment_builder.py", line 18, in <module>
-    from src.models.mixtures.squared_nm_gaussian_mixture import NMSquaredGaussianMixture
-  File "/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py", line 246
-    fig, ax = plt.subplots()
-TabError: inconsistent use of tabs and spaces in indentation
-WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
- https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+wandb: 🚀 View run denim-sweep-35 at: https://wandb.ai/ptourniaire/NMMMs/runs/mgy92s6q
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230407_120905-mgy92s6q/logs
+2023-04-07 12:09:21,619 - wandb.wandb_agent - INFO - Cleaning up finished run: mgy92s6q
+2023-04-07 12:09:21,930 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:09:21,930 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 32
+	components: 3
+	covar_reg: 4.4
+	covar_shape: diag
+	data: mor
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.00023204403015798705
+	model: squared_nm_gaussian_mixture
+	momentum: 0.6745614112709375
+	optimal_init: mor
+	optimizer: sgd_mom
+	sparsity: 0.8660298537751566
+2023-04-07 12:09:21,937 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=32 --components=3 --covar_reg=4.4 --covar_shape=diag --data=mor --initialisation=random --iterations=100 --learning_rate=0.00023204403015798705 --model=squared_nm_gaussian_mixture --momentum=0.6745614112709375 --optimal_init=mor --optimizer=sgd_mom --sparsity=0.8660298537751566
+2023-04-07 12:09:26,952 - wandb.wandb_agent - INFO - Running runs: ['trm7xab3']
 wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
 wandb: wandb version 0.14.1 is available!  To upgrade, please run:
 wandb:  $ pip install wandb --upgrade
 wandb: Tracking run with wandb version 0.14.0
-wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230406_143219-lssiu1ot
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_120936-trm7xab3
 wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run doctor-unimatrix-2248
+wandb: Syncing run swift-sweep-36
 wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
-wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/lssiu1ot
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/0wy7jmsg
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/trm7xab3
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
 WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
  https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+wandb: Starting wandb agent 🕵️
+2023-04-07 12:17:30,441 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:17:30,762 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:17:30,762 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 8
+	components: 3
+	covar_reg: 4.4
+	covar_shape: diag
+	data: mor
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.000907706734335151
+	model: squared_nm_gaussian_mixture
+	momentum: 0.8802625753837118
+	optimal_init: mor
+	optimizer: sgd_mom
+	sparsity: 0.5639569048328203
+2023-04-07 12:17:30,771 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=8 --components=3 --covar_reg=4.4 --covar_shape=diag --data=mor --initialisation=random --iterations=100 --learning_rate=0.000907706734335151 --model=squared_nm_gaussian_mixture --momentum=0.8802625753837118 --optimal_init=mor --optimizer=sgd_mom --sparsity=0.5639569048328203
+2023-04-07 12:17:35,785 - wandb.wandb_agent - INFO - Running runs: ['7zxujhxv']
 wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
 wandb: wandb version 0.14.1 is available!  To upgrade, please run:
 wandb:  $ pip install wandb --upgrade
 wandb: Tracking run with wandb version 0.14.0
-wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230406_143743-v6qczbem
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_121742-7zxujhxv
 wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run changeling-seven-2249
+wandb: Syncing run giddy-sweep-1
 wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
-wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/v6qczbem
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/hqd1q4km
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/7zxujhxv
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
 WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
  https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+
+wandb: Starting wandb agent 🕵️
+wandb: Starting wandb agent 🕵️
+wandb: Starting wandb agent 🕵️
+wandb: Starting wandb agent 🕵️
+wandb: Starting wandb agent 🕵️
+wandb: Starting wandb agent 🕵️
+wandb: Starting wandb agent 🕵️
+wandb: Starting wandb agent 🕵️
+2023-04-07 12:22:03,448 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:22:03,506 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:22:03,519 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:22:03,802 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:22:03,808 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:22:03,824 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 16
+	components: 3
+	covar_reg: 4.4
+	covar_shape: diag
+	data: funnel
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.00013990446699912862
+	model: squared_nm_gaussian_mixture
+	momentum: 0.8579640381540674
+	optimal_init: funnel
+	optimizer: sgd_mom
+	sparsity: 0.7224660897284342
+2023-04-07 12:22:03,831 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=16 --components=3 --covar_reg=4.4 --covar_shape=diag --data=funnel --initialisation=random --iterations=100 --learning_rate=0.00013990446699912862 --model=squared_nm_gaussian_mixture --momentum=0.8579640381540674 --optimal_init=funnel --optimizer=sgd_mom --sparsity=0.7224660897284342
+2023-04-07 12:22:03,892 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:22:03,944 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:22:03,956 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:22:03,957 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:22:03,969 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 8
+	components: 4
+	covar_reg: 4.4
+	covar_shape: diag
+	data: spiral
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.0005310972037826106
+	model: squared_nm_gaussian_mixture
+	momentum: 0.6234759842147364
+	optimal_init: spiral
+	optimizer: sgd_mom
+	sparsity: 0.5316745628985737
+2023-04-07 12:22:03,979 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:22:04,221 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=8 --components=4 --covar_reg=4.4 --covar_shape=diag --data=spiral --initialisation=random --iterations=100 --learning_rate=0.0005310972037826106 --model=squared_nm_gaussian_mixture --momentum=0.6234759842147364 --optimal_init=spiral --optimizer=sgd_mom --sparsity=0.5316745628985737
+2023-04-07 12:22:04,398 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:22:04,408 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:22:04,413 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 8
+	components: 8
+	covar_reg: 4.4
+	covar_shape: diag
+	data: mor
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.0003146889476651154
+	model: squared_nm_gaussian_mixture
+	momentum: 0.5359425519508557
+	optimal_init: mor
+	optimizer: sgd_mom
+	sparsity: 0.11728088131132695
+2023-04-07 12:22:04,418 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:22:04,421 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 64
+	components: 2
+	covar_reg: 4.4
+	covar_shape: diag
+	data: banana
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.0009875733005106529
+	model: squared_nm_gaussian_mixture
+	momentum: 0.09492279023620608
+	optimal_init: banana
+	optimizer: sgd_mom
+	sparsity: 0.35437558330728924
+2023-04-07 12:22:04,433 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 64
+	components: 6
+	covar_reg: 4.4
+	covar_shape: full
+	data: cosine
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.00041384620735095655
+	model: squared_nm_gaussian_mixture
+	momentum: 0.7291064140240127
+	optimal_init: cosine
+	optimizer: sgd_mom
+	sparsity: 0.4811358262793315
+2023-04-07 12:22:04,437 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=8 --components=8 --covar_reg=4.4 --covar_shape=diag --data=mor --initialisation=random --iterations=100 --learning_rate=0.0003146889476651154 --model=squared_nm_gaussian_mixture --momentum=0.5359425519508557 --optimal_init=mor --optimizer=sgd_mom --sparsity=0.11728088131132695
+2023-04-07 12:22:04,450 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=64 --components=2 --covar_reg=4.4 --covar_shape=diag --data=banana --initialisation=random --iterations=100 --learning_rate=0.0009875733005106529 --model=squared_nm_gaussian_mixture --momentum=0.09492279023620608 --optimal_init=banana --optimizer=sgd_mom --sparsity=0.35437558330728924
+2023-04-07 12:22:04,457 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=64 --components=6 --covar_reg=4.4 --covar_shape=full --data=cosine --initialisation=random --iterations=100 --learning_rate=0.00041384620735095655 --model=squared_nm_gaussian_mixture --momentum=0.7291064140240127 --optimal_init=cosine --optimizer=sgd_mom --sparsity=0.4811358262793315
+2023-04-07 12:22:04,575 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:22:04,577 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 8
+	components: 3
+	covar_reg: 4.4
+	covar_shape: diag
+	data: funnel
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.0007001424938415693
+	model: squared_nm_gaussian_mixture
+	momentum: 0.2726093652479965
+	optimal_init: funnel
+	optimizer: sgd_mom
+	sparsity: 0.9464684761953795
+2023-04-07 12:22:04,590 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=8 --components=3 --covar_reg=4.4 --covar_shape=diag --data=funnel --initialisation=random --iterations=100 --learning_rate=0.0007001424938415693 --model=squared_nm_gaussian_mixture --momentum=0.2726093652479965 --optimal_init=funnel --optimizer=sgd_mom --sparsity=0.9464684761953795
+2023-04-07 12:22:04,701 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:22:04,718 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 16
+	components: 3
+	covar_reg: 4.4
+	covar_shape: diag
+	data: banana
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.0006833530062036581
+	model: squared_nm_gaussian_mixture
+	momentum: 0.009673193228253664
+	optimal_init: banana
+	optimizer: sgd_mom
+	sparsity: 0.8363753295541143
+2023-04-07 12:22:04,739 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=16 --components=3 --covar_reg=4.4 --covar_shape=diag --data=banana --initialisation=random --iterations=100 --learning_rate=0.0006833530062036581 --model=squared_nm_gaussian_mixture --momentum=0.009673193228253664 --optimal_init=banana --optimizer=sgd_mom --sparsity=0.8363753295541143
+2023-04-07 12:22:06,942 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:22:06,951 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 64
+	components: 3
+	covar_reg: 0
+	covar_shape: diag
+	data: ring
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.000672544766373964
+	model: squared_nm_gaussian_mixture
+	momentum: 0.818140575887739
+	optimal_init: none
+	optimizer: sgd_mom
+	sparsity: 0.9884596634284388
+2023-04-07 12:22:06,956 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=64 --components=3 --covar_reg=0 --covar_shape=diag --data=ring --initialisation=random --iterations=100 --learning_rate=0.000672544766373964 --model=squared_nm_gaussian_mixture --momentum=0.818140575887739 --optimal_init=none --optimizer=sgd_mom --sparsity=0.9884596634284388
+2023-04-07 12:22:08,847 - wandb.wandb_agent - INFO - Running runs: ['nj3d0exf']
+2023-04-07 12:22:09,248 - wandb.wandb_agent - INFO - Running runs: ['nywjfir4']
+2023-04-07 12:22:09,465 - wandb.wandb_agent - INFO - Running runs: ['sncpbrjv']
+2023-04-07 12:22:09,474 - wandb.wandb_agent - INFO - Running runs: ['cne3n0cm']
+2023-04-07 12:22:09,483 - wandb.wandb_agent - INFO - Running runs: ['g3c2mx10']
+2023-04-07 12:22:09,604 - wandb.wandb_agent - INFO - Running runs: ['c4g941wa']
+2023-04-07 12:22:09,755 - wandb.wandb_agent - INFO - Running runs: ['xttwlb8v']
+2023-04-07 12:22:11,966 - wandb.wandb_agent - INFO - Running runs: ['k5asiy4s']
 wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+wandb: wandb version 0.14.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
 wandb: wandb version 0.14.1 is available!  To upgrade, please run:
 wandb:  $ pip install wandb --upgrade
 wandb: Tracking run with wandb version 0.14.0
-wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230406_160102-zdegpvo4
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_122213-nywjfir4
 wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run doctor-cube-2250
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_122213-k5asiy4s
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run zany-sweep-2
 wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
-wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/zdegpvo4
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/8ra3fwlj
+wandb: Syncing run firm-sweep-2
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/nywjfir4
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/vwcfgjdb
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/k5asiy4s
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+wandb: wandb version 0.14.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_122214-nj3d0exf
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run fresh-sweep-2
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/4vvtipn7
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/nj3d0exf
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
+wandb: wandb version 0.14.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_122216-sncpbrjv
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run swept-sweep-2
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/hqd1q4km
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/sncpbrjv
+wandb: wandb version 0.14.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_122216-xttwlb8v
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run stilted-sweep-3
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/jcedd9jg
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/xttwlb8v
+wandb: wandb version 0.14.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_122216-cne3n0cm
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run eternal-sweep-2
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/jcedd9jg
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/cne3n0cm
+wandb: wandb version 0.14.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: wandb version 0.14.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.14.0
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_122218-g3c2mx10
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_122218-c4g941wa
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run laced-sweep-3
+wandb: Syncing run comic-sweep-2
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/4vvtipn7
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/wh7ligsw
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/c4g941wa
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/g3c2mx10
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+wandb: Starting wandb agent 🕵️
+wandb: Starting wandb agent 🕵️
+2023-04-07 12:24:45,581 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:24:46,029 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:24:46,029 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 64
+	components: 3
+	covar_reg: 0
+	covar_shape: diag
+	data: ring
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.0004997208988466131
+	model: squared_nm_gaussian_mixture
+	momentum: 0.13602015406848522
+	optimal_init: none
+	optimizer: sgd_mom
+	sparsity: 0.7220431333875179
+2023-04-07 12:24:46,035 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=64 --components=3 --covar_reg=0 --covar_shape=diag --data=ring --initialisation=random --iterations=100 --learning_rate=0.0004997208988466131 --model=squared_nm_gaussian_mixture --momentum=0.13602015406848522 --optimal_init=none --optimizer=sgd_mom --sparsity=0.7220431333875179
+2023-04-07 12:24:48,471 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:24:48,965 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:24:48,967 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 8
+	components: 6
+	covar_reg: 4.4
+	covar_shape: full
+	data: cosine
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.00028308264718851885
+	model: squared_nm_gaussian_mixture
+	momentum: 0.45870387024505754
+	optimal_init: cosine
+	optimizer: sgd_mom
+	sparsity: 0.018417305077913504
+2023-04-07 12:24:48,975 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=8 --components=6 --covar_reg=4.4 --covar_shape=full --data=cosine --initialisation=random --iterations=100 --learning_rate=0.00028308264718851885 --model=squared_nm_gaussian_mixture --momentum=0.45870387024505754 --optimal_init=cosine --optimizer=sgd_mom --sparsity=0.018417305077913504
+2023-04-07 12:24:51,070 - wandb.wandb_agent - INFO - Running runs: ['4jonln9p']
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+2023-04-07 12:24:53,988 - wandb.wandb_agent - INFO - Running runs: ['jipaf3d1']
+wandb: wandb version 0.14.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_122451-4jonln9p
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run flowing-sweep-3
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/vwcfgjdb
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/4jonln9p
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+wandb: wandb version 0.14.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_122503-jipaf3d1
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run olive-sweep-3
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/wh7ligsw
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/jipaf3d1
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
+wandb: Waiting for W&B process to finish... (success).
+wandb: 
+wandb: Run history:
+wandb: iteration ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
+wandb: 
+wandb: Run summary:
+wandb: iteration 99
+wandb: 
+wandb: 🚀 View run fluent-sweep-1 at: https://wandb.ai/ptourniaire/NMMMs/runs/ydjcv13a
+wandb: Synced 6 W&B file(s), 1 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230407_120715-ydjcv13a/logs
+2023-04-07 12:25:32,242 - wandb.wandb_agent - INFO - Cleaning up finished run: ydjcv13a
+2023-04-07 12:25:33,356 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:25:33,356 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 8
+	components: 3
+	covar_reg: 4.4
+	covar_shape: diag
+	data: banana
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.000397088414031876
+	model: squared_nm_gaussian_mixture
+	momentum: 0.4912348653977788
+	optimal_init: banana
+	optimizer: sgd_mom
+	sparsity: 0.7657991182009551
+2023-04-07 12:25:33,374 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=8 --components=3 --covar_reg=4.4 --covar_shape=diag --data=banana --initialisation=random --iterations=100 --learning_rate=0.000397088414031876 --model=squared_nm_gaussian_mixture --momentum=0.4912348653977788 --optimal_init=banana --optimizer=sgd_mom --sparsity=0.7657991182009551
+2023-04-07 12:25:38,385 - wandb.wandb_agent - INFO - Running runs: ['xfk643yx']
+wandb: Currently logged in as: ptourniaire. Use `wandb login --relogin` to force relogin
+wandb: WARNING Ignored wandb.init() arg project when running a sweep.
+wandb: WARNING Ignored wandb.init() arg entity when running a sweep.
+wandb: wandb version 0.14.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.14.0
+wandb: Run data is saved locally in /exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/wandb/run-20230407_122550-xfk643yx
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run ethereal-sweep-4
+wandb: ⭐️ View project at https://wandb.ai/ptourniaire/NMMMs
+wandb: 🧹 View sweep at https://wandb.ai/ptourniaire/NMMMs/sweeps/jcedd9jg
+wandb: 🚀 View run at https://wandb.ai/ptourniaire/NMMMs/runs/xfk643yx
+/exports/eddie3_homes_local/s1900878/Non-Monotonic-Mixture-Models/src/models/mixtures/squared_nm_gaussian_mixture.py:230: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  out = self.neglog_likelihood(X)  + self.sparsity * softmax(self.tb_params['weights']).sqrt().mean()   # (1 - self.tb_params['weights'].sum()).abs()
+WARNING: If you use conda to create environments, your home directory may fill up. Please see our documentation at 
+ https://www.wiki.ed.ac.uk/display/ResearchServices/Anaconda for advice.
+wandb: Starting wandb agent 🕵️
+2023-04-07 12:27:32,749 - wandb.wandb_agent - INFO - Running runs: []
+2023-04-07 12:27:33,108 - wandb.wandb_agent - INFO - Agent received command: run
+2023-04-07 12:27:33,108 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 64
+	components: 4
+	covar_reg: 4.4
+	covar_shape: diag
+	data: spiral
+	initialisation: random
+	iterations: 100
+	learning_rate: 0.0009995691199067764
+	model: squared_nm_gaussian_mixture
+	momentum: 0.5601147225021345
+	optimal_init: spiral
+	optimizer: sgd_mom
+	sparsity: 0.8242979363483802
+2023-04-07 12:27:33,119 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python3.10 sweep_experiment.py --batch_size=64 --components=4 --covar_reg=4.4 --covar_shape=diag --data=spiral --initialisation=random --iterations=100 --learning_rate=0.0009995691199067764 --model=squared_nm_gaussian_mixture --momentum=0.5601147225021345 --optimal_init=spiral --optimizer=sgd_mom --sparsity=0.8242979363483802
+2023-04-07 12:27:38,130 - wandb.wandb_agent - INFO - Running runs: ['vd5ahwi3']

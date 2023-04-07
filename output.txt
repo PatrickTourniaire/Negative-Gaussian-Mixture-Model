@@ -1,196 +1,384 @@
 CUDA_VISIBLE_DEVICES: 5
-[10:46:12] Dataset "funnel" loaded                     experiment_builder.py:114
-           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:257
+CUDA_VISIBLE_DEVICES: 4,1
+CUDA_VISIBLE_DEVICES: 1
+CUDA_VISIBLE_DEVICES: 3
+CUDA_VISIBLE_DEVICES: 6
+CUDA_VISIBLE_DEVICES: 2
+[12:07:44] Dataset "funnel" loaded                        sweep_experiment.py:89
+[12:07:44] Dataset "cosine" loaded                        sweep_experiment.py:89
+           Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
            with the following config:                                           
-           {                                           experiment_builder.py:258
+           {                                             sweep_experiment.py:259
                "model_name":                                                    
            "squared_nm_gaussian_mixture",                                       
                "dataset": "funnel",                                             
                "components": 3,                                                 
-               "iterations": 500,                                               
-               "learning_rate": 0.0001,                                         
-               "validate_pdf": false,                                           
+               "iterations": 100,                                               
+               "learning_rate": 0.00031134804208395706,                         
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 4.4,                                                
+               "optimal_init": "funnel",                                        
+               "batch_size": 16,                                                
+               "sparsity": 0.3663065116639117,                                  
+               "validate_pdf": false                                            
+           }                                                                    
+           Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
+           with the following config:                                           
+           {                                             sweep_experiment.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "cosine",                                             
+               "components": 6,                                                 
+               "iterations": 100,                                               
+               "learning_rate": 0.00029033452595969724,                         
                "optimizer": "sgd_mom",                                          
                "initialisation": "random",                                      
                "covar_shape": "full",                                           
                "covar_reg": 4.4,                                                
-               "batch_size": 8,                                                 
-               "optimal_init": "funnel",                                        
-               "momentum": 0.94,                                                
-               "sparsity": 0.89                                                 
+               "optimal_init": "cosine",                                        
+               "batch_size": 64,                                                
+               "sparsity": 0.7916008652297498,                                  
+               "validate_pdf": false                                            
            }                                                                    
-           Model "sklearn_gmm" loaded                  experiment_builder.py:272
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+[12:07:46] Dataset "banana" loaded                        sweep_experiment.py:89
+           Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
+           with the following config:                                           
+           {                                             sweep_experiment.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "banana",                                             
+               "components": 3,                                                 
+               "iterations": 100,                                               
+               "learning_rate": 9.19011232401648e-05,                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 4.4,                                                
+               "optimal_init": "banana",                                        
+               "batch_size": 64,                                                
+               "sparsity": 0.7679710372017409,                                  
+               "validate_pdf": false                                            
+           }                                                                    
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+[12:08:04] Dataset "spiral" loaded                        sweep_experiment.py:89
+           Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
+           with the following config:                                           
+           {                                             sweep_experiment.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "spiral",                                             
+               "components": 4,                                                 
+               "iterations": 100,                                               
+               "learning_rate": 0.0009196828317243164,                          
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 4.4,                                                
+               "optimal_init": "spiral",                                        
+               "batch_size": 16,                                                
+               "sparsity": 0.5035269825294209,                                  
+               "validate_pdf": false                                            
+           }                                                                    
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+[12:08:08] Dataset "mor" loaded                           sweep_experiment.py:89
+[12:08:27] Dataset "ring" loaded                          sweep_experiment.py:89
+           Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
+           with the following config:                                           
+           {                                             sweep_experiment.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "ring",                                               
+               "components": 3,                                                 
+               "iterations": 100,                                               
+               "learning_rate": 0.0003029229978739286,                          
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 0,                                                  
+               "optimal_init": "none",                                          
+               "batch_size": 16,                                                
+               "sparsity": 0.16342489542012428,                                 
+               "validate_pdf": false                                            
+           }                                                                    
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+[12:08:42] Dataset "mor" loaded                           sweep_experiment.py:89
+[12:09:13] Dataset "mor" loaded                           sweep_experiment.py:89
+[12:09:44] Dataset "mor" loaded                           sweep_experiment.py:89
+           Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
+           with the following config:                                           
+           {                                             sweep_experiment.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "mor",                                                
+               "components": 3,                                                 
+               "iterations": 100,                                               
+               "learning_rate": 0.00023204403015798705,                         
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 4.4,                                                
+               "optimal_init": "mor",                                           
+               "batch_size": 32,                                                
+               "sparsity": 0.8660298537751566,                                  
+               "validate_pdf": false                                            
+           }                                                                    
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+CUDA_VISIBLE_DEVICES: 6
+[12:17:51] Dataset "mor" loaded                           sweep_experiment.py:89
+           Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
+           with the following config:                                           
+           {                                             sweep_experiment.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "mor",                                                
+               "components": 3,                                                 
+               "iterations": 100,                                               
+               "learning_rate": 0.000907706734335151,                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 4.4,                                                
+               "optimal_init": "mor",                                           
+               "batch_size": 8,                                                 
+               "sparsity": 0.5639569048328203,                                  
+               "validate_pdf": false                                            
+           }                                                                    
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+CUDA_VISIBLE_DEVICES: 5
+CUDA_VISIBLE_DEVICES: 5,2
 CUDA_VISIBLE_DEVICES: 4
-[10:53:07] Dataset "funnel" loaded                     experiment_builder.py:114
-           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:257
+CUDA_VISIBLE_DEVICES: 1,3
+CUDA_VISIBLE_DEVICES: 3
+CUDA_VISIBLE_DEVICES: 6
+CUDA_VISIBLE_DEVICES: 2
+CUDA_VISIBLE_DEVICES: 3
+[12:22:20] Dataset "spiral" loaded                        sweep_experiment.py:89
+           Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
            with the following config:                                           
-           {                                           experiment_builder.py:258
+           {                                             sweep_experiment.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "spiral",                                             
+               "components": 4,                                                 
+               "iterations": 100,                                               
+               "learning_rate": 0.0005310972037826106,                          
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 4.4,                                                
+               "optimal_init": "spiral",                                        
+               "batch_size": 8,                                                 
+               "sparsity": 0.5316745628985737,                                  
+               "validate_pdf": false                                            
+           }                                                                    
+[12:22:20] Dataset "ring" loaded                          sweep_experiment.py:89
+[12:22:21] Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
+           with the following config:                                           
+           {                                             sweep_experiment.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "ring",                                               
+               "components": 3,                                                 
+               "iterations": 100,                                               
+               "learning_rate": 0.000672544766373964,                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 0,                                                  
+               "optimal_init": "none",                                          
+               "batch_size": 64,                                                
+               "sparsity": 0.9884596634284388,                                  
+               "validate_pdf": false                                            
+           }                                                                    
+[12:22:21] Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+[12:22:22] Dataset "funnel" loaded                        sweep_experiment.py:89
+           Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
+           with the following config:                                           
+           {                                             sweep_experiment.py:259
                "model_name":                                                    
            "squared_nm_gaussian_mixture",                                       
                "dataset": "funnel",                                             
                "components": 3,                                                 
-               "iterations": 500,                                               
-               "learning_rate": 0.0001,                                         
-               "validate_pdf": false,                                           
+               "iterations": 100,                                               
+               "learning_rate": 0.00013990446699912862,                         
                "optimizer": "sgd_mom",                                          
                "initialisation": "random",                                      
-               "covar_shape": "full",                                           
+               "covar_shape": "diag",                                           
                "covar_reg": 4.4,                                                
-               "batch_size": 8,                                                 
                "optimal_init": "funnel",                                        
-               "momentum": 0.94,                                                
-               "sparsity": 0.89                                                 
+               "batch_size": 16,                                                
+               "sparsity": 0.7224660897284342,                                  
+               "validate_pdf": false                                            
            }                                                                    
-           Model "sklearn_gmm" loaded                  experiment_builder.py:272
-CUDA_VISIBLE_DEVICES: 7
-[11:03:58] Dataset "ring" loaded                       experiment_builder.py:114
-           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:257
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+[12:22:25] Dataset "banana" loaded                        sweep_experiment.py:89
+[12:22:25] Dataset "mor" loaded                           sweep_experiment.py:89
+           Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
            with the following config:                                           
-           {                                           experiment_builder.py:258
+           Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
+           with the following config:                                           
+           {                                             sweep_experiment.py:259
                "model_name":                                                    
            "squared_nm_gaussian_mixture",                                       
-               "dataset": "ring",                                               
+               "dataset": "banana",                                             
                "components": 3,                                                 
-               "iterations": 500,                                               
-               "learning_rate": 0.0005,                                         
-               "validate_pdf": false,                                           
+               "iterations": 100,                                               
+               "learning_rate": 0.0006833530062036581,                          
                "optimizer": "sgd_mom",                                          
                "initialisation": "random",                                      
                "covar_shape": "diag",                                           
                "covar_reg": 4.4,                                                
-               "batch_size": 8,                                                 
-               "optimal_init": "none",                                          
-               "momentum": 0.79,                                                
-               "sparsity": 0.19                                                 
+               "optimal_init": "banana",                                        
+               "batch_size": 16,                                                
+               "sparsity": 0.8363753295541143,                                  
+               "validate_pdf": false                                            
            }                                                                    
-[11:03:59] Model "sklearn_gmm" loaded                  experiment_builder.py:272
-CUDA_VISIBLE_DEVICES: 2,4
-[13:13:49] Dataset "ring" loaded                       experiment_builder.py:114
-           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:257
-           with the following config:                                           
-           {                                           experiment_builder.py:258
+           {                                             sweep_experiment.py:259
                "model_name":                                                    
            "squared_nm_gaussian_mixture",                                       
-               "dataset": "ring",                                               
-               "components": 3,                                                 
-               "iterations": 500,                                               
-               "learning_rate": 0.0005,                                         
-               "validate_pdf": false,                                           
+               "dataset": "mor",                                                
+               "components": 8,                                                 
+               "iterations": 100,                                               
+               "learning_rate": 0.0003146889476651154,                          
                "optimizer": "sgd_mom",                                          
                "initialisation": "random",                                      
                "covar_shape": "diag",                                           
                "covar_reg": 4.4,                                                
+               "optimal_init": "mor",                                           
                "batch_size": 8,                                                 
-               "optimal_init": "none",                                          
-               "momentum": 0.79,                                                
-               "sparsity": 0.19                                                 
+               "sparsity": 0.11728088131132695,                                 
+               "validate_pdf": false                                            
            }                                                                    
-[13:13:50] Model "sklearn_gmm" loaded                  experiment_builder.py:272
-CUDA_VISIBLE_DEVICES: 3,7
-[13:31:55] Dataset "ring" loaded                       experiment_builder.py:114
-           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:257
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+[12:22:27] Dataset "banana" loaded                        sweep_experiment.py:89
+           Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
            with the following config:                                           
-           {                                           experiment_builder.py:258
-               "model_name":                                                    
-           "squared_nm_gaussian_mixture",                                       
-               "dataset": "ring",                                               
-               "components": 3,                                                 
-               "iterations": 500,                                               
-               "learning_rate": 0.0005,                                         
-               "validate_pdf": false,                                           
-               "optimizer": "sgd_mom",                                          
-               "initialisation": "random",                                      
-               "covar_shape": "diag",                                           
-               "covar_reg": 4.4,                                                
-               "batch_size": 8,                                                 
-               "optimal_init": "none",                                          
-               "momentum": 0.79,                                                
-               "sparsity": 0.19                                                 
-           }                                                                    
-           Model "sklearn_gmm" loaded                  experiment_builder.py:272
-CUDA_VISIBLE_DEVICES: 1,4
-[14:17:48] Dataset "ring" loaded                       experiment_builder.py:115
-           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:258
-           with the following config:                                           
-           {                                           experiment_builder.py:259
-               "model_name":                                                    
-           "squared_nm_gaussian_mixture",                                       
-               "dataset": "ring",                                               
-               "components": 3,                                                 
-               "iterations": 500,                                               
-               "learning_rate": 0.0005,                                         
-               "validate_pdf": false,                                           
-               "optimizer": "sgd_mom",                                          
-               "initialisation": "random",                                      
-               "covar_shape": "diag",                                           
-               "covar_reg": 4.4,                                                
-               "batch_size": 8,                                                 
-               "optimal_init": "none",                                          
-               "momentum": 0.79,                                                
-               "sparsity": 0.19                                                 
-           }                                                                    
-CUDA_VISIBLE_DEVICES: 1,4
-CUDA_VISIBLE_DEVICES: 5,0
-CUDA_VISIBLE_DEVICES: 7,0
-[14:32:47] Dataset "ring" loaded                       experiment_builder.py:115
-           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:258
-           with the following config:                                           
-           {                                           experiment_builder.py:259
-               "model_name":                                                    
-           "squared_nm_gaussian_mixture",                                       
-               "dataset": "ring",                                               
-               "components": 3,                                                 
-               "iterations": 500,                                               
-               "learning_rate": 0.0005,                                         
-               "validate_pdf": false,                                           
-               "optimizer": "sgd_mom",                                          
-               "initialisation": "random",                                      
-               "covar_shape": "diag",                                           
-               "covar_reg": 4.4,                                                
-               "batch_size": 8,                                                 
-               "optimal_init": "none",                                          
-               "momentum": 0.79,                                                
-               "sparsity": 0.19                                                 
-           }                                                                    
-CUDA_VISIBLE_DEVICES: 0,5
-[14:38:12] Dataset "funnel" loaded                     experiment_builder.py:115
-[14:38:13] Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:258
-           with the following config:                                           
-           {                                           experiment_builder.py:259
-               "model_name":                                                    
-           "squared_nm_gaussian_mixture",                                       
-               "dataset": "funnel",                                             
-               "components": 3,                                                 
-               "iterations": 500,                                               
-               "learning_rate": 0.0001,                                         
-               "validate_pdf": false,                                           
-               "optimizer": "sgd_mom",                                          
-               "initialisation": "random",                                      
-               "covar_shape": "full",                                           
-               "covar_reg": 4.4,                                                
-               "batch_size": 8,                                                 
-               "optimal_init": "funnel",                                        
-               "momentum": 0.94,                                                
-               "sparsity": 0.89                                                 
-           }                                                                    
-CUDA_VISIBLE_DEVICES: 3,2
-[16:01:32] Dataset "banana" loaded                     experiment_builder.py:115
-           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:258
-           with the following config:                                           
-           {                                           experiment_builder.py:259
+           {                                             sweep_experiment.py:259
                "model_name":                                                    
            "squared_nm_gaussian_mixture",                                       
                "dataset": "banana",                                             
                "components": 2,                                                 
-               "iterations": 500,                                               
-               "learning_rate": 0.0005,                                         
-               "validate_pdf": false,                                           
+               "iterations": 100,                                               
+               "learning_rate": 0.0009875733005106529,                          
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 4.4,                                                
+               "optimal_init": "banana",                                        
+               "batch_size": 64,                                                
+               "sparsity": 0.35437558330728924,                                 
+               "validate_pdf": false                                            
+           }                                                                    
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+[12:22:28] Dataset "funnel" loaded                        sweep_experiment.py:89
+[12:22:28] Dataset "cosine" loaded                        sweep_experiment.py:89
+[12:22:29] Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
+           with the following config:                                           
+           {                                             sweep_experiment.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "funnel",                                             
+               "components": 3,                                                 
+               "iterations": 100,                                               
+               "learning_rate": 0.0007001424938415693,                          
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 4.4,                                                
+               "optimal_init": "funnel",                                        
+               "batch_size": 8,                                                 
+               "sparsity": 0.9464684761953795,                                  
+               "validate_pdf": false                                            
+           }                                                                    
+[12:22:29] Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
+           with the following config:                                           
+           {                                             sweep_experiment.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "cosine",                                             
+               "components": 6,                                                 
+               "iterations": 100,                                               
+               "learning_rate": 0.00041384620735095655,                         
                "optimizer": "sgd_mom",                                          
                "initialisation": "random",                                      
                "covar_shape": "full",                                           
                "covar_reg": 4.4,                                                
-               "batch_size": 8,                                                 
-               "optimal_init": "banana",                                        
-               "momentum": 0.94,                                                
-               "sparsity": 0.48                                                 
+               "optimal_init": "cosine",                                        
+               "batch_size": 64,                                                
+               "sparsity": 0.4811358262793315,                                  
+               "validate_pdf": false                                            
            }                                                                    
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+CUDA_VISIBLE_DEVICES: 7
+CUDA_VISIBLE_DEVICES: 1
+[12:24:56] Dataset "ring" loaded                          sweep_experiment.py:89
+           Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
+           with the following config:                                           
+           {                                             sweep_experiment.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "ring",                                               
+               "components": 3,                                                 
+               "iterations": 100,                                               
+               "learning_rate": 0.0004997208988466131,                          
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 0,                                                  
+               "optimal_init": "none",                                          
+               "batch_size": 64,                                                
+               "sparsity": 0.7220431333875179,                                  
+               "validate_pdf": false                                            
+           }                                                                    
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+[12:25:12] Dataset "cosine" loaded                        sweep_experiment.py:89
+           Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
+           with the following config:                                           
+           {                                             sweep_experiment.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "cosine",                                             
+               "components": 6,                                                 
+               "iterations": 100,                                               
+               "learning_rate": 0.00028308264718851885,                         
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "full",                                           
+               "covar_reg": 4.4,                                                
+               "optimal_init": "cosine",                                        
+               "batch_size": 8,                                                 
+               "sparsity": 0.018417305077913504,                                
+               "validate_pdf": false                                            
+           }                                                                    
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+[12:25:21] Model "squared_nm_gaussian_mixture" was       sweep_experiment.py:319
+           trained successfully                                                 
+[12:25:27]  Experiment ran successfully!                 sweep_experiment.py:323
+[12:25:59] Dataset "banana" loaded                        sweep_experiment.py:89
+           Model "squared_nm_gaussian_mixture" loaded    sweep_experiment.py:258
+           with the following config:                                           
+           {                                             sweep_experiment.py:259
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "banana",                                             
+               "components": 3,                                                 
+               "iterations": 100,                                               
+               "learning_rate": 0.000397088414031876,                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 4.4,                                                
+               "optimal_init": "banana",                                        
+               "batch_size": 8,                                                 
+               "sparsity": 0.7657991182009551,                                  
+               "validate_pdf": false                                            
+           }                                                                    
+           Model "sklearn_gmm" loaded                    sweep_experiment.py:273
+CUDA_VISIBLE_DEVICES: 7

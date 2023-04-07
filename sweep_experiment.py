@@ -198,7 +198,7 @@ with  console.status("Loading dataset...") as status:
         _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001, 0.001, 0.001], dtype=torch.float64)
 
     
-    if model_config['optimal_init'] == 'mor' and model_config['components'] == 6:
+    if model_config['optimal_init'] == 'mor' and model_config['components'] == 8:
         _means_nmgmm[0] = [0, 0] 
         _means_nmgmm[1] = [0, 0]
         _means_nmgmm[2] = [0, 0]

@@ -34,6 +34,6 @@ python3.10 experiment_builder.py --experiment_name nm_funnel \
     --initialisation random \
     --covar_shape full \
     --covar_reg 4.4 \
-    --batch_size 8 \
+    --batch_size 16 \
     --optimal_init funnel \
-    --sparsity 0.89
+    --sparsity 0.0
