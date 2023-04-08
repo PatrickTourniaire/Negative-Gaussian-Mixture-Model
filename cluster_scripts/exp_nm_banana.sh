@@ -36,4 +36,4 @@ python3.10 experiment_builder.py --experiment_name nm_banana \
     --covar_reg 4.4 \
     --batch_size 32 \
     --optimal_init banana \
-    --sparsity 0.48
+    --sparsity 0.0

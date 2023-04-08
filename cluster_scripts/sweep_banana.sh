@@ -8,7 +8,7 @@
 #$ -cwd
 #
 # Request one GPU:
-#$ -pe gpu 1
+#$ -pe gpu 2
 #
 # Request 16 GB system RAM
 # the total system RAM available to the job is the value specified here multiplied by
