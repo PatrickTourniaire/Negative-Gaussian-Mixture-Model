@@ -159,6 +159,7 @@ with  console.status("Loading dataset...") as status:
     if model_config['covar_shape'] == 'diag':
         _covariances_nmgmm = np.array([np.diag(np.sqrt(S)) for S in _covariances_nmgmm])
         _covariances_gmm = np.array([np.diag(S) for S in _covariances_gmm])
+
     
     if model_config['optimal_init'] == 'funnel' and model_config['components'] == 3:
         _means_nmgmm[0] = [3.5, 4] 
@@ -204,6 +205,21 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm[2] = [[2.5, 0], [0, 5]]
 
         _weights_nmgmm = torch.tensor([.001, .001, .001])
+
+    if model_config['optimal_init'] == 'banana' and model_config['components'] == 4:
+        _means_nmgmm[0] = [0, 5]
+        _means_nmgmm[1] = [0, 10]
+        _means_nmgmm[2] = [0, 10]
+        _means_nmgmm[3] = [0, 5]
+
+
+        _covariances_nmgmm[0] = [[7, 0], [0, 7]]
+        _covariances_nmgmm[1] = [[2.5, 0], [0, 5]]
+        _covariances_nmgmm[2] = [[2.5, 0], [0, 5]]
+        _covariances_nmgmm[3] = [[7, 0], [0, 7]]
+
+
+        _weights_nmgmm = torch.tensor([.001, .001, .001, .001])
     
     if model_config['optimal_init'] == 'cosine' and model_config['components'] == 6:
         _means_nmgmm[0] = [0, 0.5] 
