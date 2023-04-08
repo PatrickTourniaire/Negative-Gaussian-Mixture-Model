@@ -124,6 +124,7 @@ with  console.status("Loading dataset...") as status:
     if model_config['covar_shape'] == 'diag':
         _covariances_nmgmm = np.array([np.diag(np.sqrt(S)) for S in _covariances_nmgmm])
         _covariances_gmm = np.array([np.diag(S) for S in _covariances_gmm])
+
     
     if model_config['optimal_init'] == 'funnel' and model_config['components'] == 3:
         _means_nmgmm[0] = [3.5, 4] 
@@ -134,7 +135,6 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm[1] = [[2, 0], [1, 1.5]]
         _covariances_nmgmm[2] = [[7, 0], [0, 7]]
 
-        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001], dtype=torch.float64)
     
     if model_config['optimal_init'] == 'funnel' and model_config['components'] == 5:
         _means_nmgmm[0] = [3.5, 4] 
@@ -149,7 +149,6 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm[3] = [[2, 0], [1, 1.5]]
         _covariances_nmgmm[4] = [[6, 0], [0, 6]]
 
-        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001, 0.001], dtype=torch.float64)
 
     if model_config['optimal_init'] == 'mor' and model_config['components'] == 3:
         init_zip = zip(
@@ -158,15 +157,6 @@ with  console.status("Loading dataset...") as status:
         )
         _covariances_nmgmm = torch.stack([torch.sqrt(torch.diag(x)) - torch.diag(i) for i, x in init_zip])
         _covariances_nmgmm = _covariances_nmgmm.cpu().numpy()
-
-    if model_config['optimal_init'] == 'banana' and model_config['components'] == 2:
-        _means_nmgmm[0] = [0, 5]
-        _means_nmgmm[1] = [0, 10]
-
-        _covariances_nmgmm[0] = [[7, 0], [0, 7]]
-        _covariances_nmgmm[1] = [[2.5, 0], [0, 5]]
-
-        _weights_nmgmm = torch.tensor([0.001, 0.001], dtype=torch.float64)
 
     if model_config['optimal_init'] == 'banana' and model_config['components'] == 3:
         _means_nmgmm[0] = [0, 5]
@@ -177,7 +167,18 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm[1] = [[2.5, 0], [0, 5]]
         _covariances_nmgmm[2] = [[2.5, 0], [0, 5]]
 
-        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001], dtype=torch.float64)
+
+    if model_config['optimal_init'] == 'banana' and model_config['components'] == 4:
+        _means_nmgmm[0] = [0, 5]
+        _means_nmgmm[1] = [0, 10]
+        _means_nmgmm[2] = [0, 10]
+        _means_nmgmm[3] = [0, 5]
+
+
+        _covariances_nmgmm[0] = [[7, 0], [0, 7]]
+        _covariances_nmgmm[1] = [[2.5, 0], [0, 5]]
+        _covariances_nmgmm[2] = [[2.5, 0], [0, 5]]
+        _covariances_nmgmm[3] = [[7, 0], [0, 7]]
 
     
     if model_config['optimal_init'] == 'cosine' and model_config['components'] == 6:
@@ -195,10 +196,8 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm[4] = [[0.3, 0], [0, 1.5]]
         _covariances_nmgmm[5] = [[0.3, 0], [0, 1.5]]
 
-        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001, 0.001, 0.001], dtype=torch.float64)
-
     
-    if model_config['optimal_init'] == 'mor' and model_config['components'] == 8:
+    if model_config['optimal_init'] == 'mor' and model_config['components'] == 6:
         _means_nmgmm[0] = [0, 0] 
         _means_nmgmm[1] = [0, 0]
         _means_nmgmm[2] = [0, 0]
@@ -217,8 +216,6 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm[6] = [[0.2, 0], [0, 0.2]]
         _covariances_nmgmm[7] = [[0.1, 0], [0, 0.1]]
 
-        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001], dtype=torch.float64)
-
     
     if model_config['optimal_init'] == 'spiral' and model_config['components'] == 4:
         _means_nmgmm[0] = [0, 0] 
@@ -230,9 +227,6 @@ with  console.status("Loading dataset...") as status:
         _covariances_nmgmm[1] = [[0.3, 1], [-1, 0.8]]
         _covariances_nmgmm[2] = [[1, 1], [-0.5, 0.3]]
         _covariances_nmgmm[3] = [[1, 0.5], [0.5, 0.3]]
-
-        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001], dtype=torch.float64)
-
 
 
     #=============================== NMGMM SETUP ===============================
@@ -257,20 +251,6 @@ with  console.status("Loading dataset...") as status:
 
     console.log(f'Model "{model_config["model_name"]}" loaded with the following config:')
     console.log(json.dumps(model_config, indent=4))
-
-
-    #============================== SKLEARN GMM ================================
-    
-    # Base model from sklearn with same number of components
-    base_model = SKGaussianMixture(
-        n_components=model_config['components'] ** 2, 
-        random_state=random_seed,
-        means_init=_means_gmm,
-        precisions_init=[inv(S) for S in _covariances_gmm]).fit(train_set)
-    base_loss = - (logsumexp(base_model.score_samples(train_set)) / train_set.shape[0])
-    model.set_base_loss(base_loss)
-
-    console.log(f'Model "{BASE_MODEL_NAME}" loaded')
     
 
     #============================= TRAINING NMGMM ==============================
@@ -278,42 +258,47 @@ with  console.status("Loading dataset...") as status:
     status.update(status=f'Training "{model_config["model_name"]}" model...')
 
     traindata = ArtificialDataset(tensor_train_set)
+    valdata = ArtificialDataset(tensor_val_set)
     trainloader = torch.utils.data.DataLoader(traindata, batch_size=model_config['batch_size'], shuffle=True)
+    valloader = torch.utils.data.DataLoader(traindata, batch_size=model_config['batch_size'], shuffle=True)
 
     for it in range(model_config['iterations']):
         train_loss = 0
+        train_total = 0
+
         for data in trainloader:
             optimizer.zero_grad()
-            it_train_loss = model(data.to(device), it, model_config['validate_pdf'])
-            train_loss += it_train_loss
+            
+            loss = model.neglog_likelihood(data)
+            it_train_loss = model(data, it, model_config['validate_pdf'])
+
+            train_total += 1
+            train_loss += loss
 
             it_train_loss.backward()
             optimizer.step()
       
+        val_loss = 0
+        val_total = 0
+
         with torch.no_grad(): 
-            it_val_loss = model.val_loss(tensor_val_set.to(device), it)
+            for data in valloader:
+                loss = model.neglog_likelihood(data)
+                val_loss += loss
+                val_total += 1
         
         model.log_means(wandb, it)
         model.log_weights(wandb, it)
         wandb.log({
             "train": {
-               "loss":  train_loss / model_config['batch_size']
+               "loss":  train_loss / train_total,
+               "it": it
             },
             "validation": {
-                "loss": it_val_loss
-            },
-            "baseline": {
-                "loss": base_loss
-            },
-            "iteration": it
+                "loss": val_loss / val_total,
+                "it": it
+            }
         })
-
-        if it % 100 == 0:
-            fig = model.sequence_visualisation(
-                tensor_train_set.to(device),
-                tensor_val_set.to(device),
-            )
-            wandb.log({f'sequence_plot': wandb.Image(fig)})
 
 
     console.log(f'Model "{model_config["model_name"]}" was trained successfully')
