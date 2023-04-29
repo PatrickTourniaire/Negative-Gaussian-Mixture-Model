@@ -1,0 +1,550 @@
+CUDA_VISIBLE_DEVICES: 1
+CUDA_VISIBLE_DEVICES: 2
+CUDA_VISIBLE_DEVICES: 1
+CUDA_VISIBLE_DEVICES: 6
+[15:38:10] Dataset "funnel" loaded                      experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "funnel",                                             
+               "components": 3,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.01,                                           
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+[15:38:10] Dataset "cosine" loaded                      experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "cosine",                                             
+               "components": 3,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.001,                                          
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[15:38:15] Dataset "funnel" loaded                      experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "funnel",                                             
+               "components": 2,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.001,                                          
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[15:38:48] Dataset "funnel" loaded                      experiment_builder.py:83
+[15:38:49] Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "funnel",                                             
+               "components": 4,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.001,                                          
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[15:55:27] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 3
+[15:57:07] Dataset "banana" loaded                      experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "banana",                                             
+               "components": 2,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.01,                                           
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[16:14:06] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 3
+[16:15:36] Dataset "mor" loaded                         experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "mor",                                                
+               "components": 2,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.01,                                           
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 0.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[16:15:38] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+[16:15:42] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 3
+CUDA_VISIBLE_DEVICES: 1
+[16:17:13] Dataset "mor" loaded                         experiment_builder.py:83
+[16:17:13] Dataset "funnel" loaded                      experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "mor",                                                
+               "components": 3,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.001,                                          
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 0.0                                                 
+           }                                                                    
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "funnel",                                             
+               "components": 2,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.0001,                                         
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+CUDA_VISIBLE_DEVICES: 1,0
+[16:37:00] Dataset "funnel" loaded                      experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "funnel",                                             
+               "components": 3,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.01,                                           
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[17:37:53] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 0,3
+[17:38:50] Dataset "cosine" loaded                      experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "cosine",                                             
+               "components": 3,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.001,                                          
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+[17:38:51] Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[18:39:08] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 2,1
+[18:40:22] Dataset "funnel" loaded                      experiment_builder.py:83
+[18:40:23] Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "funnel",                                             
+               "components": 2,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.001,                                          
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[18:56:47] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 3,1
+[18:58:32] Dataset "funnel" loaded                      experiment_builder.py:83
+[18:58:33] Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "funnel",                                             
+               "components": 4,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.001,                                          
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[20:27:08] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 2,1
+[20:28:27] Dataset "banana" loaded                      experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "banana",                                             
+               "components": 2,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.01,                                           
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[20:47:18] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 1,3
+[20:48:38] Dataset "mor" loaded                         experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "mor",                                                
+               "components": 2,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.01,                                           
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 0.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[21:07:16] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 0,2
+[21:08:55] Dataset "funnel" loaded                      experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "funnel",                                             
+               "components": 2,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.0001,                                         
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[21:28:29] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 2,3
+[21:29:05] Dataset "mor" loaded                         experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "mor",                                                
+               "components": 3,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.001,                                          
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 0.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[22:21:58] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 3,2
+[22:22:31] Dataset "cosine" loaded                      experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "cosine",                                             
+               "components": 3,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.01,                                           
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+[22:22:32] Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[23:16:36] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 3,0
+[23:17:29] Dataset "mor" loaded                         experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "mor",                                                
+               "components": 2,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.1,                                            
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 0.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[23:37:02] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 0,3
+[23:37:44] Dataset "mor" loaded                         experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "mor",                                                
+               "components": 4,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.01,                                           
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 0.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[01:05:11] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 0,1
+[01:06:28] Dataset "mor" loaded                         experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "mor",                                                
+               "components": 2,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.001,                                          
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 0.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[01:26:04] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 2,3
+[01:27:04] Dataset "mor" loaded                         experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "mor",                                                
+               "components": 4,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.1,                                            
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 0.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[02:55:54] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 3,1
+[02:57:08] Dataset "banana" loaded                      experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "banana",                                             
+               "components": 3,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.01,                                           
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[03:50:29] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 2,3
+[03:51:42] Dataset "mor" loaded                         experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "mor",                                                
+               "components": 2,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.0001,                                         
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 0.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[04:11:03] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 0,3
+[04:12:09] Dataset "banana" loaded                      experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "banana",                                             
+               "components": 4,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.1,                                            
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+[04:12:10] Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[05:41:50] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 1,3
+[05:43:02] Dataset "cosine" loaded                      experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "cosine",                                             
+               "components": 4,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.01,                                           
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[07:12:05] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 3,2
+[07:13:01] Dataset "banana" loaded                      experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "banana",                                             
+               "components": 2,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.0001,                                         
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[07:32:51] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 0,2
+[07:33:34] Dataset "ring" loaded                        experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "ring",                                               
+               "components": 4,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.0001,                                         
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random",                                      
+               "covar_shape": "diag",                                           
+               "covar_reg": 0.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164
+[09:02:26] Model "squared_nm_gaussian_mixture" was     experiment_builder.py:188
+           trained successfully                                                 
+CUDA_VISIBLE_DEVICES: 3,0
+[09:03:06] Dataset "funnel" loaded                      experiment_builder.py:83
+           Model "squared_nm_gaussian_mixture" loaded  experiment_builder.py:149
+           with the following config:                                           
+           {                                           experiment_builder.py:150
+               "model_name":                                                    
+           "squared_nm_gaussian_mixture",                                       
+               "dataset": "funnel",                                             
+               "components": 2,                                                 
+               "iterations": 25000,                                             
+               "learning_rate": 0.1,                                            
+               "validate_pdf": false,                                           
+               "optimizer": "sgd_mom",                                          
+               "initialisation": "random_from_data",                            
+               "covar_shape": "full",                                           
+               "covar_reg": 1.0                                                 
+           }                                                                    
+           Model "sklearn_gmm" loaded                  experiment_builder.py:164

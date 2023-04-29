@@ -19,7 +19,7 @@ from src.models.mixtures.squared_nm_gaussian_mixture import NMSquaredGaussianMix
 
 from src.utils.pickle_handler import *
 from src.utils.early_stopping import EarlyStopping
-from src.utils.initialisation_procedures import GMMInitalisation, check_random_state
+from src.utils.nm_initialisations import create_nm_initialisation
 
 
 class ArtificialDataset(Dataset):
@@ -96,8 +96,9 @@ checkpoints = [i - 1 if i > 0 else i
 BASE_MODEL_NAME = 'sklearn_gmm'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-OUTPUT_REPO = str(os.path.abspath('/exports/eddie/scratch/s1900878/out/'))
-#OUTPUT_REPO = str(os.path.abspath('out/'))
+#! Replace when running on Eddie to save artifacts on a larger disk
+#OUTPUT_REPO = str(os.path.abspath('/exports/eddie/scratch/s1900878/out/'))
+OUTPUT_REPO = str(os.path.abspath('out/'))
 
 console = Console()
 
@@ -128,149 +129,23 @@ with  console.status("Loading dataset...") as status:
     if not os.path.isdir(os.path.abspath(path_models)):
         os.makedirs(os.path.abspath(path_models))
     
+    path_models = f'{OUTPUT_REPO}/saved_models/'
+    if not os.path.isdir(os.path.abspath(path_models)):
+        os.makedirs(os.path.abspath(path_models))
+    
     #=============================== INIT PARAMS ===============================
 
-    initaliser_nmgmm = GMMInitalisation(
-        n_components=model_config['components'],
-        init_params=model_config['initialisation'],
-        covariance_type=model_config['covar_shape'],
-        reg_covar=model_config['covar_reg']
+    nmgmm_params, _ = create_nm_initialisation(
+        model_config['components'],
+        model_config['initialisation'],
+        model_config['covar_shape'],
+        model_config['covar_reg'],
+        train_set,
+        model_config['optimal_init']
     )
-    initaliser_gmm = GMMInitalisation(
-        n_components=model_config['components'] ** 2,
-        init_params=model_config['initialisation'],
-        covariance_type=model_config['covar_shape'],
-        reg_covar=model_config['covar_reg']
-    )
-    random_seed = check_random_state(None)
-    
-    initaliser_nmgmm.initialize_parameters(train_set, random_seed)
-    initaliser_gmm.initialize_parameters(train_set, random_seed)
 
-    _covariances_nmgmm = initaliser_nmgmm.covariances_
-    _covariances_gmm = initaliser_gmm.covariances_
-    
-    _means_nmgmm = initaliser_nmgmm.means_
-    _means_gmm = initaliser_gmm.means_
+    _means_nmgmm, _covariances_nmgmm, _weights_nmgmm = nmgmm_params
 
-    _weights_nmgmm = None
-
-    
-    if model_config['covar_shape'] == 'diag':
-        _covariances_nmgmm = np.array([np.diag(np.sqrt(S)) for S in _covariances_nmgmm])
-        _covariances_gmm = np.array([np.diag(S) for S in _covariances_gmm])
-
-    
-    if model_config['optimal_init'] == 'funnel' and model_config['components'] == 3:
-        _means_nmgmm[0] = [3.5, 4] 
-        _means_nmgmm[1] = [3.5, -4]
-        _means_nmgmm[2] = [-1, 0] 
-
-        _covariances_nmgmm[0] = [[2, 0], [-1, 1.5]]
-        _covariances_nmgmm[1] = [[2, 0], [1, 1.5]]
-        _covariances_nmgmm[2] = [[7, 0], [0, 7]]
-
-        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001], dtype=torch.float64)
-    
-    if model_config['optimal_init'] == 'funnel' and model_config['components'] == 5:
-        _means_nmgmm[0] = [3.5, 4] 
-        _means_nmgmm[1] = [3.5, -4]
-        _means_nmgmm[2] = [3.5, 4] 
-        _means_nmgmm[3] = [3.5, -4]
-        _means_nmgmm[4] = [-1, 0] 
-
-        _covariances_nmgmm[0] = [[2, 0], [-1, 1.5]]
-        _covariances_nmgmm[1] = [[2, 0], [1, 1.5]]
-        _covariances_nmgmm[2] = [[2, 0], [-1, 1.5]]
-        _covariances_nmgmm[3] = [[2, 0], [1, 1.5]]
-        _covariances_nmgmm[4] = [[6, 0], [0, 6]]
-
-        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001, 0.001], dtype=torch.float64)
-
-    if model_config['optimal_init'] == 'mor' and model_config['components'] == 3:
-        init_zip = zip(
-            [torch.tensor([0, 0]), torch.tensor([1.5, 1.5]), torch.tensor([0.5, 0.5])], 
-            torch.torch.from_numpy(initaliser_nmgmm.covariances_)
-        )
-        _covariances_nmgmm = torch.stack([torch.sqrt(torch.diag(x)) - torch.diag(i) for i, x in init_zip])
-        _covariances_nmgmm = _covariances_nmgmm.cpu().numpy()
-
-    if model_config['optimal_init'] == 'banana' and model_config['components'] == 3:
-        _means_nmgmm[0] = [0, 5]
-        _means_nmgmm[1] = [0, 10]
-        _means_nmgmm[2] = [0, 10]
-
-        _covariances_nmgmm[0] = [[7, 0], [0, 7]]
-        _covariances_nmgmm[1] = [[2.5, 0], [0, 5]]
-        _covariances_nmgmm[2] = [[2.5, 0], [0, 5]]
-
-        _weights_nmgmm = torch.tensor([.001, .001, .001])
-
-    if model_config['optimal_init'] == 'banana' and model_config['components'] == 4:
-        _means_nmgmm[0] = [0, 5]
-        _means_nmgmm[1] = [0, 10]
-        _means_nmgmm[2] = [0, 10]
-        _means_nmgmm[3] = [0, 5]
-
-
-        _covariances_nmgmm[0] = [[7, 0], [0, 7]]
-        _covariances_nmgmm[1] = [[2.5, 0], [0, 5]]
-        _covariances_nmgmm[2] = [[2.5, 0], [0, 5]]
-        _covariances_nmgmm[3] = [[7, 0], [0, 7]]
-
-
-        _weights_nmgmm = torch.tensor([.001, .001, .001, .001])
-    
-    if model_config['optimal_init'] == 'cosine' and model_config['components'] == 6:
-        _means_nmgmm[0] = [0, 0.5] 
-        _means_nmgmm[1] = [-1.5, 3]
-        _means_nmgmm[2] = [-0.1, -3]
-        _means_nmgmm[3] = [1.5, 3]
-        _means_nmgmm[4] = [-3.1, -3]
-        _means_nmgmm[5] = [3.1, -3] 
-
-        _covariances_nmgmm[0] = 1.5 * np.array([[3, 0], [0, 3]])
-        _covariances_nmgmm[1] = [[0.3, 0], [0, 1.5]]
-        _covariances_nmgmm[2] = [[0.3, 0], [0, 1.5]]
-        _covariances_nmgmm[3] = [[0.3, 0], [0, 1.5]]
-        _covariances_nmgmm[4] = [[0.3, 0], [0, 1.5]]
-        _covariances_nmgmm[5] = [[0.3, 0], [0, 1.5]]
-
-        _weights_nmgmm = torch.tensor([.001, .001, .001, .001, .001, .001])
-    
-    if model_config['optimal_init'] == 'mor' and model_config['components'] == 6:
-        _means_nmgmm[0] = [0, 0] 
-        _means_nmgmm[1] = [0, 0]
-        _means_nmgmm[2] = [0, 0]
-        _means_nmgmm[3] = [0, 0]
-        _means_nmgmm[4] = [0, 0]
-        _means_nmgmm[5] = [0, 0]
-        _means_nmgmm[6] = [0, 0]
-        _means_nmgmm[7] = [0, 0]
-
-        _covariances_nmgmm[0] = [[3.5, 0], [0, 3.5]]
-        _covariances_nmgmm[1] = [[2.5, 0], [0, 2.5]]
-        _covariances_nmgmm[2] = [[1.5, 0], [0, 1.5]]
-        _covariances_nmgmm[3] = [[0.5, 0], [0, 0.5]]
-        _covariances_nmgmm[4] = [[2.5, 0], [0, 2.5]]
-        _covariances_nmgmm[5] = [[0.5, 0], [0, 0.5]]
-        _covariances_nmgmm[6] = [[0.2, 0], [0, 0.2]]
-        _covariances_nmgmm[7] = [[0.1, 0], [0, 0.1]]
-
-    
-    if model_config['optimal_init'] == 'spiral' and model_config['components'] == 4:
-        _means_nmgmm[0] = [0, 0] 
-        _means_nmgmm[1] = [1.5, 4]
-        _means_nmgmm[2] = [1.5, -2.8]
-        _means_nmgmm[3] = [-2.5, 0.7]
-
-        _covariances_nmgmm[0] = [[4, 0], [0, 4]]
-        _covariances_nmgmm[1] = [[0.3, 1], [-1, 0.8]]
-        _covariances_nmgmm[2] = [[1, 1], [-0.5, 0.3]]
-        _covariances_nmgmm[3] = [[1, 0.5], [0.5, 0.3]]
-
-
-        _weights_nmgmm = torch.tensor([0.001, 0.001, 0.001, 0.001])
 
     #=============================== NMGMM SETUP ===============================
     
@@ -297,21 +172,6 @@ with  console.status("Loading dataset...") as status:
 
     console.log(f'Model "{model_config["model_name"]}" loaded with the following config:')
     console.log(json.dumps(model_config, indent=4))
-
-
-    #============================== SKLEARN GMM ================================
-    """
-    # Base model from sklearn with same number of components
-    base_model = SKGaussianMixture(
-        n_components=model_config['components'] ** 2, 
-        random_state=random_seed,
-        means_init=_means_gmm,
-        precisions_init=[inv(S) for S in _covariances_gmm]).fit(train_set)
-    base_loss = - (logsumexp(base_model.score_samples(train_set)) / train_set.shape[0])
-    model.set_base_loss(base_loss)
-
-    console.log(f'Model "{BASE_MODEL_NAME}" loaded')
-    """
     
 
     #============================= TRAINING NMGMM ==============================
