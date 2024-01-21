@@ -1,7 +1,6 @@
 # External imports
 from matplotlib import pyplot as plt
 import sys
-import numpy as np
 
 # Local imports
 from src.utils.pickle_handler import *

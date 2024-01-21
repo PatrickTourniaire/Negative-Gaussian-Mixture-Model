@@ -1,15 +1,10 @@
 # External imports
-import torch
 import os
-import numpy as np
-from numpy.linalg import inv
 import json
-from rich.console import Console
-from sklearn.mixture import GaussianMixture as SKGaussianMixture
-import argparse
-from scipy.special import logsumexp
-import glob
+import torch
 import wandb
+import argparse
+from rich.console import Console
 from torch.utils.data import Dataset
 
 # Local imports
