@@ -12,9 +12,9 @@ However, as humans it makes sense to simply have a large positive component enca
 
 The table below demonstrates how a traditional GMM is not able to model the donut with only 3 components on the left, and the right side demonstrates how the Negative-GMM (NGMM) is able to effectively model this complex distribution.
 
-| 3-Comp. GMM                               | 3-Comp. GMM w/ Negative Components |
-| ----------------------------------------- | ---------------------------------- |
-| ![2 Component GMM](docs/figs/gmm_fit.png) | ![dog](docs/figs/ngmm_fit.png)     |
+| 3-Comp. GMM                               | 3-Comp. GMM w/ Negative Components              |
+| ----------------------------------------- | ----------------------------------------------- |
+| ![2 Component GMM](docs/figs/gmm_fit.png) | ![3 Component NGMM](docs/figs/ngmm_fit.png)     |
 
 Thus, it is trivial to see that this framework introduces a lot of flexibility in terms of modeling complex datasets with exponentially fewer components and implicitly fewer parameters to optimize. The framework that I built for this was constructed for a high level of generalisability, to support any exponential parametric distributions and deeply-nested mixtures. Which [Lorenzo Loconte et al.](https://openreview.net/forum?id=uTAzte88a2) accomplished with my experiments being the preliminary step for this generalisation.
 

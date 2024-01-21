@@ -68,8 +68,6 @@ instance/
 # Scrapy stuff:
 .scrapy
 
-# Sphinx documentation
-docs/_build/
 
 # PyBuilder
 .pybuilder/
@@ -135,8 +133,6 @@ venv.bak/
 # Rope project settings
 .ropeproject
 
-# mkdocs documentation
-/site
 
 # mypy
 .mypy_cache/
@@ -168,7 +164,3 @@ out/saved_models
 wandb
 cached
 out/.DS_Store
-*.pdf
-*.pdf
-*.png
-*.png
